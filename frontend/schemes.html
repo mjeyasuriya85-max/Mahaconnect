@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Recommendations | MahaConnect</title>
+<meta name="description" content="Explore scheme recommendations and learn about eligibility information for scholarships and other government welfare schemes through the MahaConnect prototype.">
+    <link rel="stylesheet" href="schemes.css">
+    <link rel="stylesheet" href="css/schemes-theme.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+                  
+        <a href="index.html" class="brand">
+            <span class="brand-icon">MC</span>
+
+            <div>
+                <strong>MahaConnect</strong>
+                <small>Digital Services</small>
+            </div>
+        </a>
+
+        <a href="dashboard.html" class="back-btn">
+            Dashboard
+        </a>
+
+    </header>
+
+
+    <main class="page">
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <span class="label">
+                SMART RECOMMENDATIONS
+            </span>
+
+            <h1>
+                Find services that may match your needs.
+            </h1>
+
+            <p>
+                Tell us a little about your requirement and
+                MahaConnect will show relevant sample services
+                and schemes.
+            </p>
+
+        </section>
+
+
+        <!-- RECOMMENDATION FORM -->
+        <section class="profile-card">
+
+            <h2>
+                Build Your Recommendation
+            </h2>
+
+            <div class="form-grid">
+
+                <!-- PROFILE -->
+                <div class="field">
+
+                    <label for="profile">
+                        Your Profile
+                    </label>
+
+                    <select id="profile">
+
+                        <option value="">
+                            Select profile
+                        </option>
+
+                        <option value="student">
+                            Student
+                        </option>
+
+                        <option value="jobseeker">
+                            Job Seeker
+                        </option>
+
+                        <option value="citizen">
+                            Family / Citizen
+                        </option>
+
+                        <option value="senior">
+                            Senior Citizen
+                        </option>
+
+                        <option value="women">
+                            Women
+                        </option>
+
+                        <option value="farmer">
+                            Farmer
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- NEED -->
+                <div class="field">
+
+                    <label for="need">
+                        Your Need
+                    </label>
+
+                    <select id="need">
+
+                        <option value="">
+                            Select requirement
+                        </option>
+
+                        <option value="education">
+                            Education Support
+                        </option>
+
+                        <option value="employment">
+                            Employment Support
+                        </option>
+
+                        <option value="certificate">
+                            Certificate / Document
+                        </option>
+
+                        <option value="welfare">
+                            Welfare Support
+                        </option>
+
+                        <option value="financial">
+                            Financial Assistance
+                        </option>
+
+                        <option value="pension">
+                            Pension Support
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="recommend-btn"
+                onclick="getRecommendations()"
+            >
+                Get Recommendations
+            </button>
+
+        </section>
+
+
+        <!-- RESULT SECTION -->
+        <section
+            id="resultSection"
+            class="result-section"
+        >
+
+            <div class="result-header">
+
+                <div>
+
+                    <span class="label">
+                        RECOMMENDED FOR YOU
+                    </span>
+
+                    <h2>
+                        Suggested Services
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="recommendationList"
+                class="recommendation-grid"
+            ></div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        async function getRecommendations() {
+
+            const profile =
+                document.getElementById("profile").value;
+
+            const need =
+                document.getElementById("need").value;
+
+            const list =
+                document.getElementById("recommendationList");
+
+            const resultSection =
+                document.getElementById("resultSection");
+
+
+            /* ===============================
+               VALIDATION
+            =============================== */
+
+            if (!profile || !need) {
+
+                resultSection.style.display = "block";
+
+                list.innerHTML = `
+                    <div class="scheme-card">
+
+                        <div class="scheme-icon">
+                            ⚠️
+                        </div>
+
+                        <h3>
+                            Select your details
+                        </h3>
+
+                        <p>
+                            Please select your profile
+                            and requirement first.
+                        </p>
+
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            /* ===============================
+               LOADING
+            =============================== */
+
+            resultSection.style.display = "block";
+
+            list.innerHTML = `
+                <div class="scheme-card">
+
+                    <div class="scheme-icon">
+                        🤖
+                    </div>
+
+                    <h3>
+                        Analyzing your requirements...
+                    </h3>
+
+                    <p>
+                        MahaConnect is checking your profile
+                        and selected need to find relevant
+                        services.
+                    </p>
+
+                </div>
+            `;
+
+
+            /* ===============================
+               BACKEND REQUEST
+            =============================== */
+
+            try {
+
+                const response = await fetch(
+                    "http://localhost:5000/api/recommendations",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            profile: profile,
+                            need: need
+                        })
+                    }
+                );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "API request failed"
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                /* ===============================
+                   NO RESULTS
+                =============================== */
+
+                if (
+                    !data.success ||
+                    !data.recommendations ||
+                    data.recommendations.length === 0
+                ) {
+
+                    list.innerHTML = `
+                        <div class="scheme-card">
+
+                            <div class="scheme-icon">
+                                🔎
+                            </div>
+
+                            <h3>
+                                No matching services
+                            </h3>
+
+                            <p>
+                                Try another profile
+                                or requirement.
+                            </p>
+
+                        </div>
+                    `;
+
+                    return;
+
+                }
+
+
+                /* ===============================
+                   SHOW RESULTS
+                =============================== */
+
+                list.innerHTML =
+                    data.recommendations
+                    
+.map(function(item) {
+    const icon = item.icon || "💼";
+    const title = item.title || item.name || item.service || "Government Service";
+    const description = item.description || "Explore service information and application requirements.";
+    const service = item.service || item.title || item.name || "Government Service";
+
+    return `
+        <div class="scheme-card">
+
+            <div class="scheme-icon">
+                ${icon}
+            </div>
+
+            <h3>
+                ${title}
+            </h3>
+
+            <p>
+                ${description}
+            </p>
+
+            <div class="match-reason">
+                ✓ Recommended based on
+                your profile and
+                selected requirement
+            </div>
+
+            <a href="application.html?service=${encodeURIComponent(service)}">
+                View Service →
+            </a>
+
+        </div>
+    `;
+})
+.join("");
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                /* ===============================
+                   BACKEND ERROR
+                =============================== */
+
+                list.innerHTML = `
+                    <div class="scheme-card">
+
+                        <div class="scheme-icon">
+                            ⚠️
+                        </div>
+
+                        <h3>
+                            Backend unavailable
+                        </h3>
+
+                        <p>
+                            Please start the
+                            MahaConnect backend server.
+                        </p>
+
+                    </div>
+                `;
+
+            }
+
+        }
+      
+    </script>
+
+
+    <script src="language.js"></script>
+</body>
+</html>

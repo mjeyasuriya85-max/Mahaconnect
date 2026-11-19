@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Applications | MahaConnect</title>
+<meta name="description" content="View the MahaConnect prototype's application dashboard and learn how application status updates can be organized in one place.">
+    <link rel="stylesheet" href="my-applications.css">
+</head>
+
+<body>
+
+    <div class="applications-container">
+
+        <!-- HEADER -->
+        <div class="applications-header">
+            <h1>My Applications</h1>
+            <p>
+                View and track your submitted government service applications.
+            </p>
+        </div>
+
+        <!-- APPLICATION LIST -->
+        <div id="applicationsList">
+            <!-- Applications will appear here -->
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const applicationsList =
+            document.getElementById("applicationsList");
+
+
+        /* =========================
+           GET APPLICATIONS
+        ========================= */
+
+        const applications =
+            JSON.parse(
+                localStorage.getItem("mahaConnectApplications")
+            ) || [];
+
+
+        /* =========================
+           TIMELINE STATUS
+        ========================= */
+
+        function getTimelineStatus(status) {
+
+            const statusMap = {
+
+                "Submitted": 1,
+
+                "Pending": 2,
+
+                "Under Review": 2,
+
+                "In Progress": 3,
+
+                "Completed": 4
+
+            };
+
+            return statusMap[status] || 1;
+        }
+
+
+        /* =========================
+           NO APPLICATIONS
+        ========================= */
+
+        if (applications.length === 0) {
+
+            applicationsList.innerHTML = `
+
+                <div class="empty-applications">
+
+                    <h2>No Applications Yet</h2>
+
+                    <p>
+                        Your submitted applications will appear here.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* =========================
+           SHOW APPLICATIONS
+        ========================= */
+
+        else {
+
+            applicationsList.innerHTML = applications.map(app => {
+
+                const currentStep =
+                    getTimelineStatus(app.status);
+const progress = currentStep * 25;
+const progressText = {
+
+    1: "Application Submitted",
+
+    2: "Under Verification",
+
+    3: "Under Processing",
+
+    4: "Application Completed"
+
+}[currentStep];
+
+                return `
+
+                    <div class="application-card">
+
+                        <!-- APPLICATION DETAILS -->
+
+                        <div>
+
+                            <span class="application-id">
+                                ${app.applicationId || "MC2026"}
+                            </span>
+
+                            <h2>
+                                ${app.service || "Government Service"}
+                            </h2>
+
+                            <p>
+                                Submitted on
+                                ${app.date || "Recently"}
+                            </p>
+
+                        </div>
+
+
+                        <!-- STATUS -->
+
+                        <span class="status pending">
+                            ${app.status || "Under Review"}
+                        </span>
+
+<div class="progress-section">
+<div class="progress-header">
+    <div>
+        <strong>Application Progress</strong>
+        <small>${progressText}</small>
+    </div>
+
+    <span>${progress}%</span>
+</div>
+
+    <div class="progress-bar">
+        <div
+            class="progress-fill"
+            style="width: ${progress}%;">
+        </div>
+    </div>
+
+</div>
+                        <!-- APPLICATION TIMELINE -->
+
+                        <div class="application-timeline">
+
+
+                            <!-- STEP 1 : SUBMITTED -->
+
+                            <div class="timeline-step ${
+                                currentStep >= 1
+                                    ? "completed"
+                                    : ""
+                            }">
+
+                                <span>
+                                    ${currentStep >= 1 ? "✓" : "○"}
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        Submitted
+                                    </strong>
+
+                                    <small>
+                                        Application received
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="timeline-line"></div>
+
+
+                            <!-- STEP 2 : VERIFICATION -->
+
+                            <div class="timeline-step ${
+                                currentStep >= 2
+                                    ? "completed"
+                                    : ""
+                            }">
+
+                                <span>
+                                    ${currentStep >= 2 ? "✓" : "○"}
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        Verification
+                                    </strong>
+
+                                    <small>
+                                        Application verification
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="timeline-line"></div>
+
+
+                            <!-- STEP 3 : PROCESSING -->
+
+                            <div class="timeline-step ${
+                                currentStep >= 3
+                                    ? "completed"
+                                    : ""
+                            }">
+
+                                <span>
+                                    ${currentStep >= 3 ? "✓" : "○"}
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        Processing
+                                    </strong>
+
+                                    <small>
+                                        Department processing
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="timeline-line"></div>
+
+
+                            <!-- STEP 4 : COMPLETED -->
+
+                            <div class="timeline-step ${
+                                currentStep >= 4
+                                    ? "completed"
+                                    : ""
+                            }">
+
+                                <span>
+                                    ${currentStep >= 4 ? "✓" : "○"}
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        Completed
+                                    </strong>
+
+                                    <small>
+                                        Service completed
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- TRACK BUTTON -->
+
+                        <button
+                            class="track-btn"
+                            onclick="trackApplication('${app.applicationId}')"
+                        >
+                            Track Application
+                        </button>
+
+
+                    </div>
+
+                `;
+
+            }).join("");
+
+        }
+
+
+        /* =========================
+           TRACK APPLICATION
+        ========================= */
+
+        function trackApplication(applicationId) {
+
+            window.location.href =
+                "tracking.html?id=" + applicationId;
+
+        }
+
+    </script>
+
+    <script src="language.js"></script>
+</body>
+
+</html>

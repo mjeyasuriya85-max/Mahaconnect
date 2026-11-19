@@ -1,0 +1,1980 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MahaConnect | Department Dashboard</title>
+<meta name="description" content="MahaConnect department dashboard for application and service management.">
+
+<style>
+:root {
+    --navy: #102d50;
+    --blue: #1769d2;
+    --blue-dark: #1054ad;
+    --bg: #f3f6fb;
+    --white: #ffffff;
+    --text: #24364b;
+    --muted: #718096;
+    --border: #e5eaf1;
+    --green: #168653;
+    --red: #c43d45;
+    --shadow: 0 5px 22px rgba(24,52,87,.06);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* HEADER */
+
+.header {
+    min-height: 76px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 5%;
+    box-shadow: 0 2px 10px rgba(20,40,70,.025);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.logo-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 13px;
+    background: linear-gradient(135deg,#1769d2,#102d50);
+    color: white;
+    display: grid;
+    place-items: center;
+    font-size: 16px;
+    font-weight: 800;
+    box-shadow: 0 5px 12px rgba(23,105,210,.2);
+}
+
+.logo strong {
+    display: block;
+    font-size: 20px;
+    color: var(--navy);
+    letter-spacing: -.4px;
+}
+
+.logo small {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.admin-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.admin-badge {
+    background: #eaf2ff;
+    color: var(--blue);
+    padding: 9px 15px;
+    border-radius: 30px;
+    font-size: 12px;
+}
+/* PREMIUM SIDEBAR LAYOUT */
+
+.admin-layout {
+    display: flex;
+    min-height: calc(100vh - 76px);
+}
+
+.sidebar {
+    width: 255px;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, #102d50, #0b203a);
+    color: #fff;
+    padding: 28px 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-heading {
+    color: #91a9c7;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: 0 13px;
+    margin: 12px 0 14px;
+}
+
+.sidebar-link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px 15px;
+    margin-bottom: 7px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: #c5d3e5;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.sidebar-link span {
+    width: 22px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.sidebar-link:hover {
+    background: rgba(255,255,255,.09);
+    color: white;
+}
+
+.sidebar-link.active {
+    color: white;
+    background: linear-gradient(110deg, #1769d2, #287ee5);
+    box-shadow: 0 5px 15px rgba(0,0,0,.18);
+}
+
+.sidebar-divider {
+    height: 1px;
+    background: rgba(255,255,255,.12);
+    margin: 20px 5px;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 18px 12px 5px;
+    color: #91a9c7;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.sidebar-logout {
+    color: #ffb6b6;
+}
+
+.main-content.container {
+    flex: 1;
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+    margin: 0;
+    padding: 35px;
+}
+
+.overview-welcome {
+    background: linear-gradient(120deg, #102d50, #1769d2);
+    border-radius: 17px;
+    padding: 28px;
+    color: white;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow);
+}
+
+.overview-welcome h2 {
+    font-size: 23px;
+    margin-bottom: 9px;
+}
+
+.overview-welcome p {
+    color: #d8e8ff;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 25px;
+}
+
+.quick-action {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+}
+
+.quick-action h3 {
+    color: var(--navy);
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.quick-action p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.coming-soon {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 45px 25px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.coming-soon h2 {
+    color: var(--navy);
+    margin-bottom: 10px;
+}
+
+.coming-soon p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+@media(max-width:850px) {
+    .admin-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 13px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .sidebar-heading,
+    .sidebar-divider,
+    .sidebar-footer {
+        display: none;
+    }
+
+    .sidebar-link {
+        width: auto;
+        flex: 1 1 140px;
+        justify-content: center;
+        margin: 0;
+        padding: 12px 9px;
+        font-size: 12px;
+    }
+
+    .main-content.container {
+        padding: 22px;
+    }
+}
+
+@media(max-width:650px) {
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .main-content.container {
+        padding: 18px 14px;
+    }
+}
+/* MAIN */
+
+.container {
+    max-width: 1450px;
+    margin: 35px auto;
+    padding: 0 35px;
+}
+
+.page-title {
+    margin-bottom: 28px;
+}
+
+.page-title span {
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+.page-title h1 {
+    margin-top: 9px;
+    font-size: clamp(25px,3vw,34px);
+    font-weight: 750;
+    letter-spacing: -.8px;
+    color: var(--navy);
+}
+
+.page-title p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* NAVIGATION */
+
+.nav-tabs {
+    display: flex;
+    gap: 8px;
+    padding: 7px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: fit-content;
+    margin-bottom: 27px;
+    box-shadow: var(--shadow);
+}
+
+.tab-btn {
+    border: none;
+    background: transparent;
+    color: #64748b;
+    padding: 12px 19px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+    background: var(--navy);
+    color: white;
+}
+
+/* PANELS */
+
+.panel {
+    display: none;
+}
+
+.panel.active {
+    display: block;
+}
+
+/* SUMMARY CARDS */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 18px;
+    margin-bottom: 27px;
+}
+
+.summary-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 23px;
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    box-shadow: var(--shadow);
+    transition: .2s;
+}
+
+.summary-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(24,52,87,.09);
+}
+
+.summary-icon {
+    flex-shrink: 0;
+    width: 51px;
+    height: 51px;
+    border-radius: 13px;
+    background: #eaf2ff;
+    color: var(--blue);
+    display: grid;
+    place-items: center;
+    font-size: 23px;
+}
+
+.summary-card small {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.summary-card strong {
+    color: var(--navy);
+    font-size: 27px;
+    font-weight: 800;
+}
+
+/* TABLE CARDS */
+
+.card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow);
+}
+
+.card-header {
+    padding: 21px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.card-header h2 {
+    color: var(--navy);
+    font-size: 18px;
+    font-weight: 750;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 760px;
+}
+
+th {
+    background: #f7f9fc;
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .7px;
+    text-align: left;
+    padding: 17px 20px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+td {
+    padding: 17px 20px;
+    border-bottom: 1px solid #edf1f6;
+    color: #405168;
+    font-size: 13px;
+    line-height: 1.6;
+    vertical-align: middle;
+}
+
+tbody tr {
+    transition: background .2s;
+}
+
+tbody tr:hover {
+    background: #f6f9ff;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.application-id {
+    color: var(--blue);
+    font-weight: 800;
+}
+
+/* STATUS */
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 11px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.pending {
+    background: #fff5df;
+    color: #a66a08;
+}
+
+.progress {
+    background: #eaf2ff;
+    color: #1769d2;
+}
+
+.completed,
+.active-status {
+    background: #e7f7ee;
+    color: #168653;
+}
+
+.inactive-status {
+    background: #fff0f0;
+    color: #c43d45;
+}
+
+/* INPUTS */
+
+.search-box,
+.filter-select,
+.status-select {
+    min-height: 41px;
+    border: 1px solid #dce3ec;
+    background: #fff;
+    color: var(--text);
+    border-radius: 8px;
+    padding: 10px 13px;
+    outline: none;
+    font-size: 13px;
+    transition: .2s;
+}
+
+.search-box {
+    width: 245px;
+}
+
+.search-box:focus,
+.filter-select:focus,
+.status-select:focus,
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(23,105,210,.09);
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+/* BUTTONS */
+
+.btn {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 750;
+    transition: .2s;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--blue);
+    color: white;
+    box-shadow: 0 4px 10px rgba(23,105,210,.15);
+}
+
+.btn-primary:hover {
+    background: var(--blue-dark);
+    transform: translateY(-1px);
+}
+
+.btn-edit {
+    background: #eaf2ff;
+    color: var(--blue);
+}
+
+.btn-edit:hover {
+    background: #d8e8ff;
+}
+
+.btn-delete {
+    background: #fff0f0;
+    color: var(--red);
+}
+
+.btn-delete:hover {
+    background: #ffe0e0;
+}
+
+.btn-toggle {
+    background: #e8f7ee;
+    color: var(--green);
+}
+
+.btn-toggle:hover {
+    background: #d6f2e2;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+button:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+/* MESSAGES */
+
+.message {
+    display: none;
+    margin: 16px 24px;
+    padding: 13px 16px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.message.success {
+    display: block;
+    background: #e8f7ee;
+    color: #168653;
+    border: 1px solid #c8ecd7;
+}
+
+.message.error {
+    display: block;
+    background: #fff0f0;
+    color: #c43d45;
+    border: 1px solid #f4d1d1;
+}
+
+.empty-state,
+.loading {
+    padding: 35px !important;
+    text-align: center;
+    color: var(--muted);
+}
+
+/* MODAL */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(9,27,49,.58);
+    backdrop-filter: blur(4px);
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 570px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: white;
+    border-radius: 17px;
+    padding: 27px;
+    margin: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,.2);
+    animation: modalIn .2s ease;
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 23px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header h2 {
+    color: var(--navy);
+    font-size: 21px;
+}
+
+.close-btn {
+    border: none;
+    background: #f1f5f9;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    font-size: 22px;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    color: #34465c;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    border: 1px solid #dce3ec;
+    background: #fff;
+    color: var(--text);
+    border-radius: 8px;
+    padding: 12px 13px;
+    outline: none;
+    font-size: 13px;
+}
+
+.form-group textarea {
+    min-height: 85px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 23px;
+    padding-top: 17px;
+    border-top: 1px solid var(--border);
+}
+
+.footer-note {
+    margin-top: 25px;
+    color: #8995a6;
+    font-size: 12px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1050px) {
+    .summary-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+}
+
+@media(max-width:650px) {
+    .header {
+        padding: 12px 16px;
+    }
+
+    .admin-badge {
+        display: none;
+    }
+
+    .container {
+        margin: 25px auto;
+        padding: 0 15px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .summary-card {
+        padding: 17px;
+    }
+
+    .nav-tabs {
+        width: 100%;
+    }
+
+    .tab-btn {
+        flex: 1;
+        padding: 11px 8px;
+        font-size: 11px;
+    }
+
+    .card-header {
+        padding: 17px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .toolbar {
+        width: 100%;
+    }
+
+    .toolbar .filter-select {
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+
+    .page-title h1 {
+        font-size: 26px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">
+        <span class="logo-icon">MC</span>
+        <div>
+            <strong>MahaConnect</strong>
+            <small>Digital Services</small>
+        </div>
+    </div>
+
+    <div class="admin-info">
+        <span class="admin-badge">Department Portal</span>
+        <span>👤 Admin</span>
+    </div>
+</header>
+
+<div class="admin-layout">
+
+    <!-- LEFT SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-heading">MAIN MENU</div>
+
+        <button class="sidebar-link active" data-tab="dashboardPanel">
+            <span>▦</span> Dashboard
+        </button>
+
+        <button class="sidebar-link" data-tab="applicationsPanel">
+            <span>📋</span> Applications
+        </button>
+
+        <button class="sidebar-link" data-tab="servicesPanel">
+            <span>🏛️</span> Service Management
+        </button>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="sidebar-heading">MANAGEMENT</div>
+
+        <button class="sidebar-link" data-tab="reportsPanel">
+            <span>📊</span> Reports
+        </button>
+
+        <button class="sidebar-link" data-tab="settingsPanel">
+            <span>⚙️</span> Settings
+        </button>
+
+        <div class="sidebar-divider"></div>
+
+        <button class="sidebar-link sidebar-logout" id="logoutBtn">
+            <span>↪</span> Logout
+        </button>
+
+        <div class="sidebar-footer">
+            MahaConnect Department Portal<br>
+            Government Services Platform
+        </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+
+    <main class="container main-content">
+
+    <section class="page-title">
+        <span>DEPARTMENT DASHBOARD</span>
+        <h1>Department Management</h1>
+        <p>Manage citizen applications and connected government services.</p>
+    </section>
+
+    <nav class="nav-tabs">
+        <button class="tab-btn active" data-tab="applicationsPanel">
+            📋 Applications
+        </button>
+        <button class="tab-btn" data-tab="servicesPanel">
+            🏛️ Service Management
+        </button>
+    </nav>
+<!-- DASHBOARD OVERVIEW -->
+
+<section class="panel active" id="dashboardPanel">
+
+    <section class="page-title">
+        <span>OVERVIEW</span>
+        <h1>Department Dashboard</h1>
+        <p>Welcome to MahaConnect Department Management Portal.</p>
+    </section>
+
+    <div class="overview-welcome">
+        <h2>Welcome, Department Admin 👋</h2>
+        <p>
+            Manage citizen applications, monitor service availability
+            and coordinate connected government services from one place.
+        </p>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <span class="summary-icon">📋</span>
+            <div>
+                <small>Total Applications</small>
+                <strong id="overviewApplications">00</strong>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <span class="summary-icon">⏳</span>
+            <div>
+                <small>Pending Applications</small>
+                <strong id="overviewPending">00</strong>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <span class="summary-icon">✓</span>
+            <div>
+                <small>Completed Applications</small>
+                <strong id="overviewCompleted">00</strong>
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <span class="summary-icon">🏛️</span>
+            <div>
+                <small>Active Services</small>
+                <strong id="overviewServices">00</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="quick-actions">
+
+        <div class="quick-action">
+            <h3>📋 Application Management</h3>
+            <p>
+                View citizen applications and update their processing status.
+            </p>
+            <button class="btn btn-primary" data-tab="applicationsPanel">
+                View Applications →
+            </button>
+        </div>
+
+        <div class="quick-action">
+            <h3>🏛️ Service Management</h3>
+            <p>
+                Add government services, edit details and manage availability.
+            </p>
+            <button class="btn btn-primary" data-tab="servicesPanel">
+                Manage Services →
+            </button>
+        </div>
+
+    </div>
+
+</section>
+    <!-- APPLICATION MANAGEMENT -->
+
+    <section class="panel active" id="applicationsPanel">
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+                <span class="summary-icon">📋</span>
+                <div>
+                    <small>Total Applications</small>
+                    <strong id="totalCount">00</strong>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <span class="summary-icon">⏳</span>
+                <div>
+                    <small>Pending</small>
+                    <strong id="pendingCount">00</strong>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <span class="summary-icon">🔄</span>
+                <div>
+                    <small>In Progress</small>
+                    <strong id="progressCount">00</strong>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <span class="summary-icon">✓</span>
+                <div>
+                    <small>Completed</small>
+                    <strong id="completedCount">00</strong>
+                </div>
+            </div>
+
+        </div>
+
+        <section class="card">
+
+            <div class="card-header">
+                <h2>Citizen Applications</h2>
+
+                <input
+                    type="text"
+                    id="applicationSearch"
+                    class="search-box"
+                    placeholder="Search application..."
+                >
+            </div>
+
+            <div id="applicationMessage" class="message"></div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Application ID</th>
+                            <th>Applicant</th>
+                            <th>Service</th>
+                            <th>Department</th>
+                            <th>Status</th>
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="applicationTable">
+                        <tr>
+                            <td colspan="6" class="loading">
+                                Loading applications...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+    </section>
+
+    <!-- SERVICE MANAGEMENT -->
+
+    <section class="panel" id="servicesPanel">
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+                <span class="summary-icon">🏛️</span>
+                <div>
+                    <small>Total Services</small>
+                    <strong id="serviceTotal">00</strong>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <span class="summary-icon">✓</span>
+                <div>
+                    <small>Active Services</small>
+                    <strong id="serviceActive">00</strong>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <span class="summary-icon">⏸️</span>
+                <div>
+                    <small>Inactive Services</small>
+                    <strong id="serviceInactive">00</strong>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <span class="summary-icon">📂</span>
+                <div>
+                    <small>Categories</small>
+                    <strong id="serviceCategories">00</strong>
+                </div>
+            </div>
+
+        </div>
+
+        <section class="card">
+
+            <div class="card-header">
+                <h2>Service Management</h2>
+
+                <button class="btn btn-primary" id="addServiceBtn">
+                    + Add New Service
+                </button>
+            </div>
+
+            <div id="serviceMessage" class="message"></div>
+
+            <div class="card-header">
+
+                <div class="toolbar">
+
+                    <input
+                        type="text"
+                        id="serviceSearch"
+                        class="search-box"
+                        placeholder="Search services..."
+                    >
+
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="">All Categories</option>
+                    </select>
+
+                    <select id="statusFilter" class="filter-select">
+                        <option value="">All Statuses</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+
+                </div>
+
+                <button class="btn btn-edit" id="refreshServicesBtn">
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Service Name</th>
+                            <th>Category</th>
+                            <th>Required Documents</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="serviceTable">
+                        <tr>
+                            <td colspan="6" class="loading">
+                                Loading services...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+    </section>
+<!-- REPORTS PANEL -->
+
+<section class="panel" id="reportsPanel">
+
+    <section class="page-title">
+        <span>ANALYTICS</span>
+        <h1>Department Reports</h1>
+        <p>Monitor application and service performance.</p>
+    </section>
+
+    <div class="coming-soon">
+        <h2>📊 Reports & Analytics</h2>
+        <p>Reports and analytics will be available in a future update.</p>
+    </div>
+
+</section>
+
+<!-- SETTINGS PANEL -->
+
+<section class="panel" id="settingsPanel">
+
+    <section class="page-title">
+        <span>CONFIGURATION</span>
+        <h1>Department Settings</h1>
+        <p>Manage department portal configuration.</p>
+    </section>
+
+    <div class="coming-soon">
+        <h2>⚙️ Department Settings</h2>
+        <p>Account and portal settings will be available in a future update.</p>
+    </div>
+
+</section>
+    <p class="footer-note">
+        MahaConnect enables coordination between connected government services.
+    </p>
+
+</main>
+
+<!-- SERVICE MODAL -->
+
+<div class="modal" id="serviceModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2 id="modalTitle">Add New Service</h2>
+            <button class="close-btn" id="closeModalBtn">&times;</button>
+        </div>
+
+        <form id="serviceForm">
+
+            <input type="hidden" id="serviceId">
+
+            <div class="form-group">
+                <label for="serviceTitle">Service Name *</label>
+                <input
+                    type="text"
+                    id="serviceTitle"
+                    required
+                    maxlength="150"
+                    placeholder="Example: Student Scholarship Support"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="serviceCategory">Category *</label>
+                <input
+                    type="text"
+                    id="serviceCategory"
+                    required
+                    maxlength="100"
+                    placeholder="Example: Education Support"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="serviceDescription">Description</label>
+                <textarea
+                    id="serviceDescription"
+                    placeholder="Enter service description"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="serviceEligibility">Eligibility</label>
+                <textarea
+                    id="serviceEligibility"
+                    placeholder="Enter eligibility details"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="serviceDocuments">Required Documents</label>
+                <textarea
+                    id="serviceDocuments"
+                    placeholder="Enter documents separated by commas"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="applicationUrl">Application URL</label>
+                <input
+                    type="url"
+                    id="applicationUrl"
+                    placeholder="https://example.gov.in"
+                >
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-edit" id="cancelModalBtn">
+                    Cancel
+                </button>
+
+                <button type="submit" class="btn btn-primary" id="saveServiceBtn">
+                    Save Service
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script>
+const API = "http://localhost:5000/api";
+
+let services = [];
+let applications = [];
+
+/* NAVIGATION */
+
+document.querySelectorAll(".tab-btn").forEach(button => {
+    button.addEventListener("click", () => {
+
+        document.querySelectorAll(".tab-btn").forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        document.querySelectorAll(".panel").forEach(panel => {
+            panel.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        document.getElementById(button.dataset.tab)
+            .classList.add("active");
+
+        if (button.dataset.tab === "servicesPanel") {
+            loadServices();
+        }
+    });
+});
+
+/* MESSAGE */
+
+function showMessage(elementId, message, type = "success") {
+    const element = document.getElementById(elementId);
+
+    element.textContent = message;
+    element.className = "message " + type;
+
+    setTimeout(() => {
+        element.className = "message";
+    }, 3500);
+}
+
+/* APPLICATION MANAGEMENT */
+
+function statusClass(status) {
+    if (status === "Pending") return "pending";
+    if (status === "Completed") return "completed";
+    return "progress";
+}
+
+async function loadApplications() {
+    const table = document.getElementById("applicationTable");
+
+    table.innerHTML = `
+        <tr><td colspan="6" class="loading">
+            Loading applications...
+        </td></tr>
+    `;
+
+    try {
+        const response = await fetch(`${API}/applications`);
+
+        if (!response.ok) {
+            throw new Error("Unable to load applications.");
+        }
+
+        const data = await response.json();
+
+        applications = Array.isArray(data.applications)
+            ? data.applications
+            : [];
+
+        renderApplications();
+
+    } catch (error) {
+        console.error("Application loading error:", error);
+
+        table.innerHTML = `
+            <tr><td colspan="6" class="empty-state">
+                Unable to load applications. Check backend server.
+            </td></tr>
+        `;
+
+        updateApplicationCounts();
+    }
+}
+
+function renderApplications() {
+    const table = document.getElementById("applicationTable");
+
+    table.innerHTML = "";
+
+    if (!applications.length) {
+        table.innerHTML = `
+            <tr><td colspan="6" class="empty-state">
+                No applications found.
+            </td></tr>
+        `;
+
+        updateApplicationCounts();
+        return;
+    }
+
+    applications.forEach(application => {
+
+        const status = application.status || "Pending";
+        const row = document.createElement("tr");
+
+        const cells = [
+            application.id,
+            application.name || "Citizen",
+            application.service || "Government Service",
+            "Connected Department"
+        ];
+
+        cells.forEach((value, index) => {
+            const td = document.createElement("td");
+            td.textContent = value || "-";
+
+            if (index === 0) {
+                td.className = "application-id";
+            }
+
+            row.appendChild(td);
+        });
+
+        const statusCell = document.createElement("td");
+        const statusBadge = document.createElement("span");
+
+        statusBadge.className = `status ${statusClass(status)}`;
+        statusBadge.textContent = status;
+
+        statusCell.appendChild(statusBadge);
+        row.appendChild(statusCell);
+
+        const actionCell = document.createElement("td");
+
+        const select = document.createElement("select");
+        select.className = "status-select";
+
+        ["Pending", "In Progress", "Completed"].forEach(optionValue => {
+            const option = document.createElement("option");
+
+            option.value = optionValue;
+            option.textContent = optionValue;
+            option.selected = optionValue === status;
+
+            select.appendChild(option);
+        });
+
+        const updateButton = document.createElement("button");
+        updateButton.className = "btn btn-primary";
+        updateButton.textContent = "Update";
+
+        updateButton.addEventListener("click", () => {
+            updateApplicationStatus(
+                application.id,
+                select.value,
+                updateButton
+            );
+        });
+
+        actionCell.append(select, updateButton);
+        row.appendChild(actionCell);
+
+        table.appendChild(row);
+    });
+
+    updateApplicationCounts();
+}
+
+async function updateApplicationStatus(id, status, button) {
+    button.disabled = true;
+
+    try {
+        const response = await fetch(
+            `${API}/applications/${encodeURIComponent(id)}/status`,
+            {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ status })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Status update failed.");
+        }
+
+        const application = applications.find(
+            item => String(item.id) === String(id)
+        );
+
+        if (application) {
+            application.status = status;
+        }
+
+        renderApplications();
+
+        showMessage(
+            "applicationMessage",
+            "Application status updated successfully."
+        );
+
+    } catch (error) {
+        alert(error.message);
+    } finally {
+        button.disabled = false;
+    }
+}
+
+function updateApplicationCounts() {
+    const pending = applications.filter(
+        a => (a.status || "Pending") === "Pending"
+    ).length;
+
+    const progress = applications.filter(
+        a => a.status === "In Progress"
+    ).length;
+
+    const completed = applications.filter(
+        a => a.status === "Completed"
+    ).length;
+
+    document.getElementById("totalCount").textContent = applications.length;
+    document.getElementById("pendingCount").textContent = pending;
+    document.getElementById("progressCount").textContent = progress;
+    document.getElementById("completedCount").textContent = completed;
+}
+
+document.getElementById("applicationSearch").addEventListener("input", function() {
+    const query = this.value.toLowerCase();
+
+    document.querySelectorAll("#applicationTable tr").forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(query)
+            ? ""
+            : "none";
+    });
+});
+
+/* SERVICE MANAGEMENT */
+
+async function loadServices() {
+    const table = document.getElementById("serviceTable");
+
+    table.innerHTML = `
+        <tr><td colspan="6" class="loading">
+            Loading services...
+        </td></tr>
+    `;
+
+    try {
+        const response = await fetch(
+            `${API}/services?includeInactive=true`
+        );
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Unable to load services.");
+        }
+
+        services = Array.isArray(data.services)
+            ? data.services
+            : [];
+
+        renderServices();
+
+    } catch (error) {
+        console.error("Service loading error:", error);
+
+        table.innerHTML = `
+            <tr><td colspan="6" class="empty-state">
+                Unable to load services. Check backend server.
+            </td></tr>
+        `;
+
+        updateServiceCounts();
+    }
+}
+
+function renderServices() {
+    const table = document.getElementById("serviceTable");
+
+    const search = document.getElementById("serviceSearch").value.toLowerCase();
+    const category = document.getElementById("categoryFilter").value;
+    const status = document.getElementById("statusFilter").value;
+
+    const filtered = services.filter(service => {
+
+        const title = String(service.title || "").toLowerCase();
+        const serviceCategory = String(service.category || "");
+
+        const matchesSearch =
+            title.includes(search) ||
+            serviceCategory.toLowerCase().includes(search);
+
+        const matchesCategory =
+            !category || serviceCategory === category;
+
+        const matchesStatus =
+            !status || service.status === status;
+
+        return matchesSearch && matchesCategory && matchesStatus;
+    });
+
+    table.innerHTML = "";
+
+    if (!filtered.length) {
+        table.innerHTML = `
+            <tr><td colspan="6" class="empty-state">
+                No services found.
+            </td></tr>
+        `;
+    }
+
+    filtered.forEach(service => {
+
+        const row = document.createElement("tr");
+
+        const idCell = document.createElement("td");
+        idCell.textContent = service.id;
+
+        const titleCell = document.createElement("td");
+        titleCell.textContent = service.title || "-";
+
+        const categoryCell = document.createElement("td");
+        categoryCell.textContent = service.category || "-";
+
+        const documentsCell = document.createElement("td");
+
+        documentsCell.textContent =
+            Array.isArray(service.requiredDocuments)
+                ? service.requiredDocuments.join(", ") || "-"
+                : "-";
+
+        const statusCell = document.createElement("td");
+        const badge = document.createElement("span");
+
+        badge.className = service.status === "Active"
+            ? "status active-status"
+            : "status inactive-status";
+
+        badge.textContent = service.status || "Inactive";
+
+        statusCell.appendChild(badge);
+
+        const actionsCell = document.createElement("td");
+        const actions = document.createElement("div");
+
+        actions.className = "actions";
+
+        const editButton = document.createElement("button");
+        editButton.className = "btn btn-edit";
+        editButton.textContent = "Edit";
+
+        editButton.addEventListener("click", () => {
+            openEditModal(service.id);
+        });
+
+        const toggleButton = document.createElement("button");
+        toggleButton.className = "btn btn-toggle";
+
+        toggleButton.textContent =
+            service.status === "Active" ? "Deactivate" : "Activate";
+
+        toggleButton.addEventListener("click", () => {
+            changeServiceStatus(
+                service.id,
+                service.status === "Active" ? "Inactive" : "Active"
+            );
+        });
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "btn btn-delete";
+        deleteButton.textContent = "Delete";
+
+        deleteButton.addEventListener("click", () => {
+            deleteService(service.id);
+        });
+
+        actions.append(editButton, toggleButton, deleteButton);
+        actionsCell.appendChild(actions);
+
+        row.append(
+            idCell,
+            titleCell,
+            categoryCell,
+            documentsCell,
+            statusCell,
+            actionsCell
+        );
+
+        table.appendChild(row);
+    });
+
+    updateServiceCounts();
+    updateCategoryFilter();
+}
+
+function updateServiceCounts() {
+    const active = services.filter(
+        service => service.status === "Active"
+    ).length;
+
+    const inactive = services.filter(
+        service => service.status === "Inactive"
+    ).length;
+
+    const categories = new Set(
+        services.map(service => service.category).filter(Boolean)
+    );
+
+    document.getElementById("serviceTotal").textContent = services.length;
+    document.getElementById("serviceActive").textContent = active;
+    document.getElementById("serviceInactive").textContent = inactive;
+    document.getElementById("serviceCategories").textContent = categories.size;
+}
+
+function updateCategoryFilter() {
+    const filter = document.getElementById("categoryFilter");
+    const currentValue = filter.value;
+
+    const categories = [
+        ...new Set(services.map(service => service.category).filter(Boolean))
+    ];
+
+    filter.innerHTML = '<option value="">All Categories</option>';
+
+    categories.forEach(category => {
+        const option = document.createElement("option");
+
+        option.value = category;
+        option.textContent = category;
+
+        filter.appendChild(option);
+    });
+
+    filter.value = categories.includes(currentValue) ? currentValue : "";
+}
+
+document.getElementById("serviceSearch")
+    .addEventListener("input", renderServices);
+
+document.getElementById("categoryFilter")
+    .addEventListener("change", renderServices);
+
+document.getElementById("statusFilter")
+    .addEventListener("change", renderServices);
+
+document.getElementById("refreshServicesBtn")
+    .addEventListener("click", loadServices);
+
+/* ADD / EDIT MODAL */
+
+const modal = document.getElementById("serviceModal");
+const form = document.getElementById("serviceForm");
+
+function openAddModal() {
+    form.reset();
+
+    document.getElementById("serviceId").value = "";
+    document.getElementById("modalTitle").textContent = "Add New Service";
+    document.getElementById("saveServiceBtn").textContent = "Save Service";
+
+    modal.classList.add("show");
+}
+
+function openEditModal(id) {
+    const service = services.find(
+        item => Number(item.id) === Number(id)
+    );
+
+    if (!service) {
+        alert("Service not found.");
+        return;
+    }
+
+    document.getElementById("serviceId").value = service.id;
+    document.getElementById("serviceTitle").value = service.title || "";
+    document.getElementById("serviceCategory").value = service.category || "";
+    document.getElementById("serviceDescription").value = service.description || "";
+    document.getElementById("serviceEligibility").value = service.eligibility || "";
+
+    document.getElementById("serviceDocuments").value =
+        Array.isArray(service.requiredDocuments)
+            ? service.requiredDocuments.join(", ")
+            : "";
+
+    document.getElementById("applicationUrl").value =
+        service.applicationUrl || "";
+
+    document.getElementById("modalTitle").textContent = "Edit Service";
+    document.getElementById("saveServiceBtn").textContent = "Update Service";
+
+    modal.classList.add("show");
+}
+
+function closeModal() {
+    modal.classList.remove("show");
+}
+
+document.getElementById("addServiceBtn")
+    .addEventListener("click", openAddModal);
+
+document.getElementById("closeModalBtn")
+    .addEventListener("click", closeModal);
+
+document.getElementById("cancelModalBtn")
+    .addEventListener("click", closeModal);
+
+modal.addEventListener("click", event => {
+    if (event.target === modal) {
+        closeModal();
+    }
+});
+
+form.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const id = document.getElementById("serviceId").value;
+
+    const documents = document.getElementById("serviceDocuments")
+        .value.split(",")
+        .map(item => item.trim())
+        .filter(Boolean);
+
+    const serviceData = {
+        title: document.getElementById("serviceTitle").value.trim(),
+        category: document.getElementById("serviceCategory").value.trim(),
+        description: document.getElementById("serviceDescription").value.trim(),
+        eligibility: document.getElementById("serviceEligibility").value.trim(),
+        requiredDocuments: documents,
+        applicationUrl: document.getElementById("applicationUrl").value.trim()
+    };
+
+    const saveButton = document.getElementById("saveServiceBtn");
+
+    saveButton.disabled = true;
+    saveButton.textContent = "Saving...";
+
+    try {
+        const response = await fetch(
+            id
+                ? `${API}/services/${encodeURIComponent(id)}`
+                : `${API}/services`,
+            {
+                method: id ? "PUT" : "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(serviceData)
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Unable to save service.");
+        }
+
+        closeModal();
+        await loadServices();
+
+        showMessage(
+            "serviceMessage",
+            id
+                ? "Service updated successfully."
+                : "New service added successfully."
+        );
+
+    } catch (error) {
+        alert(error.message);
+    } finally {
+        saveButton.disabled = false;
+        saveButton.textContent = id ? "Update Service" : "Save Service";
+    }
+});
+
+/* ACTIVATE / DEACTIVATE */
+
+async function changeServiceStatus(id, status) {
+    const action = status === "Active" ? "activate" : "deactivate";
+
+    if (!confirm(`Are you sure you want to ${action} this service?`)) {
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            `${API}/services/${encodeURIComponent(id)}/status`,
+            {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ status })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Unable to update status.");
+        }
+
+        await loadServices();
+
+        showMessage(
+            "serviceMessage",
+            `Service ${action}d successfully.`
+        );
+
+    } catch (error) {
+        alert(error.message);
+    }
+}
+
+/* DELETE SERVICE */
+
+async function deleteService(id) {
+    if (!confirm("Are you sure you want to permanently delete this service?")) {
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            `${API}/services/${encodeURIComponent(id)}`,
+            {
+                method: "DELETE"
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Unable to delete service.");
+        }
+
+        await loadServices();
+
+        showMessage(
+            "serviceMessage",
+            "Service deleted successfully."
+        );
+
+    } catch (error) {
+        alert(error.message);
+    }
+}
+
+/* INITIAL LOAD */
+
+loadApplications();
+loadServices();
+</script>
+
+</body>
+</html>

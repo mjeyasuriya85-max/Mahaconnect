@@ -1,0 +1,996 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage your document checklist with MahaConnect.">
+  <title>Document Wallet | MahaConnect</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    :root {
+      --navy: #12305d;
+      --blue: #215fc1;
+      --blue-dark: #194b99;
+      --bg: #f3f6fc;
+      --text: #293b54;
+      --muted: #6b7d94;
+      --border: #dce5f1;
+      --green: #18835c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a { text-decoration: none; }
+
+    button, input, select { font: inherit; }
+
+    button { cursor: pointer; }
+
+    .hero {
+      padding: 40px 6%;
+      color: #fff;
+      background: linear-gradient(120deg, #102750, #205fc1);
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      display: inline-block;
+      padding: 7px 12px;
+      border: 1px solid #ffffff70;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      margin: 17px 0 10px;
+      font-size: clamp(29px, 4vw, 42px);
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 0;
+      color: #e1eaff;
+      line-height: 1.8;
+    }
+
+    main {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 30px 18px 50px;
+    }
+
+    .card {
+      margin-bottom: 22px;
+      padding: 23px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      box-shadow: 0 5px 18px #12305d08;
+    }
+
+    .section-heading {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 21px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+      margin-bottom: 22px;
+    }
+
+    .summary-card {
+      padding: 19px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+    }
+
+    .summary-card span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .summary-card strong {
+      display: block;
+      margin: 10px 0 5px;
+      color: var(--navy);
+      font-size: 27px;
+    }
+
+    .progress-track {
+      height: 10px;
+      margin: 17px 0 10px;
+      overflow: hidden;
+      background: #e6edf7;
+      border-radius: 20px;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: var(--green);
+      border-radius: 20px;
+      transition: width .25s ease;
+    }
+
+    .progress-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .category-card {
+      padding: 20px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .category-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 9px 25px #12305d10;
+    }
+
+    .category-icon {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 14px;
+      background: #eaf1ff;
+      border-radius: 12px;
+      font-size: 25px;
+    }
+
+    .category-card h3 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 17px;
+    }
+
+    .category-card p {
+      min-height: 60px;
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .category-count {
+      display: inline-block;
+      margin-bottom: 13px;
+      padding: 5px 9px;
+      color: var(--blue-dark);
+      background: #edf3ff;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      padding: 11px 15px;
+      color: #fff;
+      background: var(--blue);
+      border: 1px solid var(--blue);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .btn:hover {
+      background: var(--blue-dark);
+    }
+
+    .btn.secondary {
+      color: var(--blue);
+      background: #edf3ff;
+      border-color: #d7e5ff;
+    }
+
+    .btn.secondary:hover {
+      background: #e1ebff;
+    }
+
+    .btn.danger {
+      color: #b42318;
+      background: #fff;
+      border-color: #f0c7c4;
+    }
+
+    .btn.danger:hover {
+      background: #fff1f0;
+    }
+
+    .btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 17px 0;
+    }
+
+    .toolbar select,
+    .toolbar input {
+      min-width: 180px;
+      padding: 11px 12px;
+      color: var(--text);
+      background: #fff;
+      border: 1px solid #ccd8e8;
+      border-radius: 8px;
+    }
+
+    .toolbar input {
+      flex: 1;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 15px;
+      border: 1px solid #e1e9f4;
+      border-radius: 10px;
+      transition: background .2s, border-color .2s;
+    }
+
+    .check-item.checked {
+      background: #f0fbf5;
+      border-color: #bce6ce;
+    }
+
+    .check-item input {
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .check-copy {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .check-copy strong {
+      display: block;
+      color: var(--navy);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .check-copy small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .check-category {
+      display: inline-block;
+      margin-top: 7px;
+      color: #526780;
+      font-size: 11px;
+    }
+
+    .empty-state {
+      display: none;
+      padding: 25px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed #cbd8e8;
+      border-radius: 10px;
+    }
+
+    .empty-state.show {
+      display: block;
+    }
+
+    .upload-area {
+      padding: 25px;
+      text-align: center;
+      background: #f8faff;
+      border: 2px dashed #b9cce6;
+      border-radius: 13px;
+    }
+
+    .upload-icon {
+      font-size: 35px;
+    }
+
+    .upload-area h3 {
+      color: var(--navy);
+      margin: 10px 0 7px;
+    }
+
+    .upload-area p {
+      max-width: 570px;
+      margin: 0 auto 17px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    #fileInput {
+      display: none;
+    }
+
+    .file-list {
+      margin-top: 18px;
+    }
+
+    .file-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      margin-top: 9px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+    }
+
+    .file-info {
+      min-width: 0;
+    }
+
+    .file-info strong {
+      display: block;
+      overflow-wrap: anywhere;
+      color: var(--navy);
+      font-size: 13px;
+    }
+
+    .file-info small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .notice {
+      margin-top: 17px;
+      padding: 15px;
+      color: #70551b;
+      background: #fff8e6;
+      border: 1px solid #f0d79b;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .message {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 14px;
+      color: #176541;
+      background: #e7f7ee;
+      border: 1px solid #b7e5ca;
+      border-radius: 9px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .message.show {
+      display: block;
+    }
+
+    .message.error {
+      color: #a12620;
+      background: #fff0ef;
+      border-color: #f2c7c4;
+    }
+
+    .bottom-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    footer {
+      padding: 23px 15px;
+      color: #e2ebfb;
+      background: #10264a;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 850px) {
+      .category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 32px 5%; }
+      main { padding: 22px 13px 38px; }
+      .card { padding: 17px; }
+      .summary-grid { grid-template-columns: 1fr; gap: 10px; }
+      .category-grid, .checklist { grid-template-columns: 1fr; }
+      .category-card p { min-height: 0; }
+      .toolbar { align-items: stretch; }
+      .toolbar select, .toolbar input { width: 100%; }
+      .file-row { align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="hero">
+  <div class="container">
+    <span class="hero-label">MAHACONNECT · CITIZEN SERVICES</span>
+    <h1>Document Wallet</h1>
+    <p>
+      Organise your document checklist, prepare important records and keep track
+      of the documents you may need for government service applications.
+    </p>
+  </div>
+</header>
+
+<main>
+  <section class="summary-grid" aria-label="Wallet summary">
+    <div class="summary-card">
+      <span>Total checklist items</span>
+      <strong id="totalItems">8</strong>
+      <span>Across document categories</span>
+    </div>
+    <div class="summary-card">
+      <span>Marked as ready</span>
+      <strong id="readyItems">0</strong>
+      <span>Based on your checklist selections</span>
+    </div>
+    <div class="summary-card">
+      <span>Files selected</span>
+      <strong id="fileCount">0</strong>
+      <span>Local preview only</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 class="section-heading">Your preparation progress</h2>
+    <p class="muted">
+      Mark the documents you have checked. This helps you prepare before starting
+      an application.
+    </p>
+
+    <div class="progress-track" role="progressbar"
+      aria-label="Document preparation progress"
+      aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+
+    <div class="progress-meta">
+      <span id="progressText">0 of 8 items ready</span>
+      <span id="progressPercent">0% complete</span>
+    </div>
+
+    <div class="bottom-actions">
+      <button class="btn" type="button" id="saveChecklist">Save Checklist</button>
+      <button class="btn secondary" type="button" id="resetChecklist">Reset Checklist</button>
+    </div>
+
+    <div class="message" id="checklistMessage" role="status" aria-live="polite"></div>
+  </section>
+
+  <section class="card">
+    <h2 class="section-heading">Document categories</h2>
+    <p class="muted">Choose a category to filter the checklist below.</p>
+
+    <div class="category-grid">
+      <article class="category-card">
+        <div class="category-icon" aria-hidden="true">🪪</div>
+        <h3>Identity Proof</h3>
+        <p>Identity records requested by the relevant service.</p>
+        <span class="category-count">Identity</span><br>
+        <button class="btn secondary category-filter" data-filter="identity" type="button">View Checklist</button>
+      </article>
+
+      <article class="category-card">
+        <div class="category-icon" aria-hidden="true">🏠</div>
+        <h3>Address Proof</h3>
+        <p>Residence or address evidence accepted by the authority.</p>
+        <span class="category-count">Address</span><br>
+        <button class="btn secondary category-filter" data-filter="address" type="button">View Checklist</button>
+      </article>
+
+      <article class="category-card">
+        <div class="category-icon" aria-hidden="true">🎓</div>
+        <h3>Education Records</h3>
+        <p>Marksheets, enrolment proof or academic certificates.</p>
+        <span class="category-count">Education</span><br>
+        <button class="btn secondary category-filter" data-filter="education" type="button">View Checklist</button>
+      </article>
+
+      <article class="category-card">
+        <div class="category-icon" aria-hidden="true">💰</div>
+        <h3>Income Records</h3>
+        <p>Income evidence where required for a particular scheme.</p>
+        <span class="category-count">Income</span><br>
+        <button class="btn secondary category-filter" data-filter="income" type="button">View Checklist</button>
+      </article>
+
+      <article class="category-card">
+        <div class="category-icon" aria-hidden="true">🏦</div>
+        <h3>Bank Details</h3>
+        <p>Bank account evidence for eligible benefits or transfers.</p>
+        <span class="category-count">Bank</span><br>
+        <button class="btn secondary category-filter" data-filter="bank" type="button">View Checklist</button>
+      </article>
+
+      <article class="category-card">
+        <div class="category-icon" aria-hidden="true">📑</div>
+        <h3>Other Certificates</h3>
+        <p>Community, residence or other service-specific certificates.</p>
+        <span class="category-count">Other</span><br>
+        <button class="btn secondary category-filter" data-filter="other" type="button">View Checklist</button>
+      </article>
+    </div>
+  </section>
+
+  <section class="card" id="checklistSection">
+    <h2 class="section-heading">Document checklist</h2>
+    <p class="muted">
+      Requirements differ by service. These are preparation reminders, not a
+      definitive list of legally required documents.
+    </p>
+
+    <div class="toolbar">
+      <input id="checkSearch" type="search" placeholder="Search checklist..." aria-label="Search checklist items">
+      <select id="categorySelect" aria-label="Filter checklist category">
+        <option value="all">All categories</option>
+        <option value="identity">Identity Proof</option>
+        <option value="address">Address Proof</option>
+        <option value="education">Education Records</option>
+        <option value="income">Income Records</option>
+        <option value="bank">Bank Details</option>
+        <option value="other">Other Certificates</option>
+      </select>
+    </div>
+
+    <div class="checklist" id="checklist">
+      <label class="check-item" data-category="identity" data-search="identity proof id card identity document">
+        <input type="checkbox" data-key="identity">
+        <span class="check-copy">
+          <strong>Identity proof checked</strong>
+          <small>Confirm which identity document the service accepts.</small>
+          <span class="check-category">Identity Proof</span>
+        </span>
+      </label>
+
+      <label class="check-item" data-category="address" data-search="address proof residence address document">
+        <input type="checkbox" data-key="address">
+        <span class="check-copy">
+          <strong>Address proof checked</strong>
+          <small>Confirm the accepted residence or address evidence.</small>
+          <span class="check-category">Address Proof</span>
+        </span>
+      </label>
+
+      <label class="check-item" data-category="education" data-search="education marksheet academic certificate student">
+        <input type="checkbox" data-key="education">
+        <span class="check-copy">
+          <strong>Education records checked</strong>
+          <small>Check marksheets or other academic records if required.</small>
+          <span class="check-category">Education Records</span>
+        </span>
+      </label>
+
+      <label class="check-item" data-category="income" data-search="income proof salary household income">
+        <input type="checkbox" data-key="income">
+        <span class="check-copy">
+          <strong>Income records checked</strong>
+          <small>Prepare accepted income evidence if the scheme requires it.</small>
+          <span class="check-category">Income Records</span>
+        </span>
+      </label>
+
+      <label class="check-item" data-category="bank" data-search="bank account passbook account details">
+        <input type="checkbox" data-key="bank">
+        <span class="check-copy">
+          <strong>Bank details checked</strong>
+          <small>Check whether bank details or proof are needed.</small>
+          <span class="check-category">Bank Details</span>
+        </span>
+      </label>
+
+      <label class="check-item" data-category="other" data-search="community residence other certificate supporting document">
+        <input type="checkbox" data-key="other">
+        <span class="check-copy">
+          <strong>Other certificates checked</strong>
+          <small>Identify additional certificates requested by the authority.</small>
+          <span class="check-category">Other Certificates</span>
+        </span>
+      </label>
+
+      <label class="check-item" data-category="other" data-search="readable complete copy document">
+        <input type="checkbox" data-key="readable">
+        <span class="check-copy">
+          <strong>Copies checked for readability</strong>
+          <small>Ensure any copies you prepare are clear and complete.</small>
+          <span class="check-category">Document Quality</span>
+        </span>
+      </label>
+
+      <label class="check-item" data-category="other" data-search="official requirements verify department checklist">
+        <input type="checkbox" data-key="verified">
+        <span class="check-copy">
+          <strong>Official requirements verified</strong>
+          <small>Confirm the latest checklist with the relevant official department.</small>
+          <span class="check-category">Final Review</span>
+        </span>
+      </label>
+    </div>
+
+    <div class="empty-state" id="emptyState">No checklist items match your search.</div>
+  </section>
+
+  <section class="card">
+    <h2 class="section-heading">Select documents for preview</h2>
+    <p class="muted">
+      Select PDF or image files to see their names in this browser session.
+      Files are not uploaded or sent to a server by this page.
+    </p>
+
+    <div class="upload-area">
+      <div class="upload-icon" aria-hidden="true">📁</div>
+      <h3>Choose your files</h3>
+      <p>Supported formats: PDF, JPG, JPEG and PNG. Maximum 5 MB per file. Avoid selecting documents on a shared device.</p>
+
+      <input id="fileInput" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" multiple>
+      <button class="btn" type="button" id="chooseFiles">Choose Files</button>
+    </div>
+
+    <div class="file-list" id="fileList"></div>
+    <div class="message" id="fileMessage" role="status" aria-live="polite"></div>
+
+    <div class="notice">
+      <strong>Privacy reminder</strong>
+      This is a frontend prototype. Selected files stay in the current browser page
+      and are not securely uploaded, verified or stored in the MahaConnect database.
+      A real document wallet requires authenticated backend upload, access controls,
+      secure storage and a retention policy.
+    </div>
+  </section>
+
+  <div class="bottom-actions">
+    <a class="btn secondary" href="services.html">← Back to Services</a>
+    <a class="btn" href="application.html">Go to Application Form →</a>
+  </div>
+</main>
+
+<footer>
+  © <span id="currentYear"></span> MahaConnect
+  <br>One Platform. Connected Government Services.
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  const STORAGE_KEY = "mahaconnect_wallet_checklist_v2";
+  const boxes = Array.from(document.querySelectorAll("[data-key]"));
+  const checkSearch = document.getElementById("checkSearch");
+  const categorySelect = document.getElementById("categorySelect");
+  const checklistMessage = document.getElementById("checklistMessage");
+  const fileMessage = document.getElementById("fileMessage");
+  const fileInput = document.getElementById("fileInput");
+  const fileList = document.getElementById("fileList");
+
+  let selectedFiles = [];
+
+  function showMessage(element, text, isError) {
+    element.textContent = text;
+    element.classList.add("show");
+    element.classList.toggle("error", Boolean(isError));
+  }
+
+  function hideMessage(element) {
+    element.textContent = "";
+    element.classList.remove("show", "error");
+  }
+
+  function updateProgress() {
+    const total = boxes.length;
+    const ready = boxes.filter(box => box.checked).length;
+    const percent = total ? Math.round(ready / total * 100) : 0;
+
+    document.getElementById("totalItems").textContent = total;
+    document.getElementById("readyItems").textContent = ready;
+    document.getElementById("progressText").textContent =
+      ready + " of " + total + " items ready";
+    document.getElementById("progressPercent").textContent =
+      percent + "% complete";
+    document.getElementById("progressBar").style.width = percent + "%";
+    document.getElementById("progressTrack").setAttribute("aria-valuenow", percent);
+
+    boxes.forEach(box => {
+      box.closest(".check-item").classList.toggle("checked", box.checked);
+    });
+  }
+
+  function filterChecklist() {
+    const query = checkSearch.value.trim().toLowerCase();
+    const category = categorySelect.value;
+    let visibleCount = 0;
+
+    boxes.forEach(box => {
+      const item = box.closest(".check-item");
+      const matchesCategory =
+        category === "all" || item.dataset.category === category;
+      const matchesSearch =
+        !query ||
+        item.textContent.toLowerCase().includes(query) ||
+        (item.dataset.search || "").toLowerCase().includes(query);
+
+      const visible = matchesCategory && matchesSearch;
+      item.hidden = !visible;
+
+      if (visible) visibleCount++;
+    });
+
+    document.getElementById("emptyState").classList.toggle(
+      "show", visibleCount === 0
+    );
+  }
+
+  function saveChecklist() {
+    try {
+      const choices = {};
+      boxes.forEach(box => {
+        choices[box.dataset.key] = box.checked;
+      });
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(choices));
+      showMessage(
+        checklistMessage,
+        "Checklist saved in this browser. It is not saved to the MahaConnect backend.",
+        false
+      );
+    } catch (error) {
+      showMessage(
+        checklistMessage,
+        "Browser storage is unavailable. Your current selections remain visible until you leave or refresh this page.",
+        true
+      );
+    }
+  }
+
+  function loadChecklist() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const choices = JSON.parse(raw);
+
+        boxes.forEach(box => {
+          box.checked = choices[box.dataset.key] === true;
+        });
+      }
+    } catch (error) {
+      showMessage(
+        checklistMessage,
+        "Saved checklist could not be read. You can still use the checklist on this page.",
+        true
+      );
+    }
+
+    updateProgress();
+  }
+
+  boxes.forEach(box => {
+    box.addEventListener("change", () => {
+      updateProgress();
+      hideMessage(checklistMessage);
+    });
+  });
+
+  document.getElementById("saveChecklist").addEventListener("click", saveChecklist);
+
+  document.getElementById("resetChecklist").addEventListener("click", () => {
+    boxes.forEach(box => {
+      box.checked = false;
+    });
+
+    updateProgress();
+    hideMessage(checklistMessage);
+    showMessage(
+      checklistMessage,
+      "Checklist reset on this page. Click Save Checklist to save the empty checklist.",
+      false
+    );
+  });
+
+  checkSearch.addEventListener("input", filterChecklist);
+  categorySelect.addEventListener("change", filterChecklist);
+
+  document.querySelectorAll(".category-filter").forEach(button => {
+    button.addEventListener("click", () => {
+      categorySelect.value = button.dataset.filter;
+      checkSearch.value = "";
+      filterChecklist();
+
+      document.getElementById("checklistSection").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+  });
+
+  document.getElementById("chooseFiles").addEventListener("click", () => {
+    fileInput.click();
+  });
+
+  function formatSize(bytes) {
+    if (bytes < 1024) return bytes + " B";
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+    return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+  }
+
+  function renderFiles() {
+    fileList.replaceChildren();
+    document.getElementById("fileCount").textContent = selectedFiles.length;
+
+    selectedFiles.forEach((file, index) => {
+      const row = document.createElement("div");
+      row.className = "file-row";
+
+      const info = document.createElement("div");
+      info.className = "file-info";
+
+      const name = document.createElement("strong");
+      name.textContent = file.name;
+
+      const size = document.createElement("small");
+      size.textContent = formatSize(file.size) + " · Local preview only";
+
+      info.append(name, size);
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "btn danger";
+      remove.textContent = "Remove";
+      remove.setAttribute("aria-label", "Remove " + file.name);
+
+      remove.addEventListener("click", () => {
+        selectedFiles.splice(index, 1);
+        renderFiles();
+        showMessage(fileMessage, "File removed from the local preview list.", false);
+      });
+
+      row.append(info, remove);
+      fileList.appendChild(row);
+    });
+  }
+
+  fileInput.addEventListener("change", () => {
+    hideMessage(fileMessage);
+
+    const files = Array.from(fileInput.files || []);
+    const maxBytes = 5 * 1024 * 1024;
+    const allowedTypes = [
+      "application/pdf",
+      "image/jpeg",
+      "image/png"
+    ];
+
+    const rejected = [];
+    let addedCount = 0;
+
+    files.forEach(file => {
+      const extension = file.name.split(".").pop().toLowerCase();
+      const allowedExtension = ["pdf", "jpg", "jpeg", "png"].includes(extension);
+      const allowedMime = allowedTypes.includes(file.type);
+
+      if (!allowedExtension || !allowedMime) {
+        rejected.push(file.name + ": unsupported file type");
+        return;
+      }
+
+      if (file.size > maxBytes) {
+        rejected.push(file.name + ": larger than 5 MB");
+        return;
+      }
+
+      const duplicate = selectedFiles.some(existing =>
+        existing.name === file.name &&
+        existing.size === file.size &&
+        existing.lastModified === file.lastModified
+      );
+
+      if (!duplicate) {
+        selectedFiles.push(file);
+        addedCount++;
+      }
+    });
+
+    renderFiles();
+
+    if (rejected.length) {
+      showMessage(
+        fileMessage,
+        "Some files were not added: " + rejected.join("; ") +
+        ". Accepted files were added to the local preview only.",
+        true
+      );
+    } else {
+      showMessage(
+        fileMessage,
+        addedCount + " file(s) added to the local preview. No file was uploaded.",
+        false
+      );
+    }
+
+    // Allows selecting the same file again after removing it.
+    fileInput.value = "";
+  });
+
+  document.getElementById("currentYear").textContent =
+    new Date().getFullYear();
+
+  loadChecklist();
+  filterChecklist();
+  renderFiles();
+})();
+</script>
+
+<script src="language.js"></script>
+</body>
+</html>

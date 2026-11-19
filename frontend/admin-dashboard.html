@@ -1,0 +1,1045 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MahaConnect administration dashboard prototype">
+  <title>Admin Dashboard | MahaConnect</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    :root {
+      --navy: #142d52;
+      --blue: #245fc0;
+      --bg: #f3f6fb;
+      --text: #293a51;
+      --muted: #738198;
+      --border: #dfe7f1;
+      --green: #16845b;
+      --orange: #a75b0a;
+      --red: #b42318;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button, input, select { font: inherit; }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    a { text-decoration: none; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 245px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      padding: 27px 17px;
+      color: #fff;
+      background: #12284a;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 0 8px 25px;
+      border-bottom: 1px solid #ffffff20;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      color: #15315c;
+      background: #fff;
+      border-radius: 12px;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 18px;
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 5px;
+      color: #b9c9e5;
+      font-size: 11px;
+    }
+
+    .nav-label {
+      margin: 27px 10px 11px;
+      color: #a9bbd8;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 5px 0;
+      padding: 13px 12px;
+      color: #dbe6f8;
+      border-radius: 9px;
+      font-size: 13px;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #fff;
+      background: #ffffff18;
+    }
+
+    .nav-link.active {
+      border-left: 3px solid #80b0ff;
+    }
+
+    .sidebar-note {
+      margin-top: 30px;
+      padding: 14px;
+      color: #dbe6f8;
+      background: #ffffff0c;
+      border: 1px solid #ffffff20;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .main { min-width: 0; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 20px 30px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 19px;
+    }
+
+    .topbar p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .admin-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      display: grid;
+      place-items: center;
+      width: 39px;
+      height: 39px;
+      color: #fff;
+      background: var(--blue);
+      border-radius: 50%;
+      font-weight: 700;
+    }
+
+    .admin-profile strong {
+      display: block;
+      color: var(--navy);
+      font-size: 12px;
+    }
+
+    .admin-profile small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .content { padding: 27px 30px 40px; }
+
+    .welcome {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 25px;
+    }
+
+    .welcome h1 {
+      margin: 0 0 9px;
+      color: var(--navy);
+      font-size: clamp(25px, 3vw, 32px);
+    }
+
+    .welcome p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .prototype-label {
+      flex-shrink: 0;
+      padding: 8px 11px;
+      color: #85520c;
+      background: #fff2d7;
+      border: 1px solid #f3d9a2;
+      border-radius: 7px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 15px;
+      margin-bottom: 23px;
+    }
+
+    .stat-card {
+      padding: 19px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+    }
+
+    .stat-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .stat-title {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .stat-icon {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      background: #eaf1ff;
+      border-radius: 10px;
+      font-size: 18px;
+    }
+
+    .stat-number {
+      display: block;
+      margin: 14px 0 6px;
+      color: var(--navy);
+      font-size: 29px;
+      font-weight: 800;
+    }
+
+    .stat-note {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .panel {
+      margin-bottom: 22px;
+      padding: 22px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+    }
+
+    .panel-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 17px;
+    }
+
+    .panel-heading h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 18px;
+    }
+
+    .panel-heading p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 17px;
+    }
+
+    .filters input, .filters select {
+      min-width: 155px;
+      padding: 11px 12px;
+      color: var(--text);
+      background: #fff;
+      border: 1px solid #d4deeb;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .filters input {
+      flex: 1;
+      min-width: 190px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 14px;
+      color: #fff;
+      background: var(--blue);
+      border: 1px solid var(--blue);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn:hover { background: #194b99; }
+
+    .btn.secondary {
+      color: var(--blue);
+      background: #edf3ff;
+      border-color: #d9e5fa;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 850px;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      padding: 14px 13px;
+      color: #5c6e85;
+      background: #f6f8fc;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 14px 13px;
+      border-top: 1px solid #e8edf5;
+      font-size: 12px;
+      vertical-align: middle;
+    }
+
+    .application-id {
+      color: var(--blue);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .citizen-name {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .subtext {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 6px 9px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .status.pending {
+      color: #8b5a08;
+      background: #fff2d5;
+    }
+
+    .status.progress {
+      color: #1e56a9;
+      background: #e7efff;
+    }
+
+    .status.completed {
+      color: #137249;
+      background: #def6e8;
+    }
+
+    .status.rejected {
+      color: #a3241d;
+      background: #ffebea;
+    }
+
+    .status-select {
+      max-width: 150px;
+      padding: 8px;
+      background: #fff;
+      border: 1px solid #d4deeb;
+      border-radius: 7px;
+      font-size: 11px;
+    }
+
+    .table-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .empty-row {
+      padding: 25px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .quick-card {
+      padding: 18px;
+      background: #f8faff;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+    }
+
+    .quick-card strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--navy);
+      font-size: 14px;
+    }
+
+    .quick-card p {
+      min-height: 38px;
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .notice {
+      margin-bottom: 20px;
+      padding: 14px 16px;
+      color: #75500e;
+      background: #fff8e7;
+      border: 1px solid #f0dcae;
+      border-radius: 9px;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .message {
+      display: none;
+      margin-top: 14px;
+      padding: 12px;
+      color: #176541;
+      background: #e8f8ef;
+      border: 1px solid #bce6ce;
+      border-radius: 8px;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .message.show { display: block; }
+
+    footer {
+      padding: 20px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 1050px) {
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .layout { grid-template-columns: 210px minmax(0, 1fr); }
+      .content { padding: 23px 20px; }
+      .topbar { padding: 18px 20px; }
+    }
+
+    @media (max-width: 760px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { padding: 17px; }
+      .brand { padding-bottom: 15px; }
+      .nav-label { margin-top: 16px; }
+      .nav-list {
+        display: flex;
+        gap: 5px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+      .nav-link {
+        flex-shrink: 0;
+        margin: 0;
+        padding: 11px;
+      }
+      .sidebar-note { margin-top: 12px; }
+      .welcome { flex-direction: column; }
+      .quick-grid { grid-template-columns: 1fr; }
+      .quick-card p { min-height: 0; }
+    }
+
+    @media (max-width: 480px) {
+      .stats { grid-template-columns: 1fr; }
+      .topbar { padding: 16px; }
+      .content { padding: 18px 12px; }
+      .admin-profile > div:last-child { display: none; }
+      .panel { padding: 15px; }
+      .filters input, .filters select, .filters .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <a href="index.html" class="brand" aria-label="MahaConnect home">
+      <span class="brand-mark">M</span>
+      <span>
+        <strong>MahaConnect</strong>
+        <small>Administration Portal</small>
+      </span>
+    </a>
+
+    <div class="nav-label">MAIN MENU</div>
+    <nav class="nav-list" aria-label="Admin navigation">
+      <a href="admin-dashboard.html" class="nav-link active">▦ Dashboard</a>
+      <a href="services.html" class="nav-link">▤ Services</a>
+      <a href="application-tracking.html" class="nav-link">◷ Application Tracking</a>
+      <a href="document-wallet.html" class="nav-link">▣ Document Wallet</a>
+    </nav>
+
+    <div class="nav-label">CITIZEN PORTAL</div>
+    <nav class="nav-list" aria-label="Citizen portal navigation">
+      <a href="index.html" class="nav-link">⌂ Home Page</a>
+      <a href="login.html" class="nav-link">⇥ Login Page</a>
+    </nav>
+
+    <div class="sidebar-note">
+      <strong>Admin workspace</strong><br>
+      Review sample applications and test status filters. This prototype is not connected to a secure admin account.
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div>
+        <h2>Administration</h2>
+        <p>Government services management workspace</p>
+      </div>
+
+      <div class="admin-profile">
+        <div class="avatar">A</div>
+        <div>
+          <strong>Demo Administrator</strong>
+          <small>Prototype mode</small>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="welcome">
+        <div>
+          <h1>Admin Dashboard</h1>
+          <p>Monitor application records, review current statuses and manage the demo workspace.</p>
+        </div>
+        <span class="prototype-label">DEMO DATA</span>
+      </section>
+
+      <div class="notice">
+        <strong>Prototype notice:</strong>
+        The records below are sample data. Status changes are held in this browser only.
+        This page does not provide real administrator authentication or permission checks.
+      </div>
+
+      <section class="stats" aria-label="Application summary">
+        <article class="stat-card">
+          <div class="stat-top">
+            <span class="stat-title">Total Applications</span>
+            <span class="stat-icon" aria-hidden="true">📋</span>
+          </div>
+          <strong class="stat-number" id="totalCount">0</strong>
+          <span class="stat-note">Sample records in this dashboard</span>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span class="stat-title">Pending Review</span>
+            <span class="stat-icon" aria-hidden="true">⏳</span>
+          </div>
+          <strong class="stat-number" id="pendingCount">0</strong>
+          <span class="stat-note">Waiting for review</span>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span class="stat-title">In Progress</span>
+            <span class="stat-icon" aria-hidden="true">🔄</span>
+          </div>
+          <strong class="stat-number" id="progressCount">0</strong>
+          <span class="stat-note">Currently being processed</span>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span class="stat-title">Completed</span>
+            <span class="stat-icon" aria-hidden="true">✓</span>
+          </div>
+          <strong class="stat-number" id="completedCount">0</strong>
+          <span class="stat-note">Marked completed in the demo</span>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Application Management</h2>
+            <p>Search the sample records and change their demo status.</p>
+          </div>
+          <button class="btn secondary" id="resetDemo" type="button">Reset Demo Data</button>
+        </div>
+
+        <div class="filters">
+          <input id="searchInput" type="search"
+            placeholder="Search ID, citizen or service..."
+            aria-label="Search applications">
+
+          <select id="statusFilter" aria-label="Filter by status">
+            <option value="all">All statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+
+          <select id="serviceFilter" aria-label="Filter by service">
+            <option value="all">All services</option>
+            <option value="Scholarship">Scholarship</option>
+            <option value="Income Certificate">Income Certificate</option>
+            <option value="Community Certificate">Community Certificate</option>
+            <option value="Residence Certificate">Residence Certificate</option>
+            <option value="Employment">Employment</option>
+          </select>
+
+          <button class="btn" id="exportCsv" type="button">Export CSV</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Application ID</th>
+                <th>Citizen</th>
+                <th>Service</th>
+                <th>Submitted</th>
+                <th>Status</th>
+                <th>Update Status</th>
+              </tr>
+            </thead>
+            <tbody id="applicationRows"></tbody>
+          </table>
+        </div>
+
+        <div class="table-bottom">
+          <span id="resultsText">Showing 0 applications</span>
+          <button class="btn secondary" id="clearFilters" type="button">Clear Filters</button>
+        </div>
+
+        <div class="message" id="adminMessage" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Quick Access</h2>
+            <p>Navigate to other MahaConnect prototype pages.</p>
+          </div>
+        </div>
+
+        <div class="quick-grid">
+          <article class="quick-card">
+            <strong>Government Services</strong>
+            <p>Browse the service catalogue and its available categories.</p>
+            <a href="services.html" class="btn secondary">View Services →</a>
+          </article>
+
+          <article class="quick-card">
+            <strong>Application Tracking</strong>
+            <p>Open the tracking prototype to view application progress.</p>
+            <a href="application-tracking.html" class="btn secondary">Open Tracking →</a>
+          </article>
+
+          <article class="quick-card">
+            <strong>Document Wallet</strong>
+            <p>Review the document checklist and local file selection demo.</p>
+            <a href="document-wallet.html" class="btn secondary">Open Wallet →</a>
+          </article>
+        </div>
+      </section>
+
+      <footer>
+        © <span id="currentYear"></span> MahaConnect · Administration Prototype
+      </footer>
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const STORAGE_KEY = "mahaconnect_admin_demo_v1";
+
+  const originalApplications = [
+    {
+      id: "MC-2026-1001",
+      name: "Sample Citizen One",
+      email: "citizen1@example.com",
+      service: "Scholarship",
+      date: "2026-10-20",
+      status: "Pending"
+    },
+    {
+      id: "MC-2026-1002",
+      name: "Sample Citizen Two",
+      email: "citizen2@example.com",
+      service: "Income Certificate",
+      date: "2026-10-21",
+      status: "In Progress"
+    },
+    {
+      id: "MC-2026-1003",
+      name: "Sample Citizen Three",
+      email: "citizen3@example.com",
+      service: "Community Certificate",
+      date: "2026-10-22",
+      status: "Completed"
+    },
+    {
+      id: "MC-2026-1004",
+      name: "Sample Citizen Four",
+      email: "citizen4@example.com",
+      service: "Residence Certificate",
+      date: "2026-10-23",
+      status: "Pending"
+    },
+    {
+      id: "MC-2026-1005",
+      name: "Sample Citizen Five",
+      email: "citizen5@example.com",
+      service: "Employment",
+      date: "2026-10-24",
+      status: "Rejected"
+    },
+    {
+      id: "MC-2026-1006",
+      name: "Sample Citizen Six",
+      email: "citizen6@example.com",
+      service: "Scholarship",
+      date: "2026-10-25",
+      status: "In Progress"
+    }
+  ];
+
+  let applications = loadApplications();
+
+  const rows = document.getElementById("applicationRows");
+  const searchInput = document.getElementById("searchInput");
+  const statusFilter = document.getElementById("statusFilter");
+  const serviceFilter = document.getElementById("serviceFilter");
+  const adminMessage = document.getElementById("adminMessage");
+
+  function loadApplications() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+
+      if (!saved) return originalApplications.map(item => ({ ...item }));
+
+      const parsed = JSON.parse(saved);
+
+      if (!Array.isArray(parsed)) throw new Error("Invalid demo data");
+
+      const validStatuses = [
+        "Pending", "In Progress", "Completed", "Rejected"
+      ];
+
+      return originalApplications.map(original => {
+        const stored = parsed.find(item => item.id === original.id);
+        const status = stored && validStatuses.includes(stored.status)
+          ? stored.status
+          : original.status;
+
+        return { ...original, status };
+      });
+    } catch (error) {
+      return originalApplications.map(item => ({ ...item }));
+    }
+  }
+
+  function saveApplications() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
+      return true;
+    } catch (error) {
+      showMessage(
+        "Browser storage is unavailable. Changes may not survive a refresh.",
+        true
+      );
+      return false;
+    }
+  }
+
+  function showMessage(text, isError) {
+    adminMessage.textContent = text;
+    adminMessage.classList.add("show");
+    adminMessage.style.color = isError ? "#a3241d" : "";
+    adminMessage.style.background = isError ? "#ffebea" : "";
+    adminMessage.style.borderColor = isError ? "#f2c7c4" : "";
+  }
+
+  function statusClass(status) {
+    if (status === "Pending") return "pending";
+    if (status === "In Progress") return "progress";
+    if (status === "Completed") return "completed";
+    return "rejected";
+  }
+
+  function updateStats() {
+    document.getElementById("totalCount").textContent = applications.length;
+    document.getElementById("pendingCount").textContent =
+      applications.filter(item => item.status === "Pending").length;
+    document.getElementById("progressCount").textContent =
+      applications.filter(item => item.status === "In Progress").length;
+    document.getElementById("completedCount").textContent =
+      applications.filter(item => item.status === "Completed").length;
+  }
+
+  function getFilteredApplications() {
+    const query = searchInput.value.trim().toLowerCase();
+    const status = statusFilter.value;
+    const service = serviceFilter.value;
+
+    return applications.filter(item => {
+      const searchable = [
+        item.id, item.name, item.email, item.service
+      ].join(" ").toLowerCase();
+
+      return searchable.includes(query) &&
+        (status === "all" || item.status === status) &&
+        (service === "all" || item.service === service);
+    });
+  }
+
+  function renderApplications() {
+    const filtered = getFilteredApplications();
+    rows.replaceChildren();
+
+    if (filtered.length === 0) {
+      const tr = document.createElement("tr");
+      const td = document.createElement("td");
+
+      td.colSpan = 6;
+      td.className = "empty-row";
+      td.textContent = "No applications match your filters.";
+
+      tr.appendChild(td);
+      rows.appendChild(tr);
+    } else {
+      filtered.forEach(item => {
+        const tr = document.createElement("tr");
+
+        const idCell = document.createElement("td");
+        const id = document.createElement("span");
+        id.className = "application-id";
+        id.textContent = item.id;
+        idCell.appendChild(id);
+
+        const citizenCell = document.createElement("td");
+        const citizenName = document.createElement("span");
+        citizenName.className = "citizen-name";
+        citizenName.textContent = item.name;
+
+        const email = document.createElement("span");
+        email.className = "subtext";
+        email.textContent = item.email;
+
+        citizenCell.append(citizenName, email);
+
+        const serviceCell = document.createElement("td");
+        serviceCell.textContent = item.service;
+
+        const dateCell = document.createElement("td");
+        dateCell.textContent = item.date;
+
+        const statusCell = document.createElement("td");
+        const badge = document.createElement("span");
+        badge.className = "status " + statusClass(item.status);
+        badge.textContent = item.status;
+        statusCell.appendChild(badge);
+
+        const actionCell = document.createElement("td");
+        const select = document.createElement("select");
+        select.className = "status-select";
+        select.setAttribute(
+          "aria-label", "Update status for " + item.id
+        );
+
+        ["Pending", "In Progress", "Completed", "Rejected"].forEach(status => {
+          const option = document.createElement("option");
+          option.value = status;
+          option.textContent = status;
+          option.selected = item.status === status;
+          select.appendChild(option);
+        });
+
+        select.addEventListener("change", () => {
+          const previousStatus = item.status;
+          item.status = select.value;
+
+          saveApplications();
+          updateStats();
+          renderApplications();
+
+          showMessage(
+            item.id + " status changed from " +
+            previousStatus + " to " + item.status +
+            " in this browser's demo data. No backend was updated.",
+            false
+          );
+        });
+
+        actionCell.appendChild(select);
+        tr.append(idCell, citizenCell, serviceCell, dateCell, statusCell, actionCell);
+        rows.appendChild(tr);
+      });
+    }
+
+    document.getElementById("resultsText").textContent =
+      "Showing " + filtered.length + " of " + applications.length +
+      " sample applications";
+
+    updateStats();
+  }
+
+  searchInput.addEventListener("input", renderApplications);
+  statusFilter.addEventListener("change", renderApplications);
+  serviceFilter.addEventListener("change", renderApplications);
+
+  document.getElementById("clearFilters").addEventListener("click", () => {
+    searchInput.value = "";
+    statusFilter.value = "all";
+    serviceFilter.value = "all";
+    renderApplications();
+    showMessage("Filters cleared.", false);
+  });
+
+  document.getElementById("resetDemo").addEventListener("click", () => {
+    const confirmed = window.confirm(
+      "Reset all demo application statuses to their original sample values?"
+    );
+
+    if (!confirmed) return;
+
+    applications = originalApplications.map(item => ({ ...item }));
+    saveApplications();
+    renderApplications();
+    showMessage("Demo application data has been reset.", false);
+  });
+
+  function csvEscape(value) {
+    return '"' + String(value).replace(/"/g, '""') + '"';
+  }
+
+  document.getElementById("exportCsv").addEventListener("click", () => {
+    const filtered = getFilteredApplications();
+
+    if (filtered.length === 0) {
+      showMessage("No matching records are available to export.", true);
+      return;
+    }
+
+    const headers = [
+      "Application ID", "Citizen", "Email", "Service", "Submitted Date", "Status"
+    ];
+
+    const lines = [
+      headers.map(csvEscape).join(","),
+      ...filtered.map(item => [
+        item.id, item.name, item.email, item.service, item.date, item.status
+      ].map(csvEscape).join(","))
+    ];
+
+    const blob = new Blob(
+      ["\uFEFF" + lines.join("\r\n")],
+      { type: "text/csv;charset=utf-8;" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "mahaconnect-demo-applications.csv";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+
+    showMessage("Filtered demo records exported as a CSV file.", false);
+  });
+
+  document.getElementById("currentYear").textContent =
+    new Date().getFullYear();
+
+  renderApplications();
+})();
+</script>
+
+<script src="language.js"></script>
+</body>
+</html>

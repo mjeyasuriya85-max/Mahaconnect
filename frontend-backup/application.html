@@ -1,0 +1,3792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MahaConnect | Apply for Service</title>
+<meta name="description" content="Explore the application process for services in the MahaConnect prototype and learn how service requests can be organized digitally.">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .application-page {
+            padding: 55px 7%;
+            background: #f7faff;
+            min-height: 85vh;
+        }
+
+        .application-container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .application-header {
+            margin-bottom: 30px;
+        }
+
+        .application-header span {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .application-header h1 {
+            margin: 10px 0;
+            color: #0f172a;
+            font-size: 34px;
+        }
+
+        .application-header p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .application-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+        }
+
+        /* STEP INDICATOR */
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 35px;
+            gap: 8px;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 34px;
+            height: 34px;
+            margin: auto;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .step.active .step-number {
+            background: #2563eb;
+            color: white;
+        }
+
+        .step.completed .step-number {
+            background: #059669;
+            color: white;
+        }
+
+        .step span {
+            display: block;
+            margin-top: 7px;
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        .step.active span {
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        /* FORM */
+
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .form-section h2 {
+            color: #0f172a;
+            font-size: 19px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .section-note {
+            color: #64748b;
+            font-size: 13px;
+            margin: -8px 0 18px;
+            line-height: 1.6;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: #334155;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+        }
+
+        .form-group textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .field-note {
+            color: #64748b;
+            font-size: 12px;
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        /* SERVICE SELECT */
+
+        .service-selector {
+            padding: 18px;
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+            border-radius: 12px;
+        }
+
+        .service-selector label {
+            color: #1e3a8a;
+        }
+
+        /* DYNAMIC SERVICE AREA */
+
+        #dynamicServiceArea {
+            display: none;
+        }
+
+        .service-info {
+            padding: 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 22px;
+        }
+
+        .service-info strong {
+            color: #0f172a;
+        }
+
+        .service-info p {
+            margin: 5px 0 0;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        /* DOCUMENTS */
+
+        .documents-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .document-item {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .document-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .document-title {
+            color: #0f172a;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .document-required {
+            color: #dc2626;
+            font-size: 11px;
+            margin-left: 5px;
+        }
+
+        .document-optional {
+            color: #64748b;
+            font-size: 11px;
+            margin-left: 5px;
+        }
+
+        .document-item input[type="file"] {
+            width: 100%;
+            font-size: 13px;
+        }
+
+        /* REVIEW */
+
+        .review-box {
+            display: none;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .review-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 11px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .review-row:last-child {
+            border-bottom: none;
+        }
+
+        .review-label {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .review-value {
+            color: #0f172a;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* CONSENT */
+
+        .consent-box {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 16px;
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .consent-box input {
+            margin-top: 4px;
+        }
+
+        .consent-box label {
+            color: #475569;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* BUTTONS */
+
+        .submit-area {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .cancel-btn,
+        .submit-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .cancel-btn {
+            border: 1px solid #cbd5e1;
+            color: #475569;
+            background: white;
+        }
+
+        .submit-btn {
+            border: none;
+            color: white;
+            background: #2563eb;
+        }
+
+        .submit-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* SUCCESS */
+
+        .success-message {
+            display: none;
+            margin-top: 25px;
+            padding: 22px;
+            border-radius: 12px;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #047857;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .success-message h3 {
+            margin-top: 0;
+            color: #047857;
+        }
+
+        .application-details {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .track-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 18px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .track-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .aadhaar-status {
+            display: none;
+            color: #059669;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        @media (max-width: 700px) {
+
+            .application-page {
+                padding: 35px 5%;
+            }
+
+            .application-card {
+                padding: 22px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .application-header h1 {
+                font-size: 28px;
+            }
+
+            .steps {
+                overflow-x: auto;
+            }
+
+            .step {
+                min-width: 70px;
+            }
+
+            .step span {
+                font-size: 10px;
+            }
+
+            .submit-area {
+                flex-direction: column;
+            }
+
+            .cancel-btn,
+            .submit-btn {
+                text-align: center;
+            }
+
+            .review-row {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .review-value {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <strong>MahaConnect</strong>
+        <span>Digital Services</span>
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="tracking.html">Track</a>
+    </nav>
+
+</header>
+
+
+<main class="application-page">
+
+    <div class="application-container">
+
+        <div class="application-header">
+
+            <span>SERVICE APPLICATION</span>
+
+            <h1>Apply for a Government Service</h1>
+
+            <p>
+                Select the service you need and provide the required
+                information and supporting documents.
+            </p>
+
+        </div>
+
+
+        <div class="application-card">
+
+            <!-- STEP INDICATOR -->
+
+            <div class="steps">
+
+                <div class="step active" id="step1">
+                    <div class="step-number">1</div>
+                    <span>Service</span>
+                </div>
+
+                <div class="step" id="step2">
+                    <div class="step-number">2</div>
+                    <span>Details</span>
+                </div>
+
+                <div class="step" id="step3">
+                    <div class="step-number">3</div>
+                    <span>Documents</span>
+                </div>
+
+                <div class="step" id="step4">
+                    <div class="step-number">4</div>
+                    <span>Review</span>
+                </div>
+
+                <div class="step" id="step5">
+                    <div class="step-number">5</div>
+                    <span>Submit</span>
+                </div>
+
+            </div>
+
+
+            <form id="applicationForm">
+
+                <!-- SERVICE -->
+
+                <section class="form-section">
+
+                    <h2>1. Select Service</h2>
+
+                    <div class="service-selector">
+
+                        <div class="form-group">
+
+                            <label for="service">
+                                Government Service
+                                <span class="required">*</span>
+                            </label>
+
+                            <select id="service" required>
+
+                                <option value="">
+                                    Choose the service you need
+                                </option>
+
+                                <option value="identity">
+                                    PAN / Aadhaar / Birth Certificate
+                                </option>
+
+                                <option value="property">
+                                    Patta / Chitta / EC / Property Registration
+                                </option>
+
+                                <option value="education">
+                                    Scholarships / Education Benefits
+                                </option>
+
+                                <option value="pension">
+                                    Pension / Senior Citizen Benefits
+                                </option>
+
+                                <option value="employment">
+                                    Employment / Job Seeker / Skill Development
+                                </option>
+
+                                <option value="health">
+                                    Health / Insurance / Health Schemes
+                                </option>
+
+                                <option value="voter">
+                                    Voter ID / Election Services
+                                </option>
+
+                                <option value="certificates">
+                                    Income / Community / Nativity / Residence Certificates
+                                </option>
+
+                                <option value="family">
+                                    Family / Women / Child Welfare
+                                </option>
+
+                                <option value="agriculture">
+                                    Agriculture / Farmer Schemes
+                                </option>
+
+                                <option value="transport">
+                                    Transport / Driving Licence / Vehicle Services
+                                </option>
+
+                                <option value="government">
+                                    Central / State Government Services
+                                </option>
+
+                                <option value="disability">
+                                    Disability Services
+                                </option>
+
+                                <option value="housing">
+                                    Housing Services
+                                </option>
+
+                                <option value="legal">
+                                    Legal / Citizen Services
+                                </option>
+
+                                <option value="finance">
+                                    Tax / Financial Services
+                                </option>
+
+                                <option value="utilities">
+                                    Electricity / Water / Utility Services
+                                </option>
+
+                                <option value="passport">
+                                    Passport / Immigration Services
+                                </option>
+
+                                <option value="business">
+                                    Business / MSME / Startup Services
+                                </option>
+
+                                <option value="rural">
+                                    Rural Development Services
+                                </option>
+
+                                <option value="animal">
+                                    Animal Husbandry Services
+                                </option>
+
+                                <option value="environment">
+                                    Environment / Forest Services
+                                </option>
+
+                                <option value="railway">
+                                    Railway-related Government Services
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- APPLICANT DETAILS -->
+
+                <section class="form-section">
+
+                    <h2>2. Applicant Details</h2>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label for="name">
+                                Full Name <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="Enter your full name"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="email">
+                                Email Address <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter your email"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="mobile">
+                                Mobile Number <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="mobile"
+                                maxlength="10"
+                                inputmode="numeric"
+                                placeholder="Enter 10-digit mobile number"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="fatherName">
+                                Father / Guardian Name
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="fatherName"
+                                placeholder="Enter father / guardian name"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="motherName">
+                                Mother Name
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="motherName"
+                                placeholder="Enter mother name"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="aadhaar">
+                                Aadhaar Number
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="aadhaar"
+                                maxlength="12"
+                                inputmode="numeric"
+                                pattern="[0-9]{12}"
+                                placeholder="Enter 12-digit Aadhaar"
+                                required
+                            >
+
+                            <small
+                                id="aadhaarStatus"
+                                class="aadhaar-status"
+                            >
+                                ✓ Aadhaar number format verified
+                            </small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="dob">
+                                Date of Birth
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="date"
+                                id="dob"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="gender">
+                                Gender <span class="required">*</span>
+                            </label>
+
+                            <select id="gender" required>
+
+                                <option value="">
+                                    Select Gender
+                                </option>
+
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="district">
+                                District <span class="required">*</span>
+                            </label>
+
+                            <select
+                                id="district"
+                                required
+                                onchange="loadTaluks()"
+                            >
+
+                                <option value="">
+                                    Select District
+                                </option>
+
+                                <option>Ariyalur</option>
+                                <option>Chengalpattu</option>
+                                <option>Chennai</option>
+                                <option>Coimbatore</option>
+                                <option>Cuddalore</option>
+                                <option>Dharmapuri</option>
+                                <option>Dindigul</option>
+                                <option>Erode</option>
+                                <option>Kallakurichi</option>
+                                <option>Kancheepuram</option>
+                                <option>Karur</option>
+                                <option>Krishnagiri</option>
+                                <option>Madurai</option>
+                                <option>Mayiladuthurai</option>
+                                <option>Nagapattinam</option>
+                                <option>Kanniyakumari</option>
+                                <option>Namakkal</option>
+                                <option>Perambalur</option>
+                                <option>Pudukkottai</option>
+                                <option>Ramanathapuram</option>
+                                <option>Ranipet</option>
+                                <option>Salem</option>
+                                <option>Sivaganga</option>
+                                <option>Tenkasi</option>
+                                <option>Thanjavur</option>
+                                <option>Theni</option>
+                                <option>Thoothukudi</option>
+                                <option>Tiruchirappalli</option>
+                                <option>Tirunelveli</option>
+                                <option>Tirupathur</option>
+                                <option>Tiruppur</option>
+                                <option>Tiruvallur</option>
+                                <option>Tiruvannamalai</option>
+                                <option>Tiruvarur</option>
+                                <option>Vellore</option>
+                                <option>Viluppuram</option>
+                                <option>Virudhunagar</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="taluk">
+                                Taluk <span class="required">*</span>
+                            </label>
+
+                            <select id="taluk" required>
+
+                                <option value="">
+                                    Select Taluk
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label for="address">
+                                Complete Address
+                                <span class="required">*</span>
+                            </label>
+
+                            <textarea
+                                id="address"
+                                placeholder="Enter your complete residential address"
+                                required
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- COMMON INFORMATION -->
+
+                <section class="form-section">
+
+                    <h2>3. Common Information</h2>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="education">
+                                Education Level
+                            </label>
+
+                            <select id="education">
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option>School</option>
+                                <option>10th</option>
+                                <option>12th</option>
+                                <option>Diploma</option>
+                                <option>Undergraduate</option>
+                                <option>Postgraduate</option>
+                                <option>Other</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="income">
+                                Annual Income Range
+                            </label>
+
+                            <select id="income">
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option>Below ₹1 Lakh</option>
+                                <option>₹1 - ₹3 Lakhs</option>
+                                <option>₹3 - ₹5 Lakhs</option>
+                                <option>Above ₹5 Lakhs</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- DYNAMIC SERVICE -->
+
+                <section
+                    class="form-section"
+                    id="dynamicServiceArea"
+                >
+
+                    <h2>4. Service-specific Details</h2>
+
+                    <div class="service-info">
+
+                        <strong id="selectedServiceTitle">
+                            Service Details
+                        </strong>
+
+                        <p id="selectedServiceDescription">
+                            Select a service to view the required details.
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="form-grid"
+                        id="dynamicFields"
+                    ></div>
+
+                </section>
+
+
+                <!-- DOCUMENTS -->
+
+                <section
+                    class="form-section"
+                    id="documentsSection"
+                    style="display:none;"
+                >
+
+                    <h2>5. Required Documents</h2>
+
+                    <p class="section-note">
+                        Upload the documents required for the selected service.
+                        In this prototype, only the selected file name is stored.
+                    </p>
+
+                    <div
+                        class="documents-box"
+                        id="documentsContainer"
+                    ></div>
+
+                </section>
+
+
+                <!-- REVIEW -->
+
+                <section
+                    class="form-section"
+                    id="reviewSection"
+                    style="display:none;"
+                >
+
+                    <h2>6. Review Application</h2>
+
+                    <p class="section-note">
+                        Please verify your information before submitting.
+                    </p>
+
+                    <div
+                        class="review-box"
+                        id="reviewBox"
+                    ></div>
+
+                </section>
+
+
+                <!-- CONSENT -->
+
+                <div class="consent-box">
+
+                    <input
+                        type="checkbox"
+                        id="consent"
+                        required
+                    >
+
+                    <label for="consent">
+
+                        I confirm that the information provided by me
+                        is correct. I give consent to share the required
+                        information with relevant connected government
+                        services for processing this application.
+
+                    </label>
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="submit-area">
+
+                    <a
+                        href="services.html"
+                        class="cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="submit-btn"
+                    >
+                        Submit Application →
+                    </button>
+
+                </div>
+
+
+                <!-- SUCCESS -->
+
+                <div
+                    class="success-message"
+                    id="successMessage"
+                ></div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   DISTRICT → TALUK
+========================================================= */
+
+const districtTaluks = {
+
+    "Ariyalur": [
+        "Ariyalur",
+        "Andimadam",
+        "Sendurai",
+        "Udayarpalayam"
+    ],
+
+    "Chengalpattu": [
+        "Chengalpattu",
+        "Cheyyur",
+        "Madurantakam",
+        "Thirukalukundram",
+        "Thiruporur",
+        "Tambaram",
+        "Pallavaram",
+        "Vandalur"
+    ],
+
+    "Chennai": [
+        "Ayanavaram",
+        "Ambattur",
+        "Aminjikarai",
+        "Egmore",
+        "Guindy",
+        "Madhuravoyal",
+        "Mylapore",
+        "Perambur",
+        "Purasawalkam",
+        "Sholinganallur",
+        "Tondiarpet",
+        "Velachery"
+    ],
+
+    "Coimbatore": [
+        "Coimbatore North",
+        "Coimbatore South",
+        "Perur",
+        "Madukkarai",
+        "Sulur",
+        "Pollachi",
+        "Kinathukadavu",
+        "Mettupalayam"
+    ],
+
+    "Cuddalore": [
+        "Cuddalore",
+        "Panruti",
+        "Chidambaram",
+        "Kattumannarkoil",
+        "Kurinjipadi",
+        "Srimushnam",
+        "Tittakudi",
+        "Virudhachalam"
+    ],
+
+    "Dharmapuri": [
+        "Dharmapuri",
+        "Harur",
+        "Pappireddipatti",
+        "Pennagaram",
+        "Palacode",
+        "Karimangalam",
+        "Nallampalli"
+    ],
+
+    "Dindigul": [
+        "Dindigul East",
+        "Dindigul West",
+        "Athoor",
+        "Kodaikanal",
+        "Natham",
+        "Nilakottai",
+        "Oddanchatram",
+        "Palani",
+        "Vedasandur"
+    ],
+
+    "Erode": [
+        "Erode",
+        "Perundurai",
+        "Bhavani",
+        "Gobichettipalayam",
+        "Sathyamangalam",
+        "Anthiyur",
+        "Kodumudi",
+        "Modakurichi",
+        "Nambiyur",
+        "Thalavadi"
+    ],
+
+    "Madurai": [
+        "Madurai North",
+        "Madurai South",
+        "Madurai West",
+        "Madurai East",
+        "Thirumangalam",
+        "Melur",
+        "Peraiyur",
+        "Usilampatti",
+        "Vadipatti"
+    ],
+
+    "Salem": [
+        "Salem",
+        "Salem West",
+        "Salem South",
+        "Yercaud",
+        "Attur",
+        "Gangavalli",
+        "Mettur",
+        "Omalur",
+        "Sankari",
+        "Edappadi",
+        "Valapady",
+        "Thalaivasal"
+    ],
+
+    "Sivaganga": [
+        "Sivaganga",
+        "Karaikudi",
+        "Devakottai",
+        "Manamadurai",
+        "Ilayangudi",
+        "Tiruppathur",
+        "Kalaiyarkoil"
+    ],
+
+    "Tenkasi": [
+        "Tenkasi",
+        "Sankarankovil",
+        "Shenkottai",
+        "Kadayanallur",
+        "Alangulam",
+        "Vasudevanallur",
+        "Veerakeralampudur"
+    ],
+
+    "Thanjavur": [
+        "Thanjavur",
+        "Kumbakonam",
+        "Papanasam",
+        "Pattukkottai",
+        "Peravurani",
+        "Orathanadu",
+        "Budalur",
+        "Thiruvaiyaru"
+    ],
+
+    "Theni": [
+        "Theni",
+        "Periyakulam",
+        "Bodinayakanur",
+        "Andipatti",
+        "Uthamapalayam"
+    ],
+
+    "Thoothukudi": [
+        "Thoothukudi",
+        "Tiruchendur",
+        "Srivaikuntam",
+        "Kovilpatti",
+        "Ettayapuram",
+        "Vilathikulam",
+        "Ottapidaram"
+    ],
+
+    "Tiruchirappalli": [
+        "Tiruchirappalli West",
+        "Tiruchirappalli East",
+        "Srirangam",
+        "Manachanallur",
+        "Lalgudi",
+        "Musiri",
+        "Thuraiyur",
+        "Manapparai",
+        "Thottiyam"
+    ],
+
+    "Tirunelveli": [
+        "Tirunelveli",
+        "Palayamkottai",
+        "Ambasamudram",
+        "Nanguneri",
+        "Radhapuram"
+    ],
+
+    "Tiruppur": [
+        "Tiruppur North",
+        "Tiruppur South",
+        "Avinashi",
+        "Dharapuram",
+        "Kangeyam",
+        "Palladam",
+        "Udumalpet",
+        "Madathukulam"
+    ],
+
+    "Vellore": [
+        "Vellore",
+        "Katpadi",
+        "Gudiyatham",
+        "Pernambut",
+        "Anaicut"
+    ],
+
+    "Viluppuram": [
+        "Viluppuram",
+        "Tindivanam",
+        "Gingee",
+        "Kallakurichi",
+        "Ulundurpet",
+        "Sankarapuram",
+        "Tirukoilur"
+    ],
+
+    "Virudhunagar": [
+        "Virudhunagar",
+        "Aruppukkottai",
+        "Rajapalayam",
+        "Sivakasi",
+        "Sattur",
+        "Srivilliputhur",
+        "Tiruchuli"
+    ],
+
+    "Pudukkottai": [
+        "Pudukkottai",
+        "Alangudi",
+        "Aranthangi",
+        "Avudaiyarkoil",
+        "Gandarvakottai",
+        "Illuppur",
+        "Karambakudi",
+        "Keeranur",
+        "Manamelkudi",
+        "Ponnamaravathi",
+        "Thirumayam"
+    ],
+
+    "Ramanathapuram": [
+        "Ramanathapuram",
+        "Paramakudi",
+        "Kamuthi",
+        "Kadaladi",
+        "Keelakarai",
+        "Mudukulathur",
+        "Rameswaram",
+        "Tiruvadanai"
+    ],
+
+    "Namakkal": [
+        "Namakkal",
+        "Rasipuram",
+        "Tiruchengode",
+        "Paramathi-Velur",
+        "Kolli Hills",
+        "Senthamangalam"
+    ],
+
+    "Karur": [
+        "Karur",
+        "Aravakurichi",
+        "Kadavur",
+        "Krishnarayapuram",
+        "Kulithalai",
+        "Manmangalam",
+        "Pugalur"
+    ],
+
+    "Krishnagiri": [
+        "Krishnagiri",
+        "Hosur",
+        "Denkanikottai",
+        "Pochampalli",
+        "Uthangarai",
+        "Bargur"
+    ],
+
+    "Kancheepuram": [
+        "Kancheepuram",
+        "Kundrathur",
+        "Sriperumbudur",
+        "Uthiramerur",
+        "Walajabad"
+    ],
+
+    "Tiruvallur": [
+        "Tiruvallur",
+        "Avadi",
+        "Ponneri",
+        "Gummidipoondi",
+        "Poonamallee",
+        "Tiruttani",
+        "Uthukkottai"
+    ],
+
+    "Tiruvannamalai": [
+        "Tiruvannamalai",
+        "Arani",
+        "Chengam",
+        "Cheyyar",
+        "Polur",
+        "Vandavasi",
+        "Kalasapakkam"
+    ],
+
+    "Tiruvarur": [
+        "Tiruvarur",
+        "Mannargudi",
+        "Nannilam",
+        "Needamangalam",
+        "Thiruthuraipoondi",
+        "Valangaiman",
+        "Kodavasal"
+    ],
+
+    "Nagapattinam": [
+        "Nagapattinam",
+        "Kilvelur",
+        "Thirukkuvalai",
+        "Vedaranyam"
+    ],
+
+    "Mayiladuthurai": [
+        "Mayiladuthurai",
+        "Kuthalam",
+        "Sirkali",
+        "Tharangambadi"
+    ],
+
+    "Perambalur": [
+        "Perambalur",
+        "Kunnam",
+        "Veppanthattai",
+        "Alathur"
+    ],
+
+    "Kallakurichi": [
+        "Kallakurichi",
+        "Chinnasalem",
+        "Sankarapuram",
+        "Tirukoilur",
+        "Ulundurpet",
+        "Kalvarayan Hills"
+    ],
+
+    "Ranipet": [
+        "Ranipet",
+        "Arakkonam",
+        "Arcot",
+        "Walajapet"
+    ],
+
+    "Tirupathur": [
+        "Tirupathur",
+        "Vaniyambadi",
+        "Natrampalli"
+    ],
+
+    "Kanniyakumari": [
+        "Agastheeswaram",
+        "Kalkulam",
+        "Vilavancode",
+        "Thovalai"
+    ]
+
+};
+
+
+/* =========================================================
+   LOAD TALUKS
+========================================================= */
+
+function loadTaluks() {
+
+    const district =
+        document.getElementById("district").value;
+
+    const taluk =
+        document.getElementById("taluk");
+
+    taluk.innerHTML =
+        '<option value="">Select Taluk</option>';
+
+    if (!districtTaluks[district]) {
+        return;
+    }
+
+    districtTaluks[district].forEach(function(item) {
+
+        const option =
+            document.createElement("option");
+
+        option.value = item;
+        option.textContent = item;
+
+        taluk.appendChild(option);
+
+    });
+}
+
+
+/* =========================================================
+   SERVICE CONFIGURATION
+
+   These are prototype service requirements.
+   Official requirements can vary by scheme/state.
+========================================================= */
+
+const SERVICE_CONFIG = {
+
+    identity: {
+
+        title: "Identity & Birth Documents",
+
+        description:
+            "Apply for identity and civil documents such as PAN, Aadhaar-related services or birth certificate services.",
+
+        fields: [
+
+            ["documentType", "Document / Service Type", "select",
+                [
+                    "PAN Card",
+                    "Aadhaar-related Service",
+                    "Birth Certificate",
+                    "Name Correction",
+                    "Date of Birth Correction"
+                ], true
+            ],
+
+            ["purpose", "Purpose", "text", "", true],
+
+            ["existingNumber", "Existing Document Number", "text", "", false]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["birthProof", "Birth-related Proof", false],
+            ["photo", "Passport-size Photo", false]
+
+        ]
+
+    },
+
+
+    property: {
+
+        title: "Property & Land Services",
+
+        description:
+            "Provide land or property details for services such as Patta, Chitta, EC or registration.",
+
+        fields: [
+
+            ["propertyService", "Property Service", "select",
+                [
+                    "Patta",
+                    "Chitta",
+                    "Encumbrance Certificate",
+                    "Property Registration",
+                    "Land Record"
+                ], true
+            ],
+
+            ["surveyNumber", "Survey Number", "text", "", true],
+
+            ["subDivision", "Sub-Division Number", "text", "", false],
+
+            ["landArea", "Land / Property Area", "text", "", true],
+
+            ["propertyType", "Property Type", "select",
+                [
+                    "Agricultural Land",
+                    "Residential",
+                    "Commercial",
+                    "Other"
+                ], true
+            ]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["landDocument", "Land / Property Document", true],
+            ["taxReceipt", "Property Tax Receipt", false]
+
+        ]
+
+    },
+
+
+    education: {
+
+        title: "Education & Scholarship Services",
+
+        description:
+            "Provide academic and financial information for scholarship and education-related benefits.",
+
+        fields: [
+
+            ["institution", "Institution Name", "text", "", true],
+
+            ["course", "Course / Programme", "text", "", true],
+
+            ["department", "Department", "text", "", true],
+
+            ["studyYear", "Current Year", "select",
+                [
+                    "Year 1",
+                    "Year 2",
+                    "Year 3",
+                    "Year 4",
+                    "Other"
+                ], true
+            ],
+
+            ["academicPerformance", "Previous Percentage / CGPA", "text", "", true],
+
+            ["scholarshipType", "Scholarship Type", "select",
+                [
+                    "Merit-based",
+                    "Need-based",
+                    "Category-based",
+                    "Government Scholarship",
+                    "Other"
+                ], true
+            ],
+
+            ["familyIncome", "Annual Family Income", "number", "", true],
+
+            ["bankAccount", "Bank Account Number", "text", "", true],
+
+            ["ifsc", "IFSC Code", "text", "", true]
+
+        ],
+
+        documents: [
+
+            ["aadhaarProof", "Aadhaar / Identity Proof", true],
+            ["incomeCertificate", "Income Certificate", true],
+            ["communityCertificate", "Community Certificate", false],
+            ["bonafide", "Bonafide Certificate", true],
+            ["marksheet", "Previous Marksheet", true],
+            ["bankProof", "Bank Passbook / Account Proof", true],
+            ["photo", "Passport-size Photo", true]
+
+        ]
+
+    },
+
+
+    pension: {
+
+        title: "Pension & Senior Citizen Services",
+
+        description:
+            "Provide applicant and family information for pension or senior citizen related services.",
+
+        fields: [
+
+            ["pensionType", "Pension Type", "select",
+                [
+                    "Old Age Pension",
+                    "Widow Pension",
+                    "Disability Pension",
+                    "Retirement Pension",
+                    "Other"
+                ], true
+            ],
+
+            ["occupation", "Previous / Current Occupation", "text", "", true],
+
+            ["familyIncome", "Annual Family Income", "number", "", true],
+
+            ["maritalStatus", "Marital Status", "select",
+                [
+                    "Married",
+                    "Unmarried",
+                    "Widowed",
+                    "Divorced"
+                ], true
+            ],
+
+            ["dependents", "Number of Dependents", "number", "", true],
+
+            ["existingPensionId", "Existing Pension ID", "text", "", false]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity / Age Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["incomeCertificate", "Income Certificate", true],
+            ["bankProof", "Bank Account Proof", true],
+            ["ageProof", "Age Proof", true],
+            ["photo", "Passport-size Photo", true]
+
+        ]
+
+    },
+
+
+    employment: {
+
+        title: "Employment & Skill Development",
+
+        description:
+            "Provide education, skill and employment preferences for job seeker and skill development services.",
+
+        fields: [
+
+            ["qualification", "Highest Qualification", "select",
+                [
+                    "10th",
+                    "12th",
+                    "Diploma",
+                    "Undergraduate",
+                    "Postgraduate",
+                    "Other"
+                ], true
+            ],
+
+            ["specialization", "Course / Specialization", "text", "", true],
+
+            ["passingYear", "Passing Year", "number", "", true],
+
+            ["employmentStatus", "Employment Status", "select",
+                [
+                    "Unemployed",
+                    "Employed",
+                    "Self-employed",
+                    "Student"
+                ], true
+            ],
+
+            ["skills", "Skills", "text", "", true],
+
+            ["preferredJob", "Preferred Job Role", "text", "", true],
+
+            ["preferredLocation", "Preferred Location", "text", "", true]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["educationCertificate", "Education Certificate", true],
+            ["skillCertificate", "Skill Certificate", false],
+            ["experienceCertificate", "Experience Certificate", false],
+            ["photo", "Passport-size Photo", true]
+
+        ]
+
+    },
+
+
+    health: {
+
+        title: "Health & Insurance Services",
+
+        description:
+            "Provide basic health and family information for health scheme or insurance-related services.",
+
+        fields: [
+
+            ["healthService", "Health Service", "select",
+                [
+                    "Health Scheme",
+                    "Government Insurance",
+                    "Health Certificate",
+                    "Medical Assistance",
+                    "Other"
+                ], true
+            ],
+
+            ["familyMembers", "Number of Family Members", "number", "", true],
+
+            ["healthCondition", "Health-related Information", "textarea", "", false],
+
+            ["insuranceStatus", "Existing Government Insurance", "select",
+                [
+                    "Yes",
+                    "No",
+                    "Not Sure"
+                ], true
+
+            ]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["incomeCertificate", "Income Certificate", false],
+            ["medicalDocument", "Medical Document", false],
+            ["insuranceProof", "Existing Insurance Proof", false]
+
+        ]
+
+    },
+
+
+    voter: {
+
+        title: "Voter & Election Services",
+
+        description:
+            "Provide voter and address information for voter registration or correction services.",
+
+        fields: [
+
+            ["voterService", "Voter Service", "select",
+                [
+                    "New Voter Registration",
+                    "Address Change",
+                    "Name Correction",
+                    "Voter ID Correction",
+                    "Deletion / Transfer"
+                ], true
+            ],
+
+            ["epicNumber", "Existing Voter ID / EPIC Number", "text", "", false],
+
+            ["constituency", "Assembly Constituency", "text", "", true],
+
+            ["previousAddress", "Previous Address", "textarea", "", false]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["ageProof", "Age Proof", true],
+            ["photo", "Passport-size Photo", true]
+
+        ]
+
+    },
+
+
+    certificates: {
+
+        title: "Income / Community / Residence Certificates",
+
+        description:
+            "Select the certificate required and provide the corresponding personal and supporting information.",
+
+        fields: [
+
+            ["certificateType", "Certificate Type", "select",
+                [
+                    "Income Certificate",
+                    "Community Certificate",
+                    "Nativity Certificate",
+                    "Residence Certificate"
+                ], true
+            ],
+
+            ["occupation", "Occupation", "text", "", true],
+
+            ["annualIncome", "Annual Income", "number", "", false],
+
+            ["communityCategory", "Community Category", "select",
+                [
+                    "SC",
+                    "SCA",
+                    "ST",
+                    "MBC",
+                    "BC",
+                    "DNC",
+                    "OC / General"
+                ], false
+            ],
+
+            ["religion", "Religion", "select",
+                [
+                    "Hindu",
+                    "Christian",
+                    "Muslim",
+                    "Sikh",
+                    "Buddhist",
+                    "Jain",
+                    "Other"
+                ], false
+            ],
+
+            ["purpose", "Purpose of Certificate", "text", "", true]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["incomeProof", "Income Proof", false],
+            ["communityProof", "Community Supporting Proof", false],
+            ["residenceProof", "Residence Proof", false]
+
+        ]
+
+    },
+
+
+    family: {
+
+        title: "Family / Women / Child Welfare",
+
+        description:
+            "Provide family and beneficiary information for welfare-related services.",
+
+        fields: [
+
+            ["welfareType", "Welfare Service", "select",
+                [
+                    "Women Welfare",
+                    "Child Welfare",
+                    "Family Welfare",
+                    "Maternity Benefit",
+                    "Other"
+                ], true
+            ],
+
+            ["familyMembers", "Number of Family Members", "number", "", true],
+
+            ["familyIncome", "Annual Family Income", "number", "", true],
+
+            ["beneficiaryRelation", "Beneficiary Relation", "text", "", true],
+
+            ["existingBenefit", "Existing Government Benefit", "text", "", false]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["incomeCertificate", "Income Certificate", false],
+            ["relationshipProof", "Relationship Proof", false],
+            ["bankProof", "Bank Account Proof", false]
+
+        ]
+
+    },
+
+
+    agriculture: {
+
+        title: "Agriculture & Farmer Services",
+
+        description:
+            "Provide farmer, land and crop information for agriculture-related schemes.",
+
+        fields: [
+
+            ["farmerType", "Farmer Type", "select",
+                [
+                    "Small Farmer",
+                    "Marginal Farmer",
+                    "Other Farmer"
+                ], true
+            ],
+
+            ["surveyNumber", "Land Survey Number", "text", "", true],
+
+            ["landArea", "Land Area", "text", "", true],
+
+            ["crop", "Current Crop", "text", "", true],
+
+            ["irrigation", "Irrigation Type", "select",
+                [
+                    "Rain-fed",
+                    "Canal",
+                    "Borewell",
+                    "Well",
+                    "Other"
+                ], true
+            ],
+
+            ["bankAccount", "Bank Account Number", "text", "", true],
+
+            ["ifsc", "IFSC Code", "text", "", true]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Aadhaar / Identity Proof", true],
+            ["landRecord", "Land Record / Patta", true],
+            ["bankProof", "Bank Account Proof", true],
+            ["cropProof", "Crop-related Document", false]
+
+        ]
+
+    },
+
+
+    transport: {
+
+        title: "Transport & Vehicle Services",
+
+        description:
+            "Provide applicant and vehicle information for driving licence or vehicle-related services.",
+
+        fields: [
+
+            ["transportService", "Transport Service", "select",
+                [
+                    "Driving Licence",
+                    "Learner Licence",
+                    "Vehicle Registration",
+                    "Vehicle Ownership Transfer",
+                    "Vehicle-related Service"
+                ], true
+            ],
+
+            ["vehicleNumber", "Vehicle Registration Number", "text", "", false],
+
+            ["licenceNumber", "Existing Driving Licence Number", "text", "", false],
+
+            ["vehicleType", "Vehicle Type", "select",
+                [
+                    "Two Wheeler",
+                    "Car",
+                    "Transport Vehicle",
+                    "Other"
+                ], false
+
+            ]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["ageProof", "Age Proof", true],
+            ["vehicleDocument", "Vehicle Document", false],
+            ["medicalCertificate", "Medical Certificate", false]
+
+        ]
+
+    },
+
+
+    government: {
+
+        title: "Central & State Government Services",
+
+        description:
+            "Select the government department or general citizen service you need.",
+
+        fields: [
+
+            ["department", "Department", "select",
+                [
+                    "Revenue",
+                    "Education",
+                    "Health",
+                    "Social Welfare",
+                    "Employment",
+                    "Transport",
+                    "Other"
+                ], true
+            ],
+
+            ["servicePurpose", "Service Required", "text", "", true],
+
+            ["applicationReason", "Reason / Description", "textarea", "", true]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["supportingDocument", "Supporting Document", false]
+
+        ]
+
+    },
+
+
+    disability: {
+
+        title: "Disability Services",
+
+        description:
+            "Provide disability and beneficiary details for eligible government services.",
+
+        fields: [
+
+            ["disabilityType", "Disability Type", "text", "", true],
+
+            ["disabilityPercentage", "Disability Percentage", "number", "", true],
+
+            ["disabilityId", "Existing Disability ID", "text", "", false],
+
+            ["benefitType", "Required Benefit", "select",
+                [
+                    "Certificate",
+                    "Pension",
+                    "Assistive Device",
+                    "Education Benefit",
+                    "Employment Benefit",
+                    "Other"
+                ], true
+            ]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["medicalProof", "Medical / Disability Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["incomeCertificate", "Income Certificate", false]
+
+        ]
+
+    },
+
+
+    housing: {
+
+        title: "Housing Services",
+
+        description:
+            "Provide family, income and housing information for housing-related schemes.",
+
+        fields: [
+
+            ["housingService", "Housing Service", "select",
+                [
+                    "Housing Scheme",
+                    "Housing Assistance",
+                    "House Repair Assistance",
+                    "Other"
+                ], true
+            ],
+
+            ["familyMembers", "Family Members", "number", "", true],
+
+            ["familyIncome", "Annual Family Income", "number", "", true],
+
+            ["houseType", "Current House Type", "select",
+                [
+                    "Own House",
+                    "Rented",
+                    "Temporary",
+                    "No House",
+                    "Other"
+                ], true
+            ],
+
+            ["landOwnership", "Land Ownership", "select",
+                [
+                    "Own Land",
+                    "Government Land",
+                    "No Land",
+                    "Other"
+                ], true
+            ]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["incomeCertificate", "Income Certificate", true],
+            ["landDocument", "Land / Property Document", false]
+
+        ]
+
+    },
+
+
+    legal: {
+
+        title: "Legal & Citizen Services",
+
+        description:
+            "Provide details about the legal or citizen service required.",
+
+        fields: [
+
+            ["legalService", "Service Type", "select",
+                [
+                    "Legal Assistance",
+                    "Grievance",
+                    "Citizen Complaint",
+                    "Certificate-related Issue",
+                    "Other"
+                ], true
+            ],
+
+            ["subject", "Subject", "text", "", true],
+
+            ["description", "Issue Description", "textarea", "", true]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["supportingDocument", "Supporting Document", false]
+
+        ]
+
+    },
+
+
+    finance: {
+
+        title: "Tax & Financial Services",
+
+        description:
+            "Provide financial information for tax or government financial services.",
+
+        fields: [
+
+            ["financeService", "Financial Service", "select",
+                [
+                    "Income Tax",
+                    "Tax-related Service",
+                    "Financial Assistance",
+                    "Government Payment",
+                    "Other"
+                ], true
+            ],
+
+            ["panNumber", "PAN Number", "text", "", false],
+
+            ["annualIncome", "Annual Income", "number", "", true],
+
+            ["bankAccount", "Bank Account Number", "text", "", false],
+
+            ["ifsc", "IFSC Code", "text", "", false]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["panProof", "PAN Proof", false],
+            ["incomeProof", "Income Proof", true],
+            ["bankProof", "Bank Account Proof", false]
+
+        ]
+
+    },
+
+
+    utilities: {
+
+        title: "Electricity / Water / Utility Services",
+
+        description:
+            "Provide connection and address information for utility services.",
+
+        fields: [
+
+            ["utilityType", "Utility Service", "select",
+                [
+                    "Electricity",
+                    "Water",
+                    "Gas",
+                    "Other Utility"
+                ], true
+            ],
+
+            ["connectionNumber", "Existing Connection Number", "text", "", false],
+
+            ["consumerName", "Consumer Name", "text", "", true],
+
+            ["meterAddress", "Service Address", "textarea", "", true],
+
+            ["requestType", "Request Type", "select",
+                [
+                    "New Connection",
+                    "Name Change",
+                    "Address Change",
+                    "Complaint",
+                    "Other"
+                ], true
+            ]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["ownershipProof", "Ownership / Occupancy Proof", false],
+            ["previousBill", "Previous Utility Bill", false]
+
+        ]
+
+    },
+
+
+    passport: {
+
+        title: "Passport & Immigration Services",
+
+        description:
+            "Provide basic applicant information for passport or immigration-related services.",
+
+        fields: [
+
+            ["passportService", "Passport Service", "select",
+                [
+                    "New Passport",
+                    "Passport Renewal",
+                    "Address Change",
+                    "Passport Correction",
+                    "Other"
+                ], true
+            ],
+
+            ["passportNumber", "Existing Passport Number", "text", "", false],
+
+            ["placeOfBirth", "Place of Birth", "text", "", true],
+
+            ["nationality", "Nationality", "text", "", true],
+
+            ["previousPassport", "Previous Passport Details", "text", "", false]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["birthProof", "Date of Birth Proof", true],
+            ["photo", "Photograph", true],
+            ["previousPassport", "Previous Passport", false]
+
+        ]
+
+    },
+
+
+    business: {
+
+        title: "Business / MSME / Startup Services",
+
+        description:
+            "Provide business information for registration, MSME or startup-related services.",
+
+        fields: [
+
+            ["businessName", "Business Name", "text", "", true],
+
+            ["businessType", "Business Type", "select",
+                [
+                    "Sole Proprietorship",
+                    "Partnership",
+                    "Private Limited",
+                    "Startup",
+                    "MSME",
+                    "Other"
+                ], true
+            ],
+
+            ["businessActivity", "Business Activity", "text", "", true],
+
+            ["businessAddress", "Business Address", "textarea", "", true],
+
+            ["employeeCount", "Number of Employees", "number", "", false],
+
+            ["turnover", "Approximate Annual Turnover", "number", "", false]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Owner Identity Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["businessProof", "Business Proof", false],
+            ["bankProof", "Business Bank Proof", false]
+
+        ]
+
+    },
+
+
+    rural: {
+
+        title: "Rural Development Services",
+
+        description:
+            "Provide household and village-level information for rural development schemes.",
+
+        fields: [
+
+            ["ruralService", "Service Type", "select",
+                [
+                    "Rural Housing",
+                    "Employment Scheme",
+                    "Infrastructure",
+                    "Livelihood Scheme",
+                    "Other"
+                ], true
+            ],
+
+            ["village", "Village Name", "text", "", true],
+
+            ["familyMembers", "Family Members", "number", "", true],
+
+            ["familyIncome", "Annual Family Income", "number", "", true],
+
+            ["occupation", "Main Occupation", "text", "", true]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["addressProof", "Address / Residence Proof", true],
+            ["incomeCertificate", "Income Certificate", false],
+            ["supportingDocument", "Supporting Document", false]
+
+        ]
+
+    },
+
+
+    animal: {
+
+        title: "Animal Husbandry Services",
+
+        description:
+            "Provide livestock and animal-related information for applicable government services.",
+
+        fields: [
+
+            ["animalService", "Service Type", "select",
+                [
+                    "Livestock Scheme",
+                    "Animal Health",
+                    "Cattle Assistance",
+                    "Poultry Scheme",
+                    "Other"
+                ], true
+            ],
+
+            ["animalType", "Animal / Livestock Type", "text", "", true],
+
+            ["animalCount", "Number of Animals", "number", "", true],
+
+            ["purpose", "Purpose", "text", "", true]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["livestockProof", "Livestock-related Document", false],
+            ["bankProof", "Bank Account Proof", false]
+
+        ]
+
+    },
+
+
+    environment: {
+
+        title: "Environment & Forest Services",
+
+        description:
+            "Provide details for environment, forest or related citizen services.",
+
+        fields: [
+
+            ["environmentService", "Service Type", "select",
+                [
+                    "Forest Service",
+                    "Tree / Plantation",
+                    "Environmental Permission",
+                    "Forest-related Certificate",
+                    "Other"
+                ], true
+            ],
+
+            ["location", "Location", "text", "", true],
+
+            ["purpose", "Purpose / Requirement", "textarea", "", true],
+
+            ["landDetails", "Land / Site Details", "textarea", "", false]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["addressProof", "Address Proof", true],
+            ["landDocument", "Land / Site Document", false],
+            ["supportingDocument", "Supporting Document", false]
+
+        ]
+
+    },
+
+
+    railway: {
+
+        title: "Railway-related Government Services",
+
+        description:
+            "Provide information for railway-related citizen or employment services.",
+
+        fields: [
+
+            ["railwayService", "Railway Service", "select",
+                [
+                    "Railway Recruitment",
+                    "Railway Certificate",
+                    "Railway-related Grievance",
+                    "Other"
+                ], true
+            ],
+
+            ["qualification", "Highest Qualification", "select",
+                [
+                    "10th",
+                    "12th",
+                    "Diploma",
+                    "Undergraduate",
+                    "Postgraduate",
+                    "Other"
+                ], false
+            ],
+
+            ["applicationPurpose", "Purpose", "textarea", "", true]
+
+        ],
+
+        documents: [
+
+            ["identityProof", "Identity Proof", true],
+            ["educationCertificate", "Education Certificate", false],
+            ["addressProof", "Address Proof", true],
+            ["photo", "Passport-size Photo", false]
+
+        ]
+
+    }
+
+};
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const form =
+    document.getElementById("applicationForm");
+
+const serviceSelect =
+    document.getElementById("service");
+
+const dynamicArea =
+    document.getElementById("dynamicServiceArea");
+
+const dynamicFields =
+    document.getElementById("dynamicFields");
+
+const documentsSection =
+    document.getElementById("documentsSection");
+
+const documentsContainer =
+    document.getElementById("documentsContainer");
+
+const reviewSection =
+    document.getElementById("reviewSection");
+
+const reviewBox =
+    document.getElementById("reviewBox");
+
+const successMessage =
+    document.getElementById("successMessage");
+
+const aadhaarInput =
+    document.getElementById("aadhaar");
+
+const aadhaarStatus =
+    document.getElementById("aadhaarStatus");
+
+
+/* =========================================================
+   STEP INDICATOR
+========================================================= */
+
+function activateSteps(stepNumber) {
+
+    for (let i = 1; i <= 5; i++) {
+
+        const step =
+            document.getElementById("step" + i);
+
+        step.classList.remove(
+            "active",
+            "completed"
+        );
+
+        if (i < stepNumber) {
+            step.classList.add("completed");
+        }
+
+        if (i === stepNumber) {
+            step.classList.add("active");
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   CREATE FIELD
+========================================================= */
+
+function createField(field) {
+
+    const [
+        id,
+        label,
+        type,
+        options,
+        required
+    ] = field;
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.className = "form-group";
+
+    if (type === "textarea") {
+
+        wrapper.classList.add("full");
+
+    }
+
+    const labelElement =
+        document.createElement("label");
+
+    labelElement.htmlFor = id;
+
+    labelElement.innerHTML =
+        label +
+        (required
+            ? ' <span class="required">*</span>'
+            : "");
+
+    wrapper.appendChild(labelElement);
+
+
+    let input;
+
+
+    if (type === "select") {
+
+        input =
+            document.createElement("select");
+
+        input.id = id;
+        input.dataset.key = id;
+
+        const defaultOption =
+            document.createElement("option");
+
+        defaultOption.value = "";
+
+        defaultOption.textContent =
+            "Select " + label;
+
+        input.appendChild(defaultOption);
+
+        options.forEach(function(option) {
+
+            const optionElement =
+                document.createElement("option");
+
+            optionElement.value = option;
+            optionElement.textContent = option;
+
+            input.appendChild(optionElement);
+
+        });
+
+    }
+
+    else if (type === "textarea") {
+
+        input =
+            document.createElement("textarea");
+
+        input.id = id;
+        input.dataset.key = id;
+
+        input.placeholder =
+            "Enter " + label.toLowerCase();
+
+    }
+
+    else {
+
+        input =
+            document.createElement("input");
+
+        input.type = type;
+
+        input.id = id;
+        input.dataset.key = id;
+
+        input.placeholder =
+            "Enter " + label.toLowerCase();
+
+    }
+
+
+    if (required) {
+        input.required = true;
+    }
+
+    wrapper.appendChild(input);
+
+    return wrapper;
+
+}
+
+
+/* =========================================================
+   LOAD SERVICE
+========================================================= */
+
+function loadService(serviceValue) {
+
+    dynamicFields.innerHTML = "";
+    documentsContainer.innerHTML = "";
+
+    if (!serviceValue ||
+        !SERVICE_CONFIG[serviceValue]) {
+
+        dynamicArea.style.display = "none";
+        documentsSection.style.display = "none";
+
+        return;
+    }
+
+
+    const config =
+        SERVICE_CONFIG[serviceValue];
+
+
+    dynamicArea.style.display = "block";
+    documentsSection.style.display = "block";
+
+
+    document.getElementById(
+        "selectedServiceTitle"
+    ).textContent = config.title;
+
+
+    document.getElementById(
+        "selectedServiceDescription"
+    ).textContent = config.description;
+
+
+    /* Fields */
+
+    config.fields.forEach(function(field) {
+
+        dynamicFields.appendChild(
+            createField(field)
+        );
+
+    });
+
+
+    /* Documents */
+
+    config.documents.forEach(function(documentInfo) {
+
+        const [
+            id,
+            label,
+            required
+        ] = documentInfo;
+
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "document-item";
+
+
+        const title =
+            document.createElement("div");
+
+        title.className =
+            "document-title";
+
+        title.innerHTML =
+            label +
+            (
+                required
+                    ? '<span class="document-required">Required</span>'
+                    : '<span class="document-optional">Optional</span>'
+            );
+
+
+        const input =
+            document.createElement("input");
+
+        input.type = "file";
+
+        input.id =
+            "file_" + id;
+
+        input.dataset.documentKey =
+            id;
+
+        input.accept =
+            ".pdf,.jpg,.jpeg,.png";
+
+
+        if (required) {
+            input.required = true;
+        }
+
+
+        item.appendChild(title);
+        item.appendChild(input);
+
+        documentsContainer.appendChild(item);
+
+    });
+
+
+    activateSteps(2);
+
+}
+
+
+/* =========================================================
+   SERVICE CHANGE
+========================================================= */
+
+serviceSelect.addEventListener(
+    "change",
+    function() {
+
+        loadService(
+            this.value
+        );
+
+        if (this.value) {
+            activateSteps(2);
+        } else {
+            activateSteps(1);
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AADHAAR
+========================================================= */
+
+aadhaarInput.addEventListener(
+    "input",
+    function() {
+
+        this.value =
+            this.value.replace(/\D/g, "");
+
+        if (
+            /^\d{12}$/.test(
+                this.value
+            )
+        ) {
+
+            aadhaarStatus.style.display =
+                "block";
+
+        } else {
+
+            aadhaarStatus.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+document
+    .getElementById("mobile")
+    .addEventListener(
+        "input",
+        function() {
+
+            this.value =
+                this.value.replace(/\D/g, "");
+
+        }
+    );
+
+
+/* =========================================================
+   DYNAMIC DATA COLLECTION
+========================================================= */
+
+function collectServiceData() {
+
+    const data = {};
+
+    dynamicFields
+        .querySelectorAll(
+            "input, select, textarea"
+        )
+        .forEach(function(field) {
+
+            data[field.dataset.key] =
+                field.value.trim();
+
+        });
+
+    return data;
+
+}
+
+
+/* =========================================================
+   DOCUMENT COLLECTION
+========================================================= */
+
+function collectDocuments() {
+
+    const documents = {};
+
+    documentsContainer
+        .querySelectorAll(
+            'input[type="file"]'
+        )
+        .forEach(function(input) {
+
+            documents[
+                input.dataset.documentKey
+            ] =
+                input.files.length > 0
+                    ? input.files[0].name
+                    : "";
+
+        });
+
+    return documents;
+
+}
+
+
+/* =========================================================
+   REVIEW
+========================================================= */
+
+function createReview() {
+
+    const serviceText =
+        serviceSelect.options[
+            serviceSelect.selectedIndex
+        ].text;
+
+
+    const serviceData =
+        collectServiceData();
+
+
+    const documents =
+        collectDocuments();
+
+
+    reviewBox.innerHTML = "";
+
+
+    function addReviewRow(
+        label,
+        value
+    ) {
+
+        const row =
+            document.createElement("div");
+
+        row.className =
+            "review-row";
+
+
+        row.innerHTML = `
+
+            <div class="review-label">
+                ${label}
+            </div>
+
+            <div class="review-value">
+                ${value || "Not provided"}
+            </div>
+
+        `;
+
+
+        reviewBox.appendChild(row);
+
+    }
+
+
+    addReviewRow(
+        "Service",
+        serviceText
+    );
+
+    addReviewRow(
+        "Applicant Name",
+        document.getElementById("name").value
+    );
+
+    addReviewRow(
+        "Email",
+        document.getElementById("email").value
+    );
+
+    addReviewRow(
+        "Mobile",
+        document.getElementById("mobile").value
+    );
+
+    addReviewRow(
+        "District",
+        document.getElementById("district").value
+    );
+
+    addReviewRow(
+        "Taluk",
+        document.getElementById("taluk").value
+    );
+
+
+    Object.keys(serviceData)
+        .forEach(function(key) {
+
+            addReviewRow(
+                formatLabel(key),
+                serviceData[key]
+            );
+
+        });
+
+
+    Object.keys(documents)
+        .forEach(function(key) {
+
+            if (documents[key]) {
+
+                addReviewRow(
+                    "Document - " +
+                    formatLabel(key),
+                    documents[key]
+                );
+
+            }
+
+        });
+
+
+    reviewSection.style.display =
+        "block";
+
+    reviewBox.style.display =
+        "block";
+
+    activateSteps(4);
+
+    reviewSection.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+}
+
+
+/* =========================================================
+   FORMAT LABEL
+========================================================= */
+
+function formatLabel(text) {
+
+    return text
+        .replace(/([A-Z])/g, " $1")
+        .replace(/^./, function(char) {
+            return char.toUpperCase();
+        });
+
+}
+
+
+/* =========================================================
+   FORM VALIDATION
+========================================================= */
+
+function validateApplication() {
+
+    if (!serviceSelect.value) {
+
+        alert(
+            "Please select a government service."
+        );
+
+        serviceSelect.focus();
+
+        return false;
+    }
+
+
+    if (!form.checkValidity()) {
+
+        form.reportValidity();
+
+        return false;
+
+    }
+
+
+    const mobile =
+        document.getElementById("mobile").value;
+
+
+    if (!/^[6-9]\d{9}$/.test(mobile)) {
+
+        alert(
+            "Please enter a valid 10-digit mobile number."
+        );
+
+        return false;
+
+    }
+
+
+    const aadhaar =
+        document.getElementById("aadhaar").value;
+
+
+    if (!/^\d{12}$/.test(aadhaar)) {
+
+        alert(
+            "Please enter a valid 12-digit Aadhaar number."
+        );
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =========================================================
+   APPLICATION ID
+========================================================= */
+
+function generateApplicationId(
+    applications
+) {
+
+    let maxNumber = 0;
+
+
+    applications.forEach(
+        function(application) {
+
+            const match =
+                String(application.id)
+                    .match(/MC2026(\d+)/);
+
+            if (match) {
+
+                const number =
+                    parseInt(
+                        match[1],
+                        10
+                    );
+
+                if (number > maxNumber) {
+                    maxNumber = number;
+                }
+
+            }
+
+        }
+    );
+
+
+    return (
+        "MC2026" +
+        String(maxNumber + 1)
+            .padStart(3, "0")
+    );
+
+}
+
+
+/* =========================================================
+   MASK ACCOUNT NUMBER
+========================================================= */
+
+function maskAccountNumber(number) {
+
+    if (!number) {
+        return "";
+    }
+
+    if (number.length <= 4) {
+        return "XXXX";
+    }
+
+    return (
+        "XXXXXX" +
+        number.slice(-4)
+    );
+
+}
+
+
+/* =========================================================
+   FORM SUBMIT
+========================================================= */
+
+form.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        if (!validateApplication()) {
+            return;
+        }
+
+
+        createReview();
+
+
+        if (
+            !confirm(
+                "Please confirm that all application details are correct."
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        activateSteps(5);
+
+
+        let applications =
+            JSON.parse(
+                localStorage.getItem(
+                    "mahaConnectApplications"
+                )
+            ) || [];
+
+
+        const applicationId =
+            generateApplicationId(
+                applications
+            );
+
+
+        const serviceName =
+            serviceSelect.options[
+                serviceSelect.selectedIndex
+            ].text;
+
+
+        const application = {
+
+            id: applicationId,
+
+            service: serviceName,
+
+            serviceType:
+                serviceSelect.value,
+
+            name:
+                document.getElementById(
+                    "name"
+                ).value,
+
+            email:
+                document.getElementById(
+                    "email"
+                ).value,
+
+            mobile:
+                document.getElementById(
+                    "mobile"
+                ).value,
+
+            fatherName:
+                document.getElementById(
+                    "fatherName"
+                ).value,
+
+            motherName:
+                document.getElementById(
+                    "motherName"
+                ).value,
+
+            aadhaar:
+                document.getElementById(
+                    "aadhaar"
+                ).value,
+
+            dob:
+                document.getElementById(
+                    "dob"
+                ).value,
+
+            gender:
+                document.getElementById(
+                    "gender"
+                ).value,
+
+            district:
+                document.getElementById(
+                    "district"
+                ).value,
+
+            taluk:
+                document.getElementById(
+                    "taluk"
+                ).value,
+
+            address:
+                document.getElementById(
+                    "address"
+                ).value,
+
+            education:
+                document.getElementById(
+                    "education"
+                ).value,
+
+            income:
+                document.getElementById(
+                    "income"
+                ).value,
+
+            serviceSpecificData:
+                collectServiceData(),
+
+            documents:
+                collectDocuments(),
+
+            status:
+                "Submitted",
+
+            date:
+                new Date()
+                    .toLocaleDateString()
+
+        };
+
+
+        console.log(
+            "MahaConnect Application:",
+            application
+        );
+
+
+        /* =================================================
+           BACKEND
+        ================================================= */
+
+        fetch(
+            "http://localhost:5000/api/applications",
+            {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify(
+                        application
+                    )
+
+            }
+        )
+
+        .then(
+            function(response) {
+
+                return response.json()
+                    .catch(
+                        function() {
+                            return {};
+                        }
+                    )
+                    .then(
+                        function(data) {
+
+                            return {
+                                ok:
+                                    response.ok,
+
+                                status:
+                                    response.status,
+
+                                data:
+                                    data
+                            };
+
+                        }
+                    );
+
+            }
+        )
+
+        .then(
+            function(result) {
+
+                console.log(
+                    "Backend Status:",
+                    result.status
+                );
+
+                console.log(
+                    "Backend Response:",
+                    result.data
+                );
+
+
+                if (!result.ok) {
+
+                    alert(
+                        result.data.message ||
+                        "Application submission failed."
+                    );
+
+                    return;
+
+                }
+
+
+                /*
+                    Save local copy.
+
+                    Account number is masked
+                    before storing locally.
+                */
+
+                const localCopy =
+                    JSON.parse(
+                        JSON.stringify(
+                            application
+                        )
+                    );
+
+
+                if (
+                    localCopy
+                        .serviceSpecificData
+                        .bankAccount
+                ) {
+
+                    localCopy
+                        .serviceSpecificData
+                        .bankAccount =
+                        maskAccountNumber(
+                            localCopy
+                                .serviceSpecificData
+                                .bankAccount
+                        );
+
+                }
+
+
+                applications.push(
+                    localCopy
+                );
+
+
+                localStorage.setItem(
+                    "mahaConnectApplications",
+                    JSON.stringify(
+                        applications
+                    )
+                );
+
+
+                /* SUCCESS */
+
+                successMessage.innerHTML = `
+
+                    <h3>
+                        ✓ Application Submitted Successfully!
+                    </h3>
+
+                    <p>
+                        Your application has been
+                        successfully submitted.
+                    </p>
+
+                    <div class="application-details">
+
+                        <p>
+                            <strong>
+                                Application ID:
+                            </strong>
+                            ${applicationId}
+                        </p>
+
+                        <p>
+                            <strong>
+                                Service:
+                            </strong>
+                            ${serviceName}
+                        </p>
+
+                        <p>
+                            <strong>
+                                Status:
+                            </strong>
+                            Submitted
+                        </p>
+
+                        <p>
+                            <strong>
+                                District:
+                            </strong>
+                            ${application.district}
+                        </p>
+
+                        <p>
+                            <strong>
+                                Taluk:
+                            </strong>
+                            ${application.taluk}
+                        </p>
+
+                        <p>
+                            <strong>
+                                Submitted Date:
+                            </strong>
+                            ${application.date}
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="tracking.html?id=${applicationId}"
+                        class="track-btn"
+                    >
+                        Track Application →
+                    </a>
+
+                `;
+
+
+                successMessage.style.display =
+                    "block";
+
+
+                successMessage.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+
+                /*
+                    Disable form after successful
+                    submission.
+                */
+
+                const controls =
+                    form.querySelectorAll(
+                        "input, select, textarea, button"
+                    );
+
+
+                controls.forEach(
+                    function(control) {
+
+                        if (
+                            control.type !== "button"
+                        ) {
+
+                            control.disabled =
+                                true;
+
+                        }
+
+                    }
+                );
+
+            }
+        )
+
+        .catch(
+            function(error) {
+
+                console.error(
+                    "Backend Error:",
+                    error
+                );
+
+
+                /*
+                    Backend unavailable:
+                    keep the application in localStorage
+                    so prototype testing can continue.
+                */
+
+                let applications =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "mahaConnectApplications"
+                        )
+                    ) || [];
+
+
+                const localCopy =
+                    JSON.parse(
+                        JSON.stringify(
+                            application
+                        )
+                    );
+
+
+                if (
+                    localCopy
+                        .serviceSpecificData
+                        .bankAccount
+                ) {
+
+                    localCopy
+                        .serviceSpecificData
+                        .bankAccount =
+                        maskAccountNumber(
+                            localCopy
+                                .serviceSpecificData
+                                .bankAccount
+                        );
+
+                }
+
+
+                applications.push(
+                    localCopy
+                );
+
+
+                localStorage.setItem(
+                    "mahaConnectApplications",
+                    JSON.stringify(
+                        applications
+                    )
+                );
+
+
+                successMessage.innerHTML = `
+
+                    <h3>
+                        ✓ Application Saved!
+                    </h3>
+
+                    <p>
+                        The application was saved
+                        locally for prototype testing.
+                    </p>
+
+                    <div class="application-details">
+
+                        <p>
+                            <strong>
+                                Application ID:
+                            </strong>
+                            ${applicationId}
+                        </p>
+
+                        <p>
+                            <strong>
+                                Service:
+                            </strong>
+                            ${serviceName}
+                        </p>
+
+                        <p>
+                            <strong>
+                                Status:
+                            </strong>
+                            Submitted
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="tracking.html?id=${applicationId}"
+                        class="track-btn"
+                    >
+                        Track Application →
+                    </a>
+
+                `;
+
+
+                successMessage.style.display =
+                    "block";
+
+
+                successMessage.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   SERVICE FROM URL
+
+   Example:
+   application.html?service=education
+========================================================= */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const selectedService =
+    params.get("service");
+
+
+if (
+    selectedService &&
+    SERVICE_CONFIG[selectedService]
+) {
+
+    serviceSelect.value =
+        selectedService;
+
+    loadService(
+        selectedService
+    );
+
+}
+
+
+/* =========================================================
+   INITIAL STEP
+========================================================= */
+
+activateSteps(1);
+
+</script>
+
+    <script src="language.js"></script>
+</body>
+</html>

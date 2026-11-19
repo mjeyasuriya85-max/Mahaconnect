@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Government Services | MahaConnect</title>
+  <meta name="description" content="Explore government service information, eligibility, documents and application guidance through MahaConnect.">
+  <style>
+    :root {
+      --blue: #1646a0;
+      --dark: #122b52;
+      --light: #f3f7ff;
+      --border: #e1e8f3;
+      --muted: #65748b;
+      --white: #fff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--dark);
+      background: #f7f9fd;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 15px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 23px;
+      font-weight: 800;
+      color: var(--blue);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-links a { font-size: 14px; font-weight: 600; }
+    .nav-links a:hover { color: var(--blue); }
+
+    .hero {
+      padding: 65px 6% 48px;
+      background: linear-gradient(120deg, #12377d, #2369c8);
+      color: var(--white);
+    }
+
+    .hero-inner { max-width: 1200px; margin: auto; }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid #ffffff65;
+      border-radius: 30px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      margin: 18px 0 12px;
+      font-size: clamp(32px, 5vw, 48px);
+      line-height: 1.15;
+    }
+
+    .hero p {
+      max-width: 680px;
+      color: #e1eaff;
+      margin-bottom: 25px;
+    }
+
+    .search-box {
+      display: flex;
+      max-width: 650px;
+      gap: 10px;
+      padding: 8px;
+      border-radius: 12px;
+      background: var(--white);
+    }
+
+    .search-box input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      padding: 12px;
+      font-size: 15px;
+      color: var(--dark);
+    }
+
+    .search-box button, .primary-btn {
+      background: var(--blue);
+      color: var(--white);
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 18px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    main {
+      max-width: 1300px;
+      margin: auto;
+      padding: 42px 6%;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 { margin: 0; font-size: 28px; }
+    .section-heading p { margin: 5px 0 0; color: var(--muted); }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 22px 0 26px;
+    }
+
+    .filter-btn {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 9px 16px;
+      color: var(--dark);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--white);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .service-card {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px #1b3d7212;
+    }
+
+    .service-image {
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #e4edff, #f5f8ff);
+      font-size: 48px;
+    }
+
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .service-content {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 21px;
+    }
+
+    .service-content h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+
+    .service-content p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 14px;
+      flex: 1;
+    }
+
+    .service-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 15px;
+    }
+
+    .category {
+      color: #315d9f;
+      background: #edf3ff;
+      border-radius: 30px;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .service-link {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .service-link:hover { text-decoration: underline; }
+
+    .no-results {
+      display: none;
+      grid-column: 1 / -1;
+      padding: 35px;
+      text-align: center;
+      color: var(--muted);
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .connected-panel {
+      margin-top: 48px;
+      padding: 30px;
+      border: 1px solid #dce7fa;
+      border-radius: 16px;
+      background: #edf4ff;
+    }
+
+    .connected-panel h2 { margin-top: 0; }
+    .connected-panel p { color: var(--muted); }
+
+    .connected-items {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .connected-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 15px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .notice {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    footer {
+      padding: 25px 6%;
+      background: #10264a;
+      color: #e3eaff;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 950px) {
+      .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .connected-items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 600px) {
+      .navbar { align-items: flex-start; flex-direction: column; }
+      .nav-links { gap: 13px; }
+      .hero { padding-top: 42px; }
+      .search-box { flex-direction: column; }
+      .services-grid { grid-template-columns: 1fr; }
+      .connected-items { grid-template-columns: 1fr; }
+      main { padding-top: 30px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <a class="brand" href="index.html">MahaConnect</a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="services.html" aria-current="page">Services</a>
+      <a href="about.html">About</a>
+      <a href="login.html">Citizen Login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Citizen Service Directory</span>
+      <h1>Government services, easier to discover.</h1>
+      <p>
+        Explore service information, understand eligibility, prepare documents
+        and learn the next steps from one convenient place.
+      </p>
+
+      <form class="search-box" id="searchForm">
+        <input id="serviceSearch" type="search"
+               placeholder="Search certificates, scholarships, pension..."
+               aria-label="Search services">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </section>
+
+  <main>
+    <section aria-labelledby="servicesTitle">
+      <div class="section-heading">
+        <div>
+          <h2 id="servicesTitle">Explore Services</h2>
+          <p>Choose a category or search for a service.</p>
+        </div>
+        <p><strong id="resultCount">15</strong> services</p>
+      </div>
+
+      <div class="filters" aria-label="Filter services">
+        <button class="filter-btn active" data-filter="all" type="button">All Services</button>
+        <button class="filter-btn" data-filter="education" type="button">Education</button>
+        <button class="filter-btn" data-filter="documents" type="button">Certificates</button>
+        <button class="filter-btn" data-filter="employment" type="button">Employment</button>
+        <button class="filter-btn" data-filter="welfare" type="button">Welfare</button>
+        <button class="filter-btn" data-filter="health" type="button">Health</button>
+        <button class="filter-btn" data-filter="agriculture" type="button">Agriculture</button>
+        <button class="filter-btn" data-filter="transport" type="button">Transport</button>
+        <button class="filter-btn" data-filter="housing" type="button">Housing</button>
+        <button class="filter-btn" data-filter="utilities" type="button">Utilities</button>
+      </div>
+
+      <div class="services-grid" id="servicesGrid">
+
+        <article class="service-card" data-category="education" data-search="scholarship student college school education financial assistance">
+          <div class="service-image"><span aria-hidden="true">🎓</span></div>
+          <div class="service-content">
+            <h3>Student Scholarships</h3>
+            <p>Explore scholarship information and education assistance resources.</p>
+            <div class="service-bottom"><span class="category">Education</span><a class="service-link" href="service-details.html?service=scholarship">Explore →</a></div>
+          </div>
+        </article>
+
+        <article class="service-card" data-category="documents" data-search="income certificate income proof revenue certificate">
+          <div class="service-image"><span aria-hidden="true">📄</span></div>
+          <div class="service-content">
+            <h3>Income Certificate</h3>
+            <p>Learn about income certificate requirements and application guidance.</p>
+            <div class="service-bottom"><span class="category">Certificates</span><a class="service-link" href="service-details.html?service=income">Explore →</a></div>
+          </div>
+        </article>
+
+        <article class="service-card" data-category="documents" data-search="community caste certificate identity">
+          <div class="service-image"><span aria-hidden="true">🪪</span></div>
+          <div class="service-content">
+            <h3>Community Certificate</h3>
+            <p>Find community certificate information and preparation guidance.</p>
+            <div class="service-bottom"><span class="category">Certificates</span><a class="service-link" href="service-details.html?service=community">Explore →</a></div>
+          </div>
+        </article>
+
+        <article class="service-card" data-category="employment" data-search="employment job career skill development work">
+          <div class="service-image"><span aria-hidden="true">💼</span></div>
+          <div class="service-content">
+            <h3>Employment & Skills</h3>
+            <p>Explore employment resources, career information and skill development.</p>
+            <div class="service-bottom"><span class="category">Employment</span><a class="service-link" href="service-details.html?service=employment">Explore →</a></div>
+          </div>
+        </article>
+
+        <article class="service-card" data-category="welfare" data-search="pension senior citizen elderly social security">
+          <div class="service-image"><span aria-hidden="true">👵</span></div>
+          <div class="service-content">
+            <h3>Pension & Senior Citizens</h3>
+            <p>Explore pension information and senior citizen support resources.</p>
+            <div class="service-bottom"><span class="category">Welfare</span><a class="service-link" href="service-details.html?service=pension">Explore →</a></div>
+          </div>
+        </article>
+
+        <article class="service-card" data-category="health" data-search="health insurance medical hospital health support">
+          <div class="service-image"><span aria-hidden="true">🏥</span></div>
+          <div class="service-content">
+            <h3>Health & Insurance</h3>
+            <p>Discover health coverage information and medical assistance resources.</p>
+            <div class="service-bottom"><span class="category">Health</span><a class="service-link" href="service-details.html?service=health">Explore →</a></div>
+          </div>
+        </article>
+
+        <article class="service-card" data-category="agriculture" data-search="agriculture farmer crop subsidy farming rural">
+          <div class="service-image"><span aria-hidden="true">🌾</span></div>
+          <div class="service-content">
+            <h3>Agriculture & Farmers</h3>
+            <p>Explore farmer schemes, crop support and agricultural resources.</p>
+            <div class="service-bottom"><span class="category">Agriculture</span><a class="service-link" href="service-details.html?service=agriculture">Explore →</a></div>
+          </div>
+        </article>
+
+        <article class="service-card" data-category="transport" data-search="transport driving licence vehicle registration road">
+          <div class="service-image"><span aria-hidden="true">🚘</span></div>
+          <div class="service-content">
+            <h3>Transport Services</h3>
+            <p>Find transport, driving licence and vehicle-service information.</p>
+            <div class="service-bottom"><span class="category">Transport</span><a class="service-link" href="service-details.html?service=transport">Explore →</a></div>
+          </div>
+        </article>
+
+        <article class="service-card" data-category="welfare" data-search="disability disabled accessibility assistance welfare">
+          <div class="service-image"><span aria-hidden="true">♿</span></div>
+          <div class="service-content">
+            <h3>Disability Support</h3>
+            <p>Explore disability-related certificate information and support resources.</p>
+            <div class="service-bottom"><span class="category">Welfare</span><a class="service-link" href="service-details.html?service=disability">Explore →</a></div>
+          </div>
+        </article>
+
+        <article class="service-card" data-category="housing" data-search="housing home house construction scheme">
+          <div class="service-image"><span aria-hidden="true">🏠</span></div>
+          <div class="service-content">
+            <h3>Housing Services</h3>
+            <p>Find housing scheme information and home-assistance resources.</p>
+            <div class="service-bottom"><span class="category">Housing</span><a class="service-link" href="service-details.html?service=housing">Explore →</a></div>
+          </div>
+        </article>
+
+        <article class="service-card" data-category="documents" data-search="birth death nativity residence certificate documents">
+          <div class="service-image"><span aria-hidden="true">📑</span></div>
+          <div class="service-content">
+            <h3>Citizen Certificates</h3>
+            <p>Browse birth, death, residence and related certificate information.</p>
+            <div class="service-bottom"><span class="category">Certificates</span><a class="service-link" href="service-details.html?service=documents">Explore →</a></div>
+          </div>
+        </article>
+
+        <article class="service-card" data-category="welfare" data-search="family women child welfare ration card benefits">
+          <div class="service-image"><span aria-hidden="true">👨‍👩‍👧</span></div>
+          <div class="service-content">
+            <h3>Family & Welfare Benefits</h3>
+            <p>Find family welfare, women and child support scheme information.</p>
+            <div class="service-bottom"><span class="category">Welfare</span><a class="service-link" href="service-details.html?service=welfare">Explore →</a></div>
+          </div>
+        </article>
+
+        <article class="service-card" data-category="utilities" data-search="electricity water utility public service">
+          <div class="service-image"><span aria-hidden="true">⚡</span></div>
+          <div class="service-content">
+            <h3>Utilities & Public Services</h3>
+            <p>Find electricity, water and other public utility service information.</p>
+            <div class="service-bottom"><span class="category">Utilities</span><a class="service-link" href="service-details.html?service=utilities">Explore →</a></div>
+          </div>
+        </article>
+
+        <article class="service-card" data-category="welfare" data-search="voter election voter id civic citizen">
+          <div class="service-image"><span aria-hidden="true">🗳️</span></div>
+          <div class="service-content">
+            <h3>Voter & Civic Services</h3>
+            <p>Access voter-service information and civic participation resources.</p>
+            <div class="service-bottom"><span class="category">Citizen Services</span><a class="service-link" href="service-details.html?service=voter">Explore →</a></div>
+          </div>
+        </article>
+
+        <article class="service-card" data-category="welfare" data-search="grievance complaint public feedback citizen help">
+          <div class="service-image"><span aria-hidden="true">💬</span></div>
+          <div class="service-content">
+            <h3>Grievance & Citizen Help</h3>
+            <p>Learn where to raise public-service concerns and find help resources.</p>
+            <div class="service-bottom"><span class="category">Citizen Services</span><a class="service-link" href="service-details.html?service=grievance">Explore →</a></div>
+          </div>
+        </article>
+
+        <div class="no-results" id="noResults">
+          No matching services found. Try another keyword or select All Services.
+        </div>
+      </div>
+    </section>
+
+    <section class="connected-panel">
+      <h2>One Platform. Connected Government Services.</h2>
+      <p>
+        MahaConnect is a service-discovery prototype designed to help citizens
+        find information across different service categories from one place.
+      </p>
+      <div class="connected-items">
+        <div class="connected-item">🎓 Education & Scholarships</div>
+        <div class="connected-item">📄 Citizen Certificates</div>
+        <div class="connected-item">💼 Employment Resources</div>
+        <div class="connected-item">🤝 Welfare Information</div>
+      </div>
+      <p class="notice">
+        Demo notice: This website is a prototype for service discovery and guidance.
+        It does not itself issue government certificates or confirm official applications.
+        Verify current requirements through the relevant official government department.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> MahaConnect · Government Service Discovery Prototype</p>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById("serviceSearch");
+    const searchForm = document.getElementById("searchForm");
+    const cards = [...document.querySelectorAll(".service-card")];
+    const filterButtons = [...document.querySelectorAll(".filter-btn")];
+    const noResults = document.getElementById("noResults");
+    const resultCount = document.getElementById("resultCount");
+
+    let activeCategory = "all";
+
+    function filterServices() {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const category = card.dataset.category;
+        const searchableText =
+          (card.innerText + " " + (card.dataset.search || "")).toLowerCase();
+
+        const matchesCategory =
+          activeCategory === "all" || category === activeCategory;
+
+        const matchesSearch = searchableText.includes(query);
+        const visible = matchesCategory && matchesSearch;
+
+        card.style.display = visible ? "flex" : "none";
+        if (visible) visibleCount++;
+      });
+
+      noResults.style.display = visibleCount === 0 ? "block" : "none";
+      resultCount.textContent = visibleCount;
+    }
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        activeCategory = button.dataset.filter;
+
+        filterButtons.forEach(item => {
+          const isActive = item === button;
+          item.classList.toggle("active", isActive);
+          item.setAttribute("aria-pressed", String(isActive));
+        });
+
+        filterServices();
+      });
+    });
+
+    searchInput.addEventListener("input", filterServices);
+
+    searchForm.addEventListener("submit", event => {
+      event.preventDefault();
+      filterServices();
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    filterServices();
+  </script>
+    <script src="language.js"></script>
+</body>
+</html>

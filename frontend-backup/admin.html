@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MahaConnect | Department Dashboard</title>
+<meta name="description" content="Explore the department dashboard demonstrated in the MahaConnect government services integration prototype.">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+
+        /* HEADER */
+
+        .header {
+            height: 70px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 35px;
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+
+            background: #0b5ed7;
+            color: white;
+
+            border-radius: 9px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+
+        .logo strong {
+            display: block;
+            font-size: 19px;
+            color: #123b6d;
+        }
+
+
+        .logo small {
+            color: #6b7280;
+        }
+
+
+        .admin-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+
+        .admin-badge {
+            background: #eaf2ff;
+            color: #0b5ed7;
+
+            padding: 8px 14px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+
+        /* MAIN */
+
+        .container {
+            max-width: 1250px;
+
+            margin: 35px auto;
+
+            padding: 0 25px;
+        }
+
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+
+        .page-title span {
+            color: #0b5ed7;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+        }
+
+
+        .page-title h1 {
+            margin-top: 7px;
+
+            font-size: 30px;
+
+            color: #123b6d;
+        }
+
+
+        .page-title p {
+            margin-top: 8px;
+
+            color: #6b7280;
+        }
+
+
+        /* SUMMARY */
+
+        .summary-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .summary-card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            padding: 22px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .summary-icon {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 10px;
+
+            background: #edf4ff;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+        }
+
+
+        .summary-card small {
+            display: block;
+
+            color: #6b7280;
+
+            margin-bottom: 5px;
+        }
+
+
+        .summary-card strong {
+            font-size: 25px;
+
+            color: #123b6d;
+        }
+
+
+        /* APPLICATION CARD */
+
+        .applications-card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+        }
+
+
+        .card-header {
+            padding: 22px 25px;
+
+            border-bottom:
+                1px solid #e5e7eb;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+        }
+
+
+        .card-header h2 {
+            color: #123b6d;
+
+            font-size: 20px;
+        }
+
+
+        .search-box {
+            padding: 9px 13px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 7px;
+
+            outline: none;
+
+            width: 230px;
+        }
+
+
+        .search-box:focus {
+            border-color: #0b5ed7;
+        }
+
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+
+        th {
+            background: #f8fafc;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            text-align: left;
+
+            padding: 15px 20px;
+
+            border-bottom:
+                1px solid #e5e7eb;
+        }
+
+
+        td {
+            padding: 17px 20px;
+
+            border-bottom:
+                1px solid #eef0f3;
+
+            font-size: 14px;
+        }
+
+
+        tr:hover {
+            background: #f8fbff;
+        }
+
+
+        /* APPLICATION ID */
+
+        .application-id {
+            color: #0b5ed7;
+
+            font-weight: bold;
+        }
+
+
+        /* STATUS */
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 11px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+
+        .pending {
+            background: #fff7df;
+
+            color: #a16207;
+        }
+
+
+        .progress {
+            background: #eaf2ff;
+
+            color: #0b5ed7;
+        }
+
+
+        .completed {
+            background: #e8f7ee;
+
+            color: #15803d;
+        }
+
+
+        /* SELECT */
+
+        select {
+            padding: 8px 10px;
+
+            border:
+                1px solid #d1d5db;
+
+            border-radius: 6px;
+
+            background: white;
+
+            cursor: pointer;
+        }
+
+
+        /* UPDATE BUTTON */
+
+        .update-btn {
+            margin-left: 7px;
+
+            padding: 8px 12px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            background: #0b5ed7;
+
+            color: white;
+
+            cursor: pointer;
+        }
+
+
+        .update-btn:hover {
+            background: #084298;
+        }
+
+
+        /* SUCCESS MESSAGE */
+
+        .message {
+            display: none;
+
+            margin: 20px 25px;
+
+            padding: 12px 15px;
+
+            background: #e8f7ee;
+
+            color: #15803d;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+        }
+
+
+        /* FOOTER */
+
+        .footer-note {
+            margin-top: 20px;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+
+            .summary-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .card-header {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 0 15px;
+            }
+
+
+            .admin-badge {
+                display: none;
+            }
+
+
+            .container {
+                padding: 0 15px;
+            }
+
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .search-box {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            <span class="logo-icon">
+                MC
+            </span>
+
+            <div>
+
+                <strong>
+                    MahaConnect
+                </strong>
+
+                <small>
+                    Digital Services
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-info">
+
+            <span class="admin-badge">
+                Department Portal
+            </span>
+
+            <span>
+                👤 Admin
+            </span>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+
+        <!-- TITLE -->
+
+        <section class="page-title">
+
+            <span>
+                DEPARTMENT DASHBOARD
+            </span>
+
+            <h1>
+                Application Management
+            </h1>
+
+            <p>
+                Manage citizen applications and update
+                service status through the connected
+                service network.
+            </p>
+
+        </section>
+
+
+
+        <!-- SUMMARY -->
+
+        <section class="summary-grid">
+
+
+            <div class="summary-card">
+
+                <span class="summary-icon">
+                    📋
+                </span>
+
+                <div>
+
+                    <small>
+                        Total Applications
+                    </small>
+
+                    <strong id="totalCount">
+                        03
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="summary-card">
+
+                <span class="summary-icon">
+                    ⏳
+                </span>
+
+                <div>
+
+                    <small>
+                        Pending
+                    </small>
+
+                    <strong id="pendingCount">
+                        01
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="summary-card">
+
+                <span class="summary-icon">
+                    🔄
+                </span>
+
+                <div>
+
+                    <small>
+                        In Progress
+                    </small>
+
+                    <strong id="progressCount">
+                        01
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="summary-card">
+
+                <span class="summary-icon">
+                    ✓
+                </span>
+
+                <div>
+
+                    <small>
+                        Completed
+                    </small>
+
+                    <strong id="completedCount">
+                        01
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- APPLICATIONS -->
+
+        <section class="applications-card">
+
+
+            <div class="card-header">
+
+                <h2>
+                    Citizen Applications
+                </h2>
+
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    class="search-box"
+                    placeholder="Search application..."
+                >
+
+            </div>
+
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="message"
+                class="message"
+            >
+                ✓ Application status updated successfully.
+            </div>
+
+
+
+            <!-- TABLE -->
+
+            <div class="table-wrapper">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Application ID
+                            </th>
+
+                            <th>
+                                Applicant
+                            </th>
+
+                            <th>
+                                Service
+                            </th>
+
+                            <th>
+                                Department
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Update
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody id="applicationTable">
+
+
+                        <!-- APPLICATION 1 -->
+
+                        <tr>
+
+                            <td class="application-id">
+                                MC2026001
+                            </td>
+
+                            <td>
+                                Jeya Surya
+                            </td>
+
+                            <td>
+                                Student Scholarship
+                            </td>
+
+                            <td>
+                                Education
+                            </td>
+
+                            <td>
+
+                                <span
+                                    class="status progress"
+                                >
+                                    In Progress
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <select class="status-select">
+
+                                    <option>
+                                        Pending
+                                    </option>
+
+                                    <option selected>
+                                        In Progress
+                                    </option>
+
+                                    <option>
+                                        Completed
+                                    </option>
+
+                                </select>
+
+
+                                <button
+                                    class="update-btn"
+                                >
+                                    Update
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- APPLICATION 2 -->
+
+                        <tr>
+
+                            <td class="application-id">
+                                MC2026002
+                            </td>
+
+                            <td>
+                                Arun Kumar
+                            </td>
+
+                            <td>
+                                Income Certificate
+                            </td>
+
+                            <td>
+                                Revenue
+                            </td>
+
+                            <td>
+
+                                <span
+                                    class="status completed"
+                                >
+                                    Completed
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <select class="status-select">
+
+                                    <option>
+                                        Pending
+                                    </option>
+
+                                    <option>
+                                        In Progress
+                                    </option>
+
+                                    <option selected>
+                                        Completed
+                                    </option>
+
+                                </select>
+
+
+                                <button
+                                    class="update-btn"
+                                >
+                                    Update
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- APPLICATION 3 -->
+
+                        <tr>
+
+                            <td class="application-id">
+                                MC2026003
+                            </td>
+
+                            <td>
+                                Priya S
+                            </td>
+
+                            <td>
+                                Community Certificate
+                            </td>
+
+                            <td>
+                                Revenue
+                            </td>
+
+                            <td>
+
+                                <span
+                                    class="status pending"
+                                >
+                                    Pending
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <select class="status-select">
+
+                                    <option selected>
+                                        Pending
+                                    </option>
+
+                                    <option>
+                                        In Progress
+                                    </option>
+
+                                    <option>
+                                        Completed
+                                    </option>
+
+                                </select>
+
+
+                                <button
+                                    class="update-btn"
+                                >
+                                    Update
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <p class="footer-note">
+
+            MahaConnect enables secure, consent-based
+            coordination between connected government
+            services.
+
+        </p>
+
+
+    </main>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+
+        /* UPDATE STATUS */
+
+        const updateButtons =
+            document.querySelectorAll(".update-btn");
+
+
+        updateButtons.forEach(function(button) {
+
+
+            button.addEventListener(
+                "click",
+                function() {
+
+
+                    const row =
+                        button.closest("tr");
+
+
+                    const select =
+                        row.querySelector(
+                            ".status-select"
+                        );
+
+
+                    const statusText =
+                        select.value;
+
+
+                    const statusElement =
+                        row.querySelector(
+                            ".status"
+                        );
+
+
+                    const applicationId =
+                        row.querySelector(
+                            ".application-id"
+                        ).textContent.trim();
+
+
+
+                    /* GET EXISTING STATUS DATA */
+
+                    const savedStatuses =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "mahaConnectStatuses"
+                            )
+                        ) || {};
+
+
+
+                    /* SAVE NEW STATUS */
+
+                    savedStatuses[applicationId] =
+                        statusText;
+
+
+                    localStorage.setItem(
+                        "mahaConnectStatuses",
+                        JSON.stringify(
+                            savedStatuses
+                        )
+                    );
+
+
+
+                    /* UPDATE ADMIN SCREEN */
+
+                    statusElement.textContent =
+                        statusText;
+
+
+                    statusElement.className =
+                        "status";
+
+
+                    if (
+                        statusText === "Pending"
+                    ) {
+
+                        statusElement.classList.add(
+                            "pending"
+                        );
+
+                    }
+
+
+                    else if (
+                        statusText === "In Progress"
+                    ) {
+
+                        statusElement.classList.add(
+                            "progress"
+                        );
+
+                    }
+
+
+                    else if (
+                        statusText === "Completed"
+                    ) {
+
+                        statusElement.classList.add(
+                            "completed"
+                        );
+
+                    }
+
+
+
+                    /* SUCCESS MESSAGE */
+
+                    const message =
+                        document.getElementById(
+                            "message"
+                        );
+
+
+                    message.style.display =
+                        "block";
+
+
+
+                    /* UPDATE COUNTS */
+
+                    updateCounts();
+
+
+
+                    setTimeout(
+                        function() {
+
+                            message.style.display =
+                                "none";
+
+                        },
+                        2500
+                    );
+
+
+                }
+            );
+
+        });
+
+
+
+        /* COUNT FUNCTION */
+
+        function updateCounts() {
+
+
+            const statuses =
+                document.querySelectorAll(
+                    ".status"
+                );
+
+
+            let pending = 0;
+
+            let progress = 0;
+
+            let completed = 0;
+
+
+
+            statuses.forEach(
+                function(status) {
+
+
+                    const value =
+                        status.textContent.trim();
+
+
+                    if (value === "Pending") {
+
+                        pending++;
+
+                    }
+
+
+                    else if (
+                        value === "In Progress"
+                    ) {
+
+                        progress++;
+
+                    }
+
+
+                    else if (
+                        value === "Completed"
+                    ) {
+
+                        completed++;
+
+                    }
+
+                }
+            );
+
+
+
+            document.getElementById(
+                "pendingCount"
+            ).textContent =
+                String(pending).padStart(
+                    2,
+                    "0"
+                );
+
+
+            document.getElementById(
+                "progressCount"
+            ).textContent =
+                String(progress).padStart(
+                    2,
+                    "0"
+                );
+
+
+            document.getElementById(
+                "completedCount"
+            ).textContent =
+                String(completed).padStart(
+                    2,
+                    "0"
+                );
+
+
+            document.getElementById(
+                "totalCount"
+            ).textContent =
+                String(statuses.length).padStart(
+                    2,
+                    "0"
+                );
+
+        }
+
+
+
+        /* SEARCH */
+
+        document.getElementById(
+            "searchInput"
+        ).addEventListener(
+            "input",
+            function() {
+
+
+                const searchValue =
+                    this.value.toLowerCase();
+
+
+                const rows =
+                    document.querySelectorAll(
+                        "#applicationTable tr"
+                    );
+
+
+                rows.forEach(
+                    function(row) {
+
+
+                        const text =
+                            row.textContent
+                            .toLowerCase();
+
+
+                        if (
+                            text.includes(
+                                searchValue
+                            )
+                        ) {
+
+                            row.style.display =
+                                "";
+
+                        }
+
+                        else {
+
+                            row.style.display =
+                                "none";
+
+                        }
+
+                    }
+                );
+
+            }
+       
+        );
+       
+    /* LOAD APPLICATIONS FROM BACKEND */
+
+fetch("http://localhost:5000/api/applications")
+    .then(response => response.json())
+    .then(data => {
+
+        const applicationTable =
+            document.getElementById("applicationTable");
+
+        data.applications.forEach(function(application) {
+
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td class="application-id">
+                    ${application.id}
+                </td>
+
+                <td>
+                    Citizen
+                </td>
+
+                <td>
+                    ${application.service}
+                </td>
+
+                <td>
+                    Connected Department
+                </td>
+
+                <td>
+                    <span class="status progress">
+                        ${application.status}
+                    </span>
+                </td>
+
+                <td>
+                    <select class="status-select">
+                        <option>Pending</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                    </select>
+
+                    <button class="update-btn">
+                        Update
+                    </button>
+                </td>
+            `;
+
+            applicationTable.appendChild(row);
+        });
+
+    })
+    .catch(error => {
+        console.error("Backend Error:", error);
+    });
+        /* LOAD SAVED STATUSES */
+
+        const savedStatuses =
+            JSON.parse(
+                localStorage.getItem("mahaConnectStatuses")
+            ) || {};
+
+        document
+            .querySelectorAll("#applicationTable tr")
+            .forEach(function(row) {
+
+                const idElement =
+                    row.querySelector(".application-id");
+
+                const statusElement =
+                    row.querySelector(".status");
+
+                if (!idElement || !statusElement) {
+                    return;
+                }
+
+                const applicationId =
+                    idElement.textContent.trim();
+
+                const savedStatus =
+                    savedStatuses[applicationId];
+
+                if (savedStatus) {
+
+                    statusElement.textContent =
+                        savedStatus;
+
+                    statusElement.className =
+                        "status";
+
+                    if (savedStatus === "Pending") {
+                        statusElement.classList.add("pending");
+                    }
+
+                    else if (savedStatus === "In Progress") {
+                        statusElement.classList.add("progress");
+                    }
+
+                    else if (savedStatus === "Completed") {
+                        statusElement.classList.add("completed");
+                    }
+
+                    const select =
+                        row.querySelector(".status-select");
+
+                    if (select) {
+                        select.value = savedStatus;
+                    }
+
+                }
+
+            });
+
+        updateCounts();
+/* UPDATE NEW APPLICATIONS */
+
+document
+    .querySelectorAll("#applicationTable .update-btn")
+    .forEach(function(button) {
+
+        button.addEventListener("click", async function() {
+
+            const row = button.closest("tr");
+
+            const select =
+                row.querySelector(".status-select");
+
+            const statusText = select.value;
+
+            const applicationId =
+                row.querySelector(".application-id")
+                .textContent
+                .trim();
+
+            const statusElement =
+                row.querySelector(".status");
+
+            try {
+
+                const response = await fetch(
+                    `http://localhost:5000/api/applications/${applicationId}/status`,
+                    {
+                        method: "PATCH",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            status: statusText
+                        })
+                    }
+                );
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message);
+                }
+
+                /* UPDATE SCREEN */
+
+                statusElement.textContent = statusText;
+
+                statusElement.className = "status";
+
+                if (statusText === "Pending") {
+
+                    statusElement.classList.add("pending");
+
+                } else if (statusText === "In Progress") {
+
+                    statusElement.classList.add("progress");
+
+                } else if (statusText === "Completed") {
+
+                    statusElement.classList.add("completed");
+
+                }
+
+                /* SAVE LOCAL STATUS */
+
+                const savedStatuses =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "mahaConnectStatuses"
+                        )
+                    ) || {};
+
+                savedStatuses[applicationId] =
+                    statusText;
+
+                localStorage.setItem(
+                    "mahaConnectStatuses",
+                    JSON.stringify(savedStatuses)
+                );
+
+                /* UPDATE COUNTS */
+
+                updateCounts();
+
+                /* SUCCESS MESSAGE */
+
+                const message =
+                    document.getElementById("message");
+
+                message.textContent =
+                    "✓ Application status updated successfully.";
+
+                message.style.display = "block";
+
+                setTimeout(function() {
+
+                    message.style.display = "none";
+
+                }, 2500);
+
+            } catch (error) {
+
+                console.error(
+                    "Status Update Error:",
+                    error
+                );
+
+                alert(
+                    "Status update failed: " +
+                    error.message
+                );
+            }
+
+        });
+
+    });

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MahaConnect | Application Tracking</title>
+<meta name="description" content="Learn how to track application status and view updates through the MahaConnect government services prototype.">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .tracking-page {
+            padding: 55px 7%;
+            background: #f7faff;
+            min-height: 85vh;
+        }
+
+        .tracking-container {
+            max-width: 950px;
+            margin: auto;
+        }
+
+        .tracking-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .tracking-header span {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .tracking-header h1 {
+            color: #0f172a;
+            font-size: 36px;
+            margin: 10px 0;
+        }
+
+        .tracking-header p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .search-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 25px;
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 7px 20px rgba(15, 23, 42, 0.04);
+        }
+
+        .search-card input {
+            flex: 1;
+            padding: 13px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-card input:focus {
+            border-color: #2563eb;
+        }
+
+        .search-card button {
+            padding: 13px 25px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .search-card button:hover {
+            background: #1d4ed8;
+        }
+
+        .application-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .application-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .application-top h2 {
+            margin: 0 0 7px;
+            color: #0f172a;
+            font-size: 20px;
+        }
+
+        .application-id {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .status {
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .status.progress {
+            background: #fff7ed;
+            color: #c2410c;
+        }
+
+        .status.completed {
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 7px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: #dbeafe;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -30px;
+            top: 3px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #2563eb;
+            border: 3px solid #dbeafe;
+        }
+
+        .timeline-item.pending .timeline-dot {
+            background: #cbd5e1;
+            border-color: #f1f5f9;
+        }
+
+        .timeline-item h3 {
+            margin: 0 0 5px;
+            color: #334155;
+            font-size: 15px;
+        }
+
+        .timeline-item p {
+            margin: 0;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .timeline-item small {
+            display: block;
+            margin-top: 5px;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        .update-box {
+            display: none;
+            margin-top: 20px;
+            padding: 14px;
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+            border-radius: 9px;
+            color: #1e40af;
+            font-size: 14px;
+        }
+
+        .empty-message {
+            display: none;
+            text-align: center;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 35px;
+            color: #64748b;
+        }
+
+        @media (max-width: 650px) {
+            .tracking-page {
+                padding: 40px 5%;
+            }
+
+            .tracking-header h1 {
+                font-size: 29px;
+            }
+
+            .search-card {
+                flex-direction: column;
+            }
+
+            .search-card button {
+                width: 100%;
+            }
+
+            .application-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+
+        <div class="logo">
+            <strong>MahaConnect</strong>
+            <span>Digital Services</span>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="tracking.html">Track</a>
+        </nav>
+
+    </header>
+
+
+    <!-- Tracking Page -->
+    <main class="tracking-page">
+
+        <div class="tracking-container">
+
+            <section class="tracking-header">
+
+                <span>APPLICATION TRACKING</span>
+
+                <h1>Track Your Application</h1>
+
+                <p>
+                    Check the current status and progress of your
+                    government service applications in one place.
+                </p>
+
+            </section>
+
+
+            <!-- Search -->
+            <div class="search-card">
+
+                <input
+                    type="text"
+                    id="applicationId"
+                    placeholder="Enter Application ID e.g. MC2026001"
+                >
+
+                <button onclick="trackApplication()">
+                    Track Application
+                </button>
+
+            </div>
+
+
+            <!-- Application 1 -->
+            <div class="application-card" id="applicationOne">
+
+                <div class="application-top">
+
+                    <div>
+                        <h2>Student Scholarship</h2>
+
+                        <span class="application-id">
+                            Application ID: MC2026001
+                        </span>
+                    </div>
+
+                    <span class="status progress">
+                        In Progress
+                    </span>
+
+                </div>
+
+
+                <div class="timeline">
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <h3>Application Submitted</h3>
+
+                        <p>
+                            Your application has been successfully submitted.
+                        </p>
+
+                        <small>10 Sep 2026</small>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <h3>Information Verified</h3>
+
+                        <p>
+                            Required information has been verified.
+                        </p>
+
+                        <small>11 Sep 2026</small>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <h3>Department Review</h3>
+
+                        <p>
+                            Application is currently under department review.
+                        </p>
+
+                        <small>In Progress</small>
+
+                    </div>
+
+
+                    <div class="timeline-item pending">
+
+                        <div class="timeline-dot"></div>
+
+                        <h3>Application Completed</h3>
+
+                        <p>
+                            Final processing is pending.
+                        </p>
+
+                        <small>Pending</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Application 2 -->
+            <div class="application-card" id="applicationTwo">
+
+                <div class="application-top">
+
+                    <div>
+                        <h2>Income Certificate</h2>
+
+                        <span class="application-id">
+                            Application ID: MC2026002
+                        </span>
+                    </div>
+
+                    <span class="status completed">
+                        Completed
+                    </span>
+
+                </div>
+
+
+                <div class="timeline">
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <h3>Application Submitted</h3>
+
+                        <p>
+                            Your application was submitted successfully.
+                        </p>
+
+                        <small>07 Sep 2026</small>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <h3>Information Verified</h3>
+
+                        <p>
+                            Applicant information was verified.
+                        </p>
+
+                        <small>08 Sep 2026</small>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <h3>Department Approved</h3>
+
+                        <p>
+                            Application was approved by the department.
+                        </p>
+
+                        <small>09 Sep 2026</small>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <h3>Application Completed</h3>
+
+                        <p>
+                            Service request has been completed.
+                        </p>
+
+                        <small>09 Sep 2026</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="empty-message" id="emptyMessage">
+                No application found for this Application ID.
+            </div>
+
+
+            <div class="update-box" id="updateBox">
+                ✓ Application status loaded successfully.
+            </div>
+
+        </div>
+
+    </main>
+<script>
+
+function trackApplication() {
+
+    const id = document
+        .getElementById("applicationId")
+        .value
+        .trim()
+        .toUpperCase();
+
+    const applicationOne =
+        document.getElementById("applicationOne");
+
+    const applicationTwo =
+        document.getElementById("applicationTwo");
+
+    const emptyMessage =
+        document.getElementById("emptyMessage");
+
+    const updateBox =
+        document.getElementById("updateBox");
+
+
+    applicationOne.style.display = "none";
+    applicationTwo.style.display = "none";
+    emptyMessage.style.display = "none";
+    updateBox.style.display = "none";
+
+
+    // Get Admin updated statuses
+    const savedStatuses =
+        JSON.parse(localStorage.getItem("mahaConnectStatuses")) || {};
+
+
+    // Existing Application 1
+    if (id === "MC2026001") {
+
+        applicationOne.style.display = "block";
+
+        const status =
+            savedStatuses["MC2026001"] || "In Progress";
+
+        updateApplicationStatus(
+            applicationOne,
+            status
+        );
+
+        updateBox.style.display = "block";
+    }
+
+
+    // Existing Application 2
+    else if (id === "MC2026002") {
+
+        applicationTwo.style.display = "block";
+
+        const status =
+            savedStatuses["MC2026002"] || "Completed";
+
+        updateApplicationStatus(
+            applicationTwo,
+            status
+        );
+
+        updateBox.style.display = "block";
+    }
+
+
+    // New applications submitted from Application page
+    else {
+
+        const applications =
+            JSON.parse(
+                localStorage.getItem("mahaConnectApplications")
+            ) || [];
+
+        const application =
+            applications.find(function(app) {
+                return app.id === id;
+            });
+if (application) {
+
+    emptyMessage.style.display = "none";
+
+    updateBox.style.display = "block";
+
+    const currentStatus =
+        savedStatuses[application.id] ||
+        application.status;
+
+    updateBox.innerHTML =
+        "✓ Application Found<br><br>" +
+        "<strong>Service:</strong> " +
+        application.service + "<br>" +
+        "<strong>Application ID:</strong> " +
+        application.id + "<br>" +
+        "<strong>Status:</strong> " +
+        currentStatus + "<br>" +
+        "<strong>Submitted Date:</strong> " +
+        application.date;
+
+}
+        else {
+
+            emptyMessage.style.display = "block";
+
+        }
+
+    }
+
+}
+
+
+function updateApplicationStatus(card, status) {
+
+    const statusElement =
+        card.querySelector(".application-top .status");
+
+    statusElement.textContent = status;
+
+    statusElement.className = "status";
+
+
+    if (status === "Pending") {
+
+        statusElement.classList.add("progress");
+
+    }
+
+    else if (status === "In Progress") {
+
+        statusElement.classList.add("progress");
+
+    }
+
+    else if (status === "Completed") {
+
+        statusElement.classList.add("completed");
+
+    }
+
+
+    const timelineItems =
+        card.querySelectorAll(".timeline-item");
+
+
+    if (status === "Pending") {
+
+        timelineItems.forEach(function(item, index) {
+
+            if (index > 0) {
+                item.classList.add("pending");
+            }
+
+        });
+
+    }
+
+
+    else if (status === "In Progress") {
+
+        timelineItems.forEach(function(item) {
+            item.classList.remove("pending");
+        });
+
+        if (timelineItems.length > 0) {
+            timelineItems[timelineItems.length - 1]
+                .classList.add("pending");
+        }
+
+    }
+
+
+    else if (status === "Completed") {
+
+        timelineItems.forEach(function(item) {
+            item.classList.remove("pending");
+        });
+
+    }
+
+}
+const urlParams = new URLSearchParams(window.location.search);
+const applicationIdFromUrl = urlParams.get("id");
+
+if (applicationIdFromUrl) {
+    document.getElementById("applicationId").value = applicationIdFromUrl;
+    trackApplication();
+}
+</script>
+
+

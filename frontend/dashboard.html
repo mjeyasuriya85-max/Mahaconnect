@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MahaConnect | Dashboard</title>
+<meta name="description" content="Explore the MahaConnect prototype dashboard to view government service information and organize application updates in one place.">
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <style>
+        /* NOTIFICATION CENTER */
+
+.notification-section {
+    margin: 30px 0;
+}
+
+.notification-list {
+    margin-top: 15px;
+}
+
+.notification-empty {
+    padding: 25px;
+    text-align: center;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    color: #64748b;
+}
+
+.notification-empty span {
+    display: block;
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.notification-empty p {
+    margin: 0;
+}
+
+        /* ==============================
+           DASHBOARD
+        ============================== */
+
+        body {
+            margin: 0;
+            background: #f7faff;
+            color: #0f172a;
+        }
+
+        .dashboard-page {
+            padding: 45px 7%;
+            min-height: calc(100vh - 80px);
+            box-sizing: border-box;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+
+        /* ==============================
+           WELCOME SECTION
+        ============================== */
+
+        .welcome-section {
+            margin-bottom: 30px;
+        }
+
+        .welcome-section span {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .welcome-section h1 {
+            margin: 8px 0 8px;
+            font-size: 34px;
+            color: #0f172a;
+        }
+
+        .welcome-section p {
+            margin: 0;
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .user-email {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+
+        /* ==============================
+           SUMMARY CARDS
+        ============================== */
+
+        .summary-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 35px;
+        }
+
+        .summary-card {
+            background: white;
+
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+
+            padding: 24px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(15, 23, 42, 0.05);
+        }
+
+        .summary-card .icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #eff6ff;
+            color: #2563eb;
+
+            border-radius: 10px;
+
+            font-size: 19px;
+
+            margin-bottom: 15px;
+        }
+
+        .summary-card h3 {
+            margin: 0;
+
+            font-size: 28px;
+            color: #0f172a;
+        }
+
+        .summary-card p {
+            margin: 5px 0 0;
+
+            color: #64748b;
+            font-size: 13px;
+        }
+
+
+        /* ==============================
+           QUICK SERVICES
+        ============================== */
+
+        .section-title {
+            margin-bottom: 18px;
+        }
+
+        .section-title h2 {
+            margin: 0 0 5px;
+
+            font-size: 21px;
+            color: #0f172a;
+        }
+
+        .section-title p {
+            margin: 0;
+
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .quick-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 16px;
+
+            margin-bottom: 40px;
+        }
+
+        .quick-card {
+            display: block;
+
+            padding: 20px;
+
+            background: white;
+
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+
+            text-decoration: none;
+
+            color: #0f172a;
+
+            transition: 0.2s ease;
+        }
+
+        .quick-card:hover {
+            border-color: #2563eb;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(37, 99, 235, 0.08);
+        }
+
+        .quick-card .quick-icon {
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
+
+        .quick-card strong {
+            display: block;
+
+            margin-bottom: 5px;
+
+            font-size: 15px;
+        }
+
+        .quick-card span {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+
+        /* ==============================
+           APPLICATIONS
+        ============================== */
+
+        .applications-section {
+            background: white;
+
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(15, 23, 42, 0.04);
+        }
+
+        .application-list {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .application-item {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 17px;
+
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+
+            background: #fafcff;
+        }
+
+        .application-info strong {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #0f172a;
+            font-size: 14px;
+        }
+
+        .application-info span {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .status {
+            display: inline-block;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            background: #eff6ff;
+            color: #2563eb;
+
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .empty-message {
+            padding: 25px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        /* ==============================
+           DEMO NOTICE
+        ============================== */
+
+        .demo-notice {
+            margin-top: 25px;
+
+            padding: 13px 16px;
+
+            background: #fffbeb;
+
+            border: 1px solid #fde68a;
+
+            border-radius: 9px;
+
+            color: #92400e;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 900px) {
+
+            .summary-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .quick-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .dashboard-page {
+                padding: 30px 16px;
+            }
+
+            .welcome-section h1 {
+                font-size: 28px;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .application-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+        }
+.notification-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 16px;
+    margin-bottom: 12px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    transition: 0.2s ease;
+}
+
+.notification-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+}
+
+.notification-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eff6ff;
+    border-radius: 50%;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.notification-content strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+.notification-content p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+}
+/* ===============================
+   ACCESSIBILITY MENU
+=============================== */
+
+.accessibility-panel {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 1000;
+}
+
+.accessibility-button {
+    border: none;
+    background: #2563eb;
+    color: white;
+    padding: 13px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+}
+
+.accessibility-options {
+    display: none;
+    width: 230px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+}
+
+.accessibility-options button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 6px;
+    border: none;
+    background: #f8fafc;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.accessibility-options button:last-child {
+    margin-bottom: 0;
+}
+
+.accessibility-options button:hover {
+    background: #eff6ff;
+}
+
+/* ===== MAHACONNECT DASHBOARD SIZE FIX ===== */
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    width: 100%;
+    min-width: 320px;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    background: #f4f7fc;
+    color: #17233b;
+}
+
+.navbar {
+    width: 100%;
+    min-height: 76px;
+    padding: 16px 5%;
+    box-sizing: border-box;
+}
+
+.dashboard-page {
+    width: 100%;
+    min-height: calc(100vh - 76px);
+    padding: 42px 5%;
+    box-sizing: border-box;
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 1320px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.welcome-section {
+    margin-bottom: 34px;
+}
+
+.welcome-section h1 {
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.25;
+    margin: 12px 0;
+}
+
+.welcome-section p {
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.section-title h2 {
+    font-size: 24px;
+    line-height: 1.4;
+}
+
+.section-title p {
+    font-size: 14px;
+}
+
+.summary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.summary-card {
+    padding: 28px;
+    border-radius: 16px;
+}
+
+.summary-card h3 {
+    font-size: 32px;
+}
+
+.quick-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.quick-card {
+    min-height: 145px;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.quick-card strong {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.quick-card span {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.applications-section {
+    padding: 30px;
+    border-radius: 16px;
+}
+
+.application-item {
+    padding: 20px;
+}
+
+.notification-item {
+    padding: 20px;
+}
+
+@media (max-width: 900px) {
+    .dashboard-page {
+        padding: 30px 4%;
+    }
+
+    .quick-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard-page {
+        padding: 24px 16px;
+    }
+
+    .summary-grid,
+    .quick-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-card,
+    .applications-section {
+        padding: 20px;
+    }
+
+    .navbar {
+        padding: 14px 16px;
+    }
+}
+
+/* ===== MAHACONNECT COLORFUL DASHBOARD THEME ===== */
+
+body {
+    background: linear-gradient(135deg, #eaf2ff 0%, #f4edff 50%, #e5fbf7 100%);
+    color: #172554;
+}
+
+/* Top navigation */
+.navbar {
+    background: linear-gradient(100deg, #122554, #194e91, #087f8c);
+    color: #ffffff;
+    border-bottom: 3px solid #f5a623;
+    box-shadow: 0 5px 20px rgba(25, 55, 110, 0.18);
+}
+
+.navbar .logo strong,
+.navbar .logo span,
+.navbar nav a {
+    color: #ffffff;
+}
+
+.navbar nav a:hover {
+    color: #ffd166;
+}
+
+/* Main dashboard surface */
+.dashboard-page {
+    background: transparent;
+}
+
+.dashboard-container {
+    max-width: 1320px;
+}
+
+/* Colourful welcome banner */
+.welcome-section {
+    padding: 32px;
+    border-radius: 20px;
+    background: linear-gradient(120deg, #183b78, #3267c8 58%, #087f8c);
+    color: #ffffff;
+    box-shadow: 0 12px 28px rgba(37, 80, 160, 0.20);
+}
+
+.welcome-section > span {
+    color: #bfe8ff;
+}
+
+.welcome-section h1,
+.welcome-section p,
+.welcome-section .user-email {
+    color: #ffffff;
+}
+
+.welcome-section p {
+    line-height: 1.8;
+}
+
+/* Summary cards — different pastel colours */
+.summary-card {
+    border: 1px solid transparent;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(34, 55, 100, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.summary-card:nth-child(1) {
+    background: linear-gradient(140deg, #ffffff, #dceaff);
+    border-color: #b9d2ff;
+}
+
+.summary-card:nth-child(2) {
+    background: linear-gradient(140deg, #ffffff, #fff0ce);
+    border-color: #ffdda0;
+}
+
+.summary-card:nth-child(3) {
+    background: linear-gradient(140deg, #ffffff, #d7f8e9);
+    border-color: #a8e9cc;
+}
+
+.summary-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(34, 55, 100, 0.13);
+}
+
+.summary-card .icon {
+    background: #ffffff;
+    border: 1px solid rgba(100, 130, 190, 0.15);
+    box-shadow: 0 4px 12px rgba(30, 60, 120, 0.08);
+}
+
+/* Quick Services — colourful cards */
+.quick-card {
+    min-height: 145px;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(34, 55, 100, 0.07);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quick-card:nth-child(1) {
+    background: linear-gradient(145deg, #e0edff, #ffffff);
+    border-color: #bfd5ff;
+}
+
+.quick-card:nth-child(2) {
+    background: linear-gradient(145deg, #ffeadb, #ffffff);
+    border-color: #ffcfad;
+}
+
+.quick-card:nth-child(3) {
+    background: linear-gradient(145deg, #e6e1ff, #ffffff);
+    border-color: #d0c5ff;
+}
+
+.quick-card:nth-child(4) {
+    background: linear-gradient(145deg, #d9f8eb, #ffffff);
+    border-color: #b3e9d0;
+}
+
+.quick-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 25px rgba(37, 80, 160, 0.13);
+}
+
+.quick-card .quick-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(34, 55, 100, 0.10);
+}
+
+/* Section headings */
+.section-title h2 {
+    color: #183b78;
+}
+
+.section-title p {
+    color: #64748b;
+}
+
+/* Notifications */
+.notification-section {
+    padding: 22px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #e8f3ff, #f4efff);
+    border: 1px solid #d8e5ff;
+}
+
+.notification-item {
+    background: #ffffff;
+    border-left: 4px solid #4785e8;
+    box-shadow: 0 4px 12px rgba(40, 70, 120, 0.05);
+}
+
+.notification-icon {
+    background: linear-gradient(135deg, #dbeafe, #e9ddff);
+}
+
+/* Recent applications */
+.applications-section {
+    background: linear-gradient(145deg, #ffffff, #f0f5ff);
+    border: 1px solid #d8e4fa;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(34, 55, 100, 0.07);
+}
+
+.application-item {
+    background: #ffffff;
+    border-left: 4px solid #8b7be8;
+    border-radius: 12px;
+}
+
+.status {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+/* Accessibility button */
+.accessibility-button {
+    background: linear-gradient(135deg, #2456bd, #087f8c);
+    box-shadow: 0 8px 20px rgba(36, 86, 189, 0.25);
+}
+
+.accessibility-options {
+    background: #ffffff;
+    border: 1px solid #d7e3f7;
+}
+
+/* Demo message */
+.demo-notice {
+    background: linear-gradient(100deg, #fff5d9, #fffaf0);
+    border-color: #f3cf72;
+}
+
+/* Mobile view */
+@media (max-width: 600px) {
+    .welcome-section {
+        padding: 24px 20px;
+    }
+
+    .notification-section {
+        padding: 16px;
+    }
+}
+
+    </style>
+
+<link rel="stylesheet" href="css/dashboard-theme.css">
+<link rel="stylesheet" href="css/application-theme.css">
+<link rel="stylesheet" href="css/schemes-theme.css">
+</head>
+
+
+<body>
+
+
+    <!-- ==============================
+         NAVIGATION
+    ============================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            <strong>
+                MahaConnect
+            </strong>
+
+            <span>
+                Digital Services
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="tracking.html">
+                Track
+            </a>
+
+        </nav>
+
+
+        <button
+            id="logoutButton"
+            class="login-btn"
+            type="button"
+        >
+            Logout
+        </button>
+
+    </header>
+<!-- ACCESSIBILITY -->
+
+<div class="accessibility-panel">
+
+    <button
+        id="accessibilityButton"
+        class="accessibility-button"
+        type="button"
+    >
+        ♿ Accessibility
+    </button>
+<div id="accessibilityOptions" class="accessibility-options">
+
+    <button type="button" onclick="enableVisualMode()">
+        👁️ Visual Assistance
+    </button>
+
+    <button type="button" onclick="enableHearingMode()">
+        👂 Hearing Assistance
+    </button>
+
+    <button type="button" onclick="enableSignLanguageMode()">
+        🤟 Sign Language
+    </button>
+
+    <button type="button" onclick="enableVoiceMode()">
+        🎙️ Voice Assistance
+    </button>
+
+    <button type="button" onclick="enableLargeText()">
+        🔤 Large Text
+    </button>
+
+</div>
+</div>
+
+
+    <!-- ==============================
+         DASHBOARD
+    ============================== -->
+
+    <main class="dashboard-page">
+
+        <div class="dashboard-container">
+
+
+            <!-- WELCOME -->
+
+            <section class="welcome-section">
+
+                <span>
+                    CITIZEN DASHBOARD
+                </span>
+
+                <h1>
+                    Welcome,
+                    <span
+                        id="userEmail"
+                        class="user-email"
+                    >
+                        User
+                    </span>
+                </h1>
+
+                <p>
+                    Manage your government services,
+                    applications and service requests
+                    from one place.
+                </p>
+
+            </section>
+
+
+<!-- NOTIFICATION CENTER -->
+
+<section class="notification-section">
+
+    <div class="section-title">
+        <h2>🔔 Notifications</h2>
+        <p>Stay updated about your applications and services.</p>
+    </div>
+
+    <div id="notificationList" class="notification-list">
+
+        <div class="notification-empty">
+            <span>🔔</span>
+            <p>No new notifications</p>
+        </div>
+
+    </div>
+
+</section>
+            <!-- SUMMARY -->
+
+            <section class="summary-grid">
+
+
+                <div class="summary-card">
+
+                    <div class="icon">
+                        📄
+                    </div>
+
+                    <h3 id="applicationCount">
+                        0
+                    </h3>
+
+                    <p>
+                        Total Applications
+                    </p>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="icon">
+                        ⏳
+                    </div>
+
+                    <h3 id="pendingCount">
+                        0
+                    </h3>
+
+                    <p>
+                        Pending Applications
+                    </p>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="icon">
+                        ✓
+                    </div>
+
+                    <h3 id="completedCount">
+                        0
+                    </h3>
+
+                    <p>
+                        Completed Applications
+                    </p>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- QUICK SERVICES -->
+
+            <section>
+
+                <div class="section-title">
+
+                    <h2>
+                        Quick Services
+                    </h2>
+
+                    <p>
+                        Access commonly used MahaConnect services.
+                    </p>
+
+                </div>
+
+
+                <div class="quick-grid">
+
+
+                    <a
+                        href="services.html"
+                        class="quick-card"
+                    >
+
+                        <div class="quick-icon">
+                            🏛️
+                        </div>
+
+                        <strong>
+                            Government Services
+                        </strong>
+
+                        <span>
+                            Explore available services
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="application.html"
+                        class="quick-card"
+                    >
+
+                        <div class="quick-icon">
+                            📝
+                        </div>
+
+                        <strong>
+                            Apply for Service
+                        </strong>
+
+                        <span>
+                            Submit a new application
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="my-applications.html"
+                        class="quick-card"
+                    >
+
+                        <div class="quick-icon">
+                            📋
+                        </div>
+
+                        <strong>
+                            My Applications
+                        </strong>
+
+                        <span>
+                            View your applications
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="schemes.html"
+                        class="quick-card"
+                    >
+
+                        <div class="quick-icon">
+                            💡
+                        </div>
+
+                        <strong>
+                            Recommended Schemes
+                        </strong>
+
+                        <span>
+                            Find relevant services
+                        </span>
+
+                    </a>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- RECENT APPLICATIONS -->
+
+            <section class="applications-section">
+
+                <div class="section-title">
+
+                    <h2>
+                        Recent Applications
+                    </h2>
+
+                    <p>
+                        Your latest submitted applications.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="applicationList"
+                    class="application-list"
+                >
+
+                </div>
+
+            </section>
+
+
+
+            <!-- DEMO NOTICE -->
+
+            <div class="demo-notice">
+
+                <strong>Prototype / Demo:</strong>
+
+                This dashboard uses browser
+                sessionStorage and localStorage
+                for demonstration purposes.
+                It does not represent real government
+                authentication or live government systems.
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ==============================
+         DASHBOARD JAVASCRIPT
+    ============================== -->
+
+    <script>
+// ===============================
+// NOTIFICATION CENTER
+// ===============================
+
+function loadNotifications() {
+
+    const notificationList =
+        document.getElementById("notificationList");
+
+    const applications =
+        JSON.parse(
+            localStorage.getItem("mahaConnectApplications")
+        ) || [];
+
+    if (applications.length === 0) {
+        return;
+    }
+
+    notificationList.innerHTML = applications
+        .slice(-5)
+        .reverse()
+        .map(app => `
+            <div class="notification-item">
+
+                <div class="notification-icon">
+                    🔔
+                </div>
+
+                <div class="notification-content">
+                    <strong>
+                        ${app.service || "Government Service"}
+                    </strong>
+
+                    <p>
+                        Your application
+                        ${app.applicationId || ""}
+                        is currently
+                        ${app.status || "Submitted"}.
+                    </p>
+                </div>
+
+            </div>
+        `)
+        .join("");
+}
+
+loadNotifications();
+
+        /* ==============================
+           GET LOGGED-IN EMAIL
+        ============================== */
+const userEmail =
+    sessionStorage.getItem("mahaConnectEmail") ||
+    localStorage.getItem("mahaConnectEmail");
+
+if (!userEmail) {
+    window.location.replace("login.html");
+} else {
+    sessionStorage.setItem("mahaConnectEmail", userEmail);
+
+    document.getElementById("userEmail").textContent =
+        userEmail;
+}     
+        /* ==============================
+           GET APPLICATIONS
+        ============================== */
+
+        const applications =
+            JSON.parse(
+                localStorage.getItem(
+                    "mahaConnectApplications"
+                )
+            ) || [];
+
+
+
+        /* ==============================
+           TOTAL APPLICATIONS
+        ============================== */
+
+        document.getElementById(
+            "applicationCount"
+        ).textContent =
+            applications.length;
+
+
+
+        /* ==============================
+           PENDING / COMPLETED
+        ============================== */
+
+        const pendingApplications =
+            applications.filter(
+                function (application) {
+
+                    const status =
+                        String(
+                            application.status || ""
+                        ).toLowerCase();
+
+                    return (
+                        status === "submitted" ||
+                        status === "pending" ||
+                        status === "in progress" ||
+                        status === "progress"
+                    );
+
+                }
+            );
+
+
+        const completedApplications =
+            applications.filter(
+                function (application) {
+
+                    return String(
+                        application.status || ""
+                    ).toLowerCase()
+                    === "completed";
+
+                }
+            );
+
+
+        document.getElementById(
+            "pendingCount"
+        ).textContent =
+            pendingApplications.length;
+
+
+        document.getElementById(
+            "completedCount"
+        ).textContent =
+            completedApplications.length;
+
+
+
+        /* ==============================
+           SHOW RECENT APPLICATIONS
+        ============================== */
+
+        const applicationList =
+            document.getElementById(
+                "applicationList"
+            );
+
+
+        if (applications.length === 0) {
+
+            applicationList.innerHTML = `
+
+                <div class="empty-message">
+
+                    No applications submitted yet.
+
+                    <br><br>
+
+                    You can apply for a government
+                    service using the
+                    <strong>Apply for Service</strong>
+                    option.
+
+                </div>
+
+            `;
+
+        }
+
+        else {
+
+            const recentApplications =
+                applications
+                    .slice()
+                    .reverse()
+                    .slice(0, 5);
+
+
+            recentApplications.forEach(
+                function (application) {
+
+                    const applicationId =
+                        application.id ||
+                        application.applicationId ||
+                        "N/A";
+
+
+                    const service =
+                        application.service ||
+                        "Government Service";
+
+
+                    const status =
+                        application.status ||
+                        "Submitted";
+
+
+                    const date =
+                        application.date ||
+                        "Date not available";
+
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        "application-item";
+
+
+                    item.innerHTML = `
+
+                        <div class="application-info">
+
+                            <strong>
+                                ${service}
+                            </strong>
+
+                            <span>
+                                Application ID:
+                                ${applicationId}
+                                &nbsp; | &nbsp;
+                                ${date}
+                            </span>
+
+                        </div>
+
+
+                        <span class="status">
+                            ${status}
+                        </span>
+
+                    `;
+
+
+                    applicationList.appendChild(
+                        item
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* ==============================
+           LOGOUT
+        ============================== */
+
+    document.getElementById("logoutButton").addEventListener("click", function () {
+    sessionStorage.removeItem("mahaConnectEmail");
+    localStorage.removeItem("mahaConnectEmail");
+
+    window.location.href = "login.html";
+});
+// ===============================
+// ACCESSIBILITY MENU
+// ===============================
+
+const accessibilityButton =
+    document.getElementById("accessibilityButton");
+
+const accessibilityOptions =
+    document.getElementById("accessibilityOptions");
+
+accessibilityButton.addEventListener("click", function () {
+
+    if (
+        accessibilityOptions.style.display === "block"
+    ) {
+        accessibilityOptions.style.display = "none";
+    } else {
+        accessibilityOptions.style.display = "block";
+    }
+
+});
+    </script>
+
+
+    <script src="language.js"></script>
+</body>
+
+</html>

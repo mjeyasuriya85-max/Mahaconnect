@@ -1,0 +1,501 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Scheme Finder | MahaConnect</title>
+
+  <style>
+    :root {
+      --navy: #102b50;
+      --blue: #2463eb;
+      --light: #f3f7ff;
+      --text: #25334a;
+      --muted: #64748b;
+      --green: #16865c;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f7f9fd;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    nav {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .brand span {
+      color: var(--blue);
+    }
+
+    nav a {
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 54px 7% 48px;
+      background: linear-gradient(125deg, #102b50, #1e55a7);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border: 45px solid #ffffff12;
+      border-radius: 50%;
+      right: -60px;
+      top: -90px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid #ffffff55;
+      border-radius: 30px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.2;
+      max-width: 680px;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #e0eaff;
+      font-size: 16px;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+      color: var(--navy);
+      font-size: 25px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .finder-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px;
+      box-shadow: 0 8px 30px #17365d0a;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: 650;
+      font-size: 14px;
+      margin-bottom: 7px;
+    }
+
+    .field select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font: inherit;
+      background: white;
+      color: var(--text);
+    }
+
+    .field select:focus {
+      outline: 2px solid #93b4ff;
+      border-color: var(--blue);
+    }
+
+    .primary-button {
+      background: var(--blue);
+      color: white;
+      border: 0;
+      border-radius: 10px;
+      padding: 14px 22px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 22px;
+      transition: background .2s, transform .2s;
+    }
+
+    .primary-button:hover {
+      background: #174bc2;
+      transform: translateY(-1px);
+    }
+
+    .privacy-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .results {
+      margin-top: 36px;
+    }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .demo-label {
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .6px;
+      padding: 5px 10px;
+      border-radius: 30px;
+      color: #8a5700;
+      background: #fff2cc;
+    }
+
+    .scheme-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .scheme-card {
+      background: white;
+      padding: 23px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .scheme-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px #102b5012;
+    }
+
+    .scheme-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      background: #eaf1ff;
+      border-radius: 13px;
+      font-size: 23px;
+      margin-bottom: 14px;
+    }
+
+    .scheme-card h3 {
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .scheme-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .scheme-tag {
+      display: inline-block;
+      background: #e8f7ef;
+      color: #13734e;
+      border-radius: 7px;
+      padding: 4px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      margin: 13px 0;
+    }
+
+    .scheme-card a {
+      display: inline-block;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+
+    .empty-state {
+      background: white;
+      border: 1px dashed #b9c7dc;
+      padding: 28px;
+      border-radius: 14px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      background: white;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 22px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 650px) {
+      nav {
+        padding: 14px 5%;
+      }
+
+      .hero {
+        padding: 40px 6%;
+      }
+
+      .page {
+        padding: 25px 15px 45px;
+      }
+
+      .form-grid,
+      .scheme-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .finder-card {
+        padding: 19px;
+      }
+
+      .primary-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="brand">MC <span>MahaConnect</span></div>
+    <a href="index.html">← Back to Home</a>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">SMART CITIZEN SERVICES</div>
+    <h1>Find schemes that fit your future.</h1>
+    <p>
+      Discover government scheme possibilities based on your profile.
+      Understand where to start, without searching through multiple pages.
+    </p>
+  </header>
+
+  <main class="page">
+    <section>
+      <div class="section-heading">
+        <h2>Your Smart Scheme Finder</h2>
+        <p>Choose a few details to explore relevant demo suggestions.</p>
+      </div>
+
+      <div class="finder-card">
+        <form id="schemeForm">
+          <div class="form-grid">
+            <div class="field">
+              <label for="education">Education level</label>
+              <select id="education" required>
+                <option value="">Select education</option>
+                <option value="school">School student</option>
+                <option value="college">College student</option>
+                <option value="graduate">Graduate</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="occupation">Current status</label>
+              <select id="occupation" required>
+                <option value="">Select status</option>
+                <option value="student">Student</option>
+                <option value="employed">Employed</option>
+                <option value="jobseeker">Looking for a job</option>
+                <option value="selfemployed">Self-employed</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="income">Annual family income</label>
+              <select id="income" required>
+                <option value="">Select income range</option>
+                <option value="low">Below ₹1 lakh</option>
+                <option value="middle">₹1 lakh – ₹3 lakh</option>
+                <option value="high">Above ₹3 lakh</option>
+                <option value="prefer">Prefer not to say</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="interest">What support are you looking for?</label>
+              <select id="interest" required>
+                <option value="">Select a category</option>
+                <option value="education">Education & scholarships</option>
+                <option value="employment">Employment & skills</option>
+                <option value="business">Business support</option>
+                <option value="welfare">Family & social welfare</option>
+                <option value="housing">Housing support</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="primary-button" type="submit">
+            ✨ Find My Scheme Suggestions
+          </button>
+
+          <p class="privacy-note">
+            Demo prototype: your selections are processed in this page only.
+            Don't enter confidential or identifying information.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <section class="results hidden" id="resultsSection">
+      <div class="results-header">
+        <div class="section-heading">
+          <h2>Suggestions for You</h2>
+          <p id="resultDescription">Explore these starting points.</p>
+        </div>
+        <span class="demo-label">DEMO SUGGESTIONS</span>
+      </div>
+
+      <div class="scheme-grid" id="schemeResults"></div>
+
+      <p class="privacy-note">
+        These are category-based demo suggestions, not confirmed eligibility
+        results. Check official scheme rules, eligibility and deadlines before
+        applying. No government affiliation is implied.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <strong>MC MahaConnect</strong> · One Platform. Connected Government Services.
+    <br>Independent demo prototype · Not an official government portal.
+  </footer>
+
+  <script>
+    const schemeForm = document.getElementById("schemeForm");
+    const resultsSection = document.getElementById("resultsSection");
+    const schemeResults = document.getElementById("schemeResults");
+    const resultDescription = document.getElementById("resultDescription");
+
+    const demoSchemes = {
+      education: {
+        icon: "🎓",
+        title: "Education & Scholarship Search",
+        description: "Explore scholarship and education assistance opportunities. Requirements depend on the individual scheme.",
+        tag: "EDUCATION",
+        url: "https://scholarships.gov.in/"
+      },
+      employment: {
+        icon: "💼",
+        title: "Employment & Skill Development",
+        description: "Explore job-seeker services and skill-development opportunities relevant to your career goals.",
+        tag: "CAREER",
+        url: "https://www.ncs.gov.in/"
+      },
+      business: {
+        icon: "🚀",
+        title: "Business Support Search",
+        description: "Explore official resources for entrepreneurs and people planning to start a business.",
+        tag: "ENTREPRENEURSHIP",
+        url: "https://www.myscheme.gov.in/"
+      },
+      welfare: {
+        icon: "🤝",
+        title: "Social Welfare Scheme Search",
+        description: "Explore welfare services and review the official eligibility criteria for each scheme.",
+        tag: "WELFARE",
+        url: "https://www.myscheme.gov.in/"
+      },
+      housing: {
+        icon: "🏠",
+        title: "Housing Support Search",
+        description: "Explore housing-related government schemes and confirm current requirements on official websites.",
+        tag: "HOUSING",
+        url: "https://www.myscheme.gov.in/"
+      }
+    };
+
+    schemeForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const education = document.getElementById("education").value;
+      const occupation = document.getElementById("occupation").value;
+      const income = document.getElementById("income").value;
+      const interest = document.getElementById("interest").value;
+
+      const selected = demoSchemes[interest];
+
+      schemeResults.innerHTML = `
+        <article class="scheme-card">
+          <div class="scheme-icon">${selected.icon}</div>
+          <h3>${selected.title}</h3>
+          <p>${selected.description}</p>
+          <span class="scheme-tag">${selected.tag}</span>
+          <p><strong>Your selections:</strong> ${education}, ${occupation}, ${income === "prefer" ? "income not shared" : "selected income range"}.</p>
+          <a href="${selected.url}" target="_blank" rel="noopener noreferrer">
+            Explore official resources ↗
+          </a>
+        </article>
+      `;
+
+      resultDescription.textContent =
+        "Based on the support category you selected. Verify all scheme requirements on the official website.";
+
+      resultsSection.classList.remove("hidden");
+      resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  </script>
+</body>
+</html>

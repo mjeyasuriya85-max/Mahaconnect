@@ -1,0 +1,657 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MahaConnect security, privacy and citizen consent settings.">
+  <title>Security & Consent | MahaConnect</title>
+  <link rel="stylesheet" href="css/style.css">
+  <a href="security.html">Security & Consent</a>
+
+  <style>
+    :root {
+      --navy: #12305d;
+      --blue: #215fc1;
+      --blue-dark: #194b99;
+      --bg: #f3f6fc;
+      --text: #293b54;
+      --muted: #6b7d94;
+      --border: #dce5f1;
+      --green: #18835c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a { text-decoration: none; }
+
+    button, input { font: inherit; }
+
+    .security-hero {
+      padding: 43px 6%;
+      color: white;
+      background: linear-gradient(120deg, #102750, #205fc1);
+    }
+
+    .security-hero-inner,
+    .security-container {
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    .security-label {
+      display: inline-block;
+      padding: 7px 12px;
+      border: 1px solid #ffffff65;
+      border-radius: 25px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .security-hero h1 {
+      margin: 17px 0 10px;
+      font-size: clamp(29px, 4vw, 42px);
+    }
+
+    .security-hero p {
+      max-width: 720px;
+      line-height: 1.8;
+      margin: 0;
+      color: #e1eaff;
+    }
+
+    .security-main { padding: 30px 18px 55px; }
+
+    .security-status {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 5px 18px #12305d08;
+    }
+
+    .status-icon {
+      width: 45px;
+      height: 45px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #e5f7ef;
+      font-size: 23px;
+    }
+
+    .security-status h2 {
+      margin: 1px 0 7px;
+      color: var(--navy);
+      font-size: 18px;
+    }
+
+    .security-status p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .security-card {
+      min-width: 0;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 24px;
+      box-shadow: 0 5px 18px #12305d08;
+    }
+
+    .security-card-heading {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 10px;
+    }
+
+    .security-card-icon {
+      width: 45px;
+      height: 45px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #eaf1ff;
+      font-size: 23px;
+    }
+
+    .security-card h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 19px;
+    }
+
+    .security-card > p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+      margin: 10px 0 18px;
+    }
+
+    .security-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 0;
+      border-top: 1px solid #edf1f7;
+    }
+
+    .security-item-copy { flex: 1; min-width: 0; }
+
+    .security-item h3 {
+      margin: 0 0 6px;
+      color: #2c405b;
+      font-size: 14px;
+    }
+
+    .security-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .toggle {
+      position: relative;
+      width: 48px;
+      height: 27px;
+      flex-shrink: 0;
+      display: inline-block;
+    }
+
+    .toggle input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
+      border-radius: 30px;
+      background: #cbd5e1;
+      transition: .2s;
+    }
+
+    .slider::before {
+      content: "";
+      position: absolute;
+      width: 19px;
+      height: 19px;
+      left: 4px;
+      top: 4px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 1px 4px #0002;
+      transition: .2s;
+    }
+
+    .toggle input:checked + .slider { background: var(--blue); }
+
+    .toggle input:checked + .slider::before {
+      transform: translateX(21px);
+    }
+
+    .toggle input:focus-visible + .slider {
+      outline: 3px solid #80b5ff;
+      outline-offset: 3px;
+    }
+
+    .required-tag {
+      font-size: 10px;
+      padding: 5px 7px;
+      border-radius: 15px;
+      color: #166448;
+      background: #e3f7ed;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .security-button {
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 15px;
+      color: white;
+      background: var(--blue);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .security-button:hover { background: var(--blue-dark); }
+
+    .security-button.secondary {
+      color: var(--blue);
+      background: #edf3ff;
+      border: 1px solid #d7e5ff;
+    }
+
+    .security-button.secondary:hover { background: #e1ebff; }
+
+    .security-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 17px;
+    }
+
+    .security-notice {
+      margin-top: 24px;
+      border: 1px solid #f0d79b;
+      background: #fff8e6;
+      color: #70551b;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .security-notice strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .save-message {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: #e7f7ee;
+      border: 1px solid #b7e5ca;
+      color: #176541;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .save-message.show { display: block; }
+
+    .security-footer {
+      background: #10264a;
+      color: #e2ebfb;
+      text-align: center;
+      padding: 23px 15px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 760px) {
+      .security-grid { grid-template-columns: 1fr; }
+      .security-hero { padding: 35px 5%; }
+      .security-main { padding: 22px 13px 40px; }
+      .security-card { padding: 19px; }
+    }
+
+    @media (max-width: 400px) {
+      .security-item { gap: 9px; }
+      .security-item p { font-size: 11px; }
+      .security-card h2 { font-size: 17px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="security-hero">
+  <div class="security-hero-inner">
+    <span class="security-label">PRIVACY & PROTECTION</span>
+    <h1>Security & Consent</h1>
+    <p>
+      Understand how your information is handled and manage optional consent
+      preferences while using the MahaConnect service-discovery prototype.
+    </p>
+  </div>
+</header>
+
+<main class="security-main">
+  <div class="security-container">
+
+    <section class="security-status">
+      <div class="status-icon" aria-hidden="true">🛡️</div>
+      <div>
+        <h2>Your privacy matters</h2>
+        <p>
+          Review the information below before using a service. Optional
+          preferences on this page are a demonstration and are not connected
+          to a production consent-management system.
+        </p>
+      </div>
+    </section>
+
+    <div class="security-grid">
+
+      <!-- Consent preferences -->
+      <section class="security-card">
+        <div class="security-card-heading">
+          <div class="security-card-icon" aria-hidden="true">🤝</div>
+          <h2>Consent Preferences</h2>
+        </div>
+        <p>
+          Choose whether to allow the optional activities described below.
+          You can change these sample preferences at any time on this page.
+        </p>
+
+        <div class="security-item">
+          <div class="security-item-copy">
+            <h3>Essential functionality</h3>
+            <p>Basic features needed for the website to operate.</p>
+          </div>
+          <span class="required-tag">Essential</span>
+        </div>
+
+        <div class="security-item">
+          <div class="security-item-copy">
+            <h3>Personalised recommendations</h3>
+            <p>Allow the prototype to use entered preferences to demonstrate relevant service suggestions.</p>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="recommendationsConsent" aria-label="Personalised recommendations consent">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="security-item">
+          <div class="security-item-copy">
+            <h3>Service updates</h3>
+            <p>Optional updates about services, where a supported communication feature is available.</p>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="updatesConsent" aria-label="Service updates consent">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="security-item">
+          <div class="security-item-copy">
+            <h3>Optional analytics</h3>
+            <p>Allow anonymous usage analytics in a future supported implementation.</p>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="analyticsConsent" aria-label="Optional analytics consent">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="security-actions">
+          <button class="security-button" id="saveConsent" type="button">Save Preferences</button>
+          <button class="security-button secondary" id="resetConsent" type="button">Reset Choices</button>
+        </div>
+
+        <div class="save-message" id="consentMessage" role="status" aria-live="polite"></div>
+      </section>
+
+      <!-- Account safety -->
+      <section class="security-card">
+        <div class="security-card-heading">
+          <div class="security-card-icon" aria-hidden="true">🔐</div>
+          <h2>Account Safety</h2>
+        </div>
+        <p>
+          Good security practices help protect your account when using
+          government-related online services.
+        </p>
+
+        <div class="security-item">
+          <div class="security-item-copy">
+            <h3>Use a strong password</h3>
+            <p>Use a unique password and avoid sharing it with anyone.</p>
+          </div>
+          <span class="required-tag">Recommended</span>
+        </div>
+
+        <div class="security-item">
+          <div class="security-item-copy">
+            <h3>Verify login requests</h3>
+            <p>Never share an OTP with another person, even if they claim to be support staff.</p>
+          </div>
+          <span aria-hidden="true">✓</span>
+        </div>
+
+        <div class="security-item">
+          <div class="security-item-copy">
+            <h3>Protect your documents</h3>
+            <p>Upload identity and financial documents only to trusted, authorised services.</p>
+          </div>
+          <span aria-hidden="true">✓</span>
+        </div>
+
+        <div class="security-item">
+          <div class="security-item-copy">
+            <h3>Use a trusted device</h3>
+            <p>Sign out after using a shared computer and avoid saving passwords on it.</p>
+          </div>
+          <span aria-hidden="true">✓</span>
+        </div>
+      </section>
+
+      <!-- Data transparency -->
+      <section class="security-card">
+        <div class="security-card-heading">
+          <div class="security-card-icon" aria-hidden="true">📋</div>
+          <h2>Data Transparency</h2>
+        </div>
+        <p>
+          Understand what to consider before sharing information with
+          MahaConnect or an external service provider.
+        </p>
+
+        <div class="security-item">
+          <div class="security-item-copy">
+            <h3>Information you enter</h3>
+            <p>Only enter information needed for the task you are performing.</p>
+          </div>
+        </div>
+
+        <div class="security-item">
+          <div class="security-item-copy">
+            <h3>External government services</h3>
+            <p>Check the official department's privacy policy before submitting documents or personal data.</p>
+          </div>
+        </div>
+
+        <div class="security-item">
+          <div class="security-item-copy">
+            <h3>Data sharing</h3>
+            <p>Review what information is shared, with whom, and for what purpose before giving consent.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Privacy controls -->
+      <section class="security-card">
+        <div class="security-card-heading">
+          <div class="security-card-icon" aria-hidden="true">⚙️</div>
+          <h2>Privacy Controls</h2>
+        </div>
+        <p>
+          Review your sample choices or return to the main service directory.
+        </p>
+
+        <div class="security-item">
+          <div class="security-item-copy">
+            <h3>Review preferences</h3>
+            <p>See your current choices above and save changes when needed.</p>
+          </div>
+        </div>
+
+        <div class="security-item">
+          <div class="security-item-copy">
+            <h3>Clear saved demonstration choices</h3>
+            <p>Remove the consent preference sample saved by this page in your browser.</p>
+          </div>
+        </div>
+
+        <div class="security-actions">
+          <button class="security-button secondary" id="clearSaved" type="button">
+            Clear Saved Choices
+          </button>
+          <a class="security-button" href="services.html">Explore Services →</a>
+        </div>
+
+        <div class="save-message" id="privacyMessage" role="status" aria-live="polite"></div>
+      </section>
+
+    </div>
+
+    <aside class="security-notice">
+      <strong>Prototype notice</strong>
+      This page demonstrates the consent interface only. Its optional toggles
+      do not enforce permissions, enable or disable analytics, control notifications,
+      or change backend data sharing. Preferences are saved locally in this browser
+      only. Production use requires secure backend consent records, authentication,
+      access controls, a privacy policy and verified data-handling procedures.
+    </aside>
+
+  </div>
+</main>
+
+<footer class="security-footer">
+  © <span id="currentYear"></span> MahaConnect
+  <br>
+  One Platform. Connected Government Services.
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  const STORAGE_KEY = "mahaconnect_demo_consent_v1";
+
+  const controls = {
+    recommendations: document.getElementById("recommendationsConsent"),
+    updates: document.getElementById("updatesConsent"),
+    analytics: document.getElementById("analyticsConsent")
+  };
+
+  const consentMessage = document.getElementById("consentMessage");
+  const privacyMessage = document.getElementById("privacyMessage");
+
+  function showMessage(element, message) {
+    element.textContent = message;
+    element.classList.add("show");
+  }
+
+  function hideMessage(element) {
+    element.textContent = "";
+    element.classList.remove("show");
+  }
+
+  function readChoices() {
+    return {
+      recommendations: controls.recommendations.checked,
+      updates: controls.updates.checked,
+      analytics: controls.analytics.checked
+    };
+  }
+
+  function applyChoices(choices) {
+    controls.recommendations.checked = Boolean(choices.recommendations);
+    controls.updates.checked = Boolean(choices.updates);
+    controls.analytics.checked = Boolean(choices.analytics);
+  }
+
+  function loadChoices() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        applyChoices(parsed);
+      }
+    } catch (error) {
+      showMessage(
+        privacyMessage,
+        "Browser storage is unavailable. Your choices will remain on this page until it is closed or refreshed."
+      );
+    }
+  }
+
+  document.getElementById("saveConsent").addEventListener("click", function () {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(readChoices()));
+
+      showMessage(
+        consentMessage,
+        "Demonstration preferences saved in this browser. These choices do not change backend permissions or actual data sharing."
+      );
+      hideMessage(privacyMessage);
+    } catch (error) {
+      showMessage(
+        consentMessage,
+        "Browser storage is unavailable. Your choices are currently shown on this page but could not be saved."
+      );
+    }
+  });
+
+  document.getElementById("resetConsent").addEventListener("click", function () {
+    applyChoices({
+      recommendations: false,
+      updates: false,
+      analytics: false
+    });
+
+    hideMessage(consentMessage);
+    showMessage(
+      privacyMessage,
+      "Optional choices have been switched off on this page. Click Save Preferences if you also want to save these choices in this browser."
+    );
+  });
+
+  document.getElementById("clearSaved").addEventListener("click", function () {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+
+      applyChoices({
+        recommendations: false,
+        updates: false,
+        analytics: false
+      });
+
+      hideMessage(consentMessage);
+      showMessage(
+        privacyMessage,
+        "Saved demonstration preferences have been cleared from this browser."
+      );
+    } catch (error) {
+      showMessage(
+        privacyMessage,
+        "Browser storage is unavailable, so saved choices could not be cleared. You can still switch off the options shown above."
+      );
+    }
+  });
+
+  document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+  loadChoices();
+})();
+</script>
+
+<script src="language.js"></script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+
+/* =====================================
+   MAHACONNECT — RECOMMENDED SCHEMES
+   Colourful theme; existing logic stays
+===================================== */
+
+:root {
+    --scheme-navy: #153568;
+    --scheme-blue: #2458a6;
+    --scheme-teal: #087f8c;
+    --scheme-text: #1a2b49;
+    --scheme-muted: #65748b;
+    --scheme-border: #dce5f1;
+}
+
+body {
+    color: var(--scheme-text);
+    background:
+        radial-gradient(ellipse at top left, #e0edff, transparent 42%),
+        radial-gradient(ellipse at bottom right, #ddf7ef, transparent 38%),
+        #f3f6fc;
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.65;
+}
+
+/* Header */
+.navbar {
+    color: #fff;
+    background: linear-gradient(105deg, #122b54, #194d88 65%, #087f8c);
+    border-bottom: 4px solid #f0a83c;
+    box-shadow: 0 6px 22px rgba(21, 53, 104, 0.15);
+}
+
+.navbar .logo strong,
+.navbar .logo span,
+.navbar nav a {
+    color: #fff;
+}
+
+.navbar nav a {
+    border-radius: 9px;
+    transition: background 0.2s ease;
+}
+
+.navbar nav a:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Page layout */
+main,
+.schemes-page,
+.recommendations-page {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 36px 5%;
+}
+
+.schemes-container,
+.recommendations-container {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+}
+
+/* Headings */
+h1,
+h2,
+h3 {
+    color: var(--scheme-navy);
+    line-height: 1.4;
+}
+
+h1 {
+    font-size: clamp(28px, 3vw, 38px);
+}
+
+p {
+    color: var(--scheme-muted);
+}
+
+/* Scheme and recommendation grids */
+.scheme-grid,
+.schemes-grid,
+.recommendation-grid,
+.recommendations-grid,
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin: 25px 0 35px;
+}
+
+/* Cards */
+.scheme-card,
+.schemes-card,
+.recommendation-card,
+.scheme-item,
+.service-card {
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 24px;
+    overflow-wrap: anywhere;
+    background: linear-gradient(145deg, #fff, #eaf2ff);
+    border: 1px solid #cdddf5;
+    border-radius: 18px;
+    box-shadow: 0 7px 22px rgba(27, 55, 100, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Different card colours */
+.scheme-card:nth-child(3n + 1),
+.schemes-card:nth-child(3n + 1),
+.recommendation-card:nth-child(3n + 1),
+.scheme-item:nth-child(3n + 1),
+.service-card:nth-child(3n + 1) {
+    background: linear-gradient(145deg, #e2edff, #fff 90%);
+    border-color: #c8dcfb;
+}
+
+.scheme-card:nth-child(3n + 2),
+.schemes-card:nth-child(3n + 2),
+.recommendation-card:nth-child(3n + 2),
+.scheme-item:nth-child(3n + 2),
+.service-card:nth-child(3n + 2) {
+    background: linear-gradient(145deg, #e0f7ed, #fff 90%);
+    border-color: #c2e9d7;
+}
+
+.scheme-card:nth-child(3n),
+.schemes-card:nth-child(3n),
+.recommendation-card:nth-child(3n),
+.scheme-item:nth-child(3n),
+.service-card:nth-child(3n) {
+    background: linear-gradient(145deg, #f0e8ff, #fff 90%);
+    border-color: #d9ccf7;
+}
+
+/* Hover animation */
+.scheme-card:hover,
+.schemes-card:hover,
+.recommendation-card:hover,
+.scheme-item:hover,
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(27, 55, 100, 0.12);
+}
+
+/* Card titles */
+.scheme-card h2,
+.scheme-card h3,
+.schemes-card h2,
+.schemes-card h3,
+.recommendation-card h2,
+.recommendation-card h3,
+.scheme-item h2,
+.scheme-item h3,
+.service-card h2,
+.service-card h3 {
+    margin-top: 0;
+    color: #20477f;
+    font-size: 19px;
+}
+
+/* Links */
+.scheme-card a,
+.schemes-card a,
+.recommendation-card a,
+.scheme-item a,
+.service-card a {
+    color: #2458a6;
+    font-weight: 650;
+    text-underline-offset: 3px;
+}
+
+.scheme-card a:hover,
+.schemes-card a:hover,
+.recommendation-card a:hover,
+.scheme-item a:hover,
+.service-card a:hover {
+    color: #087f8c;
+}
+
+/* Buttons */
+button,
+input[type="submit"],
+.scheme-button,
+.recommendation-button {
+    padding: 11px 18px;
+    color: #fff;
+    background: linear-gradient(110deg, #2458a6, #087f8c);
+    border: 0;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover,
+input[type="submit"]:hover,
+.scheme-button:hover,
+.recommendation-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 7px 17px rgba(36, 88, 166, 0.20);
+}
+
+/* Filters and search */
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+select,
+textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 11px 13px;
+    color: var(--scheme-text);
+    background: #fff;
+    border: 1px solid #cdd9ea;
+    border-radius: 10px;
+    font-family: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #4785df;
+    box-shadow: 0 0 0 4px rgba(71, 133, 223, 0.13);
+}
+
+/* Empty / loading messages */
+.empty-message,
+.no-results,
+.loading-message {
+    padding: 25px;
+    color: var(--scheme-muted);
+    text-align: center;
+    background: #fff;
+    border: 1px dashed #cbd9ec;
+    border-radius: 14px;
+}
+
+/* Responsive tablet */
+@media (max-width: 900px) {
+    main,
+    .schemes-page,
+    .recommendations-page {
+        padding: 28px 4%;
+    }
+
+    .scheme-grid,
+    .schemes-grid,
+    .recommendation-grid,
+    .recommendations-grid,
+    .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+}
+
+/* Responsive mobile */
+@media (max-width: 600px) {
+    main,
+    .schemes-page,
+    .recommendations-page {
+        padding: 22px 15px;
+    }
+
+    .scheme-grid,
+    .schemes-grid,
+    .recommendation-grid,
+    .recommendations-grid,
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .scheme-card,
+    .schemes-card,
+    .recommendation-card,
+    .scheme-item,
+    .service-card {
+        padding: 20px;
+    }
+}

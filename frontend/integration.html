@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MahaConnect | Government Service Integration</title>
+<meta name="description" content="Learn how the MahaConnect prototype demonstrates connecting government service information through a unified digital platform.">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .integration-page {
+            padding: 55px 7%;
+            background: #f7faff;
+            min-height: 85vh;
+        }
+
+        .integration-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .integration-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .integration-header span {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .integration-header h1 {
+            color: #0f172a;
+            font-size: 36px;
+            margin: 10px 0;
+        }
+
+        .integration-header p {
+            color: #64748b;
+            max-width: 760px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+        .architecture-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+        }
+
+        .architecture-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .architecture-title h2 {
+            color: #0f172a;
+            margin-bottom: 7px;
+        }
+
+        .architecture-title p {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .flow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .system-box {
+            width: 170px;
+            min-height: 125px;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 1px solid #dbeafe;
+            background: #f8fbff;
+            border-radius: 13px;
+            text-align: center;
+        }
+
+        .system-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .system-box h3 {
+            color: #0f172a;
+            font-size: 15px;
+            margin: 0 0 6px;
+        }
+
+        .system-box p {
+            color: #64748b;
+            font-size: 11px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .central-box {
+            background: #2563eb;
+            border-color: #2563eb;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+        }
+
+        .central-box h3,
+        .central-box p {
+            color: white;
+        }
+
+        .flow-arrow {
+            color: #2563eb;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .department-section {
+            margin-top: 40px;
+        }
+
+        .department-section h2 {
+            color: #0f172a;
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .department-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .department-card {
+            border: 1px solid #e2e8f0;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.2s ease;
+        }
+
+        .department-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+        }
+
+        .department-card .icon {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .department-card strong {
+            display: block;
+            color: #334155;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .department-card p {
+            color: #64748b;
+            font-size: 12px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .integration-note {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+            text-align: center;
+        }
+
+        .integration-note h3 {
+            color: #1d4ed8;
+            font-size: 16px;
+            margin: 0 0 7px;
+        }
+
+        .integration-note p {
+            color: #475569;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        @media (max-width: 850px) {
+            .department-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media (max-width: 550px) {
+            .integration-page {
+                padding: 35px 5%;
+            }
+
+            .architecture-card {
+                padding: 22px;
+            }
+
+            .integration-header h1 {
+                font-size: 28px;
+            }
+
+            .department-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .system-box {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            Maha <span>Connect</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="services.html">Services</a>
+            <a href="tracking.html">Track Application</a>
+            <a href="schemes.html">Schemes</a>
+            <a href="security.html">Security</a>
+            <a href="integration.html">Integration</a>
+        </div>
+    </nav>
+
+
+    <main class="integration-page">
+
+        <div class="integration-container">
+
+            <div class="integration-header">
+
+                <span>CONNECTED GOVERNMENT SERVICES</span>
+
+                <h1>
+                    Government Service Integration
+                </h1>
+
+                <p>
+                    MahaConnect acts as a unified integration layer that can
+                    connect authorised government department systems through
+                    secure APIs and web services.
+                </p>
+
+            </div>
+
+
+            <section class="architecture-card">
+
+                <div class="architecture-title">
+
+                    <h2>
+                        How MahaConnect Connects Systems
+                    </h2>
+
+                    <p>
+                        A proposed architecture for interoperable government services
+                    </p>
+
+                </div>
+
+
+                <div class="flow-row">
+
+                    <div class="system-box">
+
+                        <div class="system-icon">👤</div>
+
+                        <h3>Citizen</h3>
+
+                        <p>
+                            Selects a service and submits an application
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-arrow">→</div>
+
+
+                    <div class="system-box central-box">
+
+                        <div class="system-icon">🔗</div>
+
+                        <h3>MahaConnect</h3>
+
+                        <p>
+                            Unified platform for government services
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-arrow">→</div>
+
+
+                    <div class="system-box central-box">
+
+                        <div class="system-icon">⚙️</div>
+
+                        <h3>Integration Layer</h3>
+
+                        <p>
+                            Routes requests through authorised APIs
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-arrow">→</div>
+
+
+                    <div class="system-box">
+
+                        <div class="system-icon">🏛️</div>
+
+                        <h3>Government Systems</h3>
+
+                        <p>
+                            Relevant department processes the request
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div style="
+                    text-align:center;
+                    margin-top:25px;
+                    color:#64748b;
+                    font-size:13px;
+                ">
+
+                    Government response / status
+                    <strong style="color:#2563eb;">→</strong>
+                    MahaConnect
+                    <strong style="color:#2563eb;">→</strong>
+                    Citizen
+
+                </div>
+
+
+                <div class="department-section">
+
+                    <h2>
+                        Example Government Service Areas
+                    </h2>
+
+                    <div class="department-grid">
+
+                        <div class="department-card">
+
+                            <div class="icon">📄</div>
+
+                            <strong>Revenue</strong>
+
+                            <p>
+                                Income and community certificate services
+                            </p>
+
+                        </div>
+
+
+                        <div class="department-card">
+
+                            <div class="icon">🎓</div>
+
+                            <strong>Education</strong>
+
+                            <p>
+                                Scholarships and education services
+                            </p>
+
+                        </div>
+
+
+                        <div class="department-card">
+
+                            <div class="icon">🤝</div>
+
+                            <strong>Welfare</strong>
+
+                            <p>
+                                Welfare schemes and citizen benefits
+                            </p>
+
+                        </div>
+
+
+                        <div class="department-card">
+
+                            <div class="icon">💼</div>
+
+                            <strong>Employment</strong>
+
+                            <p>
+                                Employment and career-related services
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="integration-note">
+
+                    <h3>
+                        Secure API-Based Integration
+                    </h3>
+
+                    <p>
+                        The proposed architecture enables authorised government
+                        systems to exchange application data and status updates
+                        through secure APIs or web services, reducing fragmented
+                        service delivery and repeated data entry.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <script src="language.js"></script>
+</body>

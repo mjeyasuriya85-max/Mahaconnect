@@ -1,0 +1,762 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Wallet | MahaConnect</title>
+
+  <style>
+    :root {
+      --primary: #2457c5;
+      --dark: #183b86;
+      --background: #f4f7fc;
+      --text: #202b40;
+      --muted: #68758b;
+      --border: #e1e7f0;
+      --white: #ffffff;
+      --green: #166534;
+      --orange: #92400e;
+      --red: #991b1b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+    }
+
+    .navbar {
+      background: white;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      color: var(--primary);
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+    .brand span {
+      color: var(--text);
+    }
+
+    .nav-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 30px auto;
+    }
+
+    .heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(26px, 4vw, 34px);
+    }
+
+    h2 {
+      font-size: 19px;
+      margin: 0 0 16px;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    .muted {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .badge {
+      padding: 8px 13px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #fff0d9;
+      color: var(--orange);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 5px 20px rgba(30, 55, 95, 0.04);
+      min-width: 0;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .stat-number {
+      font-size: 29px;
+      font-weight: 750;
+      margin-top: 10px;
+    }
+
+    .progress-track {
+      height: 8px;
+      background: #e9edf5;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 13px 0 8px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: #168354;
+      transition: width 0.2s;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .check-item {
+      display: flex;
+      gap: 11px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .check-item:last-child {
+      border-bottom: 0;
+    }
+
+    input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: var(--primary);
+    }
+
+    .check-item strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .check-item small {
+      display: block;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: 650;
+      font-size: 14px;
+      margin-bottom: 7px;
+    }
+
+    .field input,
+    .field select,
+    .search-input {
+      width: 100%;
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid #cfd8e6;
+      border-radius: 9px;
+      background: white;
+      color: var(--text);
+      font: inherit;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .search-input:focus {
+      outline: 2px solid #c8d8ff;
+      border-color: var(--primary);
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 9px;
+      padding: 12px 16px;
+      background: var(--primary);
+      color: white;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 650;
+    }
+
+    .btn:hover {
+      background: var(--dark);
+    }
+
+    .btn-secondary {
+      background: #eaf0ff;
+      color: var(--dark);
+    }
+
+    .btn-secondary:hover {
+      background: #dce6ff;
+    }
+
+    .notice {
+      background: #fff8e9;
+      border: 1px solid #f1dfb7;
+      color: #7a4b08;
+      padding: 13px;
+      border-radius: 10px;
+      margin-top: 16px;
+      font-size: 13px;
+    }
+
+    .documents-section {
+      margin-top: 22px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .toolbar h2 {
+      margin: 0;
+    }
+
+    .search-input {
+      max-width: 300px;
+    }
+
+    .document-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .document-row:last-child {
+      border-bottom: 0;
+    }
+
+    .document-title {
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .document-category {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .document-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .status-pending {
+      background: #fff0d9;
+      color: var(--orange);
+    }
+
+    .status-verified {
+      background: #dcfce7;
+      color: var(--green);
+    }
+
+    .status-rejected {
+      background: #fee2e2;
+      color: var(--red);
+    }
+
+    .status-select {
+      max-width: 145px;
+      padding: 8px;
+      border: 1px solid #cfd8e6;
+      border-radius: 8px;
+      background: white;
+      font: inherit;
+      font-size: 13px;
+    }
+
+    .delete-btn {
+      border: 1px solid #fecaca;
+      color: var(--red);
+      background: white;
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+    }
+
+    .empty-state {
+      padding: 24px 0;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 15px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 760px) {
+      .stats,
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      .container {
+        margin-top: 22px;
+      }
+
+      .navbar {
+        padding: 15px 4%;
+      }
+
+      .document-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .document-actions {
+        width: 100%;
+      }
+
+      .search-input {
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="brand">MC <span>MahaConnect</span></div>
+    <div class="nav-label">Citizen Portal · Document Wallet</div>
+  </header>
+
+  <main class="container">
+    <section class="heading">
+      <div>
+        <h1>Document Wallet</h1>
+        <p class="muted">
+          Manage your document checklist and demo statuses in one place.
+        </p>
+      </div>
+      <span class="badge">DEMO MODE</span>
+    </section>
+
+    <section class="stats">
+      <div class="card">
+        <div class="stat-label">Demo Entries</div>
+        <div class="stat-number" id="totalCount">0</div>
+      </div>
+
+      <div class="card">
+        <div class="stat-label">Verified Entries</div>
+        <div class="stat-number" id="verifiedCount">0</div>
+      </div>
+
+      <div class="card">
+        <div class="stat-label">Checklist Progress</div>
+        <div class="stat-number" id="progressPercent">0%</div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="muted" id="checklistMessage">0 of 4 completed</p>
+      </div>
+    </section>
+
+    <section class="layout">
+      <div class="card">
+        <h2>Required Documents</h2>
+        <p class="muted">Tick items to track your checklist.</p>
+
+        <label class="check-item">
+          <input type="checkbox" class="required-check">
+          <span>
+            <strong>Income Certificate</strong>
+            <small>For applicable income-based schemes</small>
+          </span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" class="required-check">
+          <span>
+            <strong>Community Certificate</strong>
+            <small>Where the scheme requires it</small>
+          </span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" class="required-check">
+          <span>
+            <strong>Educational Certificate</strong>
+            <small>For applicable education schemes</small>
+          </span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" class="required-check">
+          <span>
+            <strong>Residence Certificate</strong>
+            <small>Where residence proof is required</small>
+          </span>
+        </label>
+      </div>
+
+      <div class="card">
+        <h2>Add a Demo Document</h2>
+        <p class="muted">
+          Add fictional document details for testing the interface.
+        </p>
+
+        <form id="documentForm">
+          <div class="field">
+            <label for="docCategory">Document Category</label>
+            <select id="docCategory" required>
+              <option value="">Select category</option>
+              <option value="Education">Education</option>
+              <option value="Income">Income</option>
+              <option value="Community">Community</option>
+              <option value="Residence">Residence</option>
+              <option value="Employment">Employment</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="docName">Document Name</label>
+            <input
+              id="docName"
+              type="text"
+              maxlength="80"
+              placeholder="Example: Sample Education Certificate"
+              autocomplete="off"
+              required
+            >
+          </div>
+
+          <button class="btn" type="submit">+ Add Demo Document</button>
+          <button class="btn btn-secondary" type="reset">Clear Form</button>
+        </form>
+
+        <div class="notice">
+          <strong>Privacy warning:</strong> Demo only. Do not enter real
+          Aadhaar/PAN numbers, bank details, or confidential documents.
+          No files are uploaded. Demo entries are held in page memory and
+          will reset when the page is reloaded.
+        </div>
+      </div>
+    </section>
+
+    <section class="card documents-section">
+      <div class="toolbar">
+        <h2>My Documents</h2>
+        <input
+          id="searchDocuments"
+          class="search-input"
+          type="search"
+          placeholder="Search documents..."
+          aria-label="Search demo documents"
+        >
+      </div>
+
+      <div id="documentList" aria-live="polite">
+        <div class="empty-state">No demo documents added yet.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    MahaConnect · One Platform. Connected Government Services.
+    <br>
+    Demo interface only — no real document upload or verification.
+  </footer>
+
+  <script>
+    // Frontend demo: no backend calls and no document file storage.
+  let demoDocuments = [];
+    let nextDocumentId = 1;
+
+    const form = document.getElementById("documentForm");
+    const categoryInput = document.getElementById("docCategory");
+    const nameInput = document.getElementById("docName");
+    const searchInput = document.getElementById("searchDocuments");
+    const documentList = document.getElementById("documentList");
+    async function loadDocuments() {
+  try {
+    const response = await fetch(
+      "http://localhost:5000/api/wallet-documents"
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to load documents");
+    }
+
+    demoDocuments = await response.json();
+    renderDocuments();
+  } catch (error) {
+    console.error("Load documents error:", error);
+    alert("Backend running-la irukka nu check pannunga.");
+  }
+}
+
+    function updateChecklist() {
+      const checkboxes = document.querySelectorAll(".required-check");
+      const completed = [...checkboxes].filter(item => item.checked).length;
+      const total = checkboxes.length;
+      const percentage = total
+        ? Math.round((completed / total) * 100)
+        : 0;
+
+      document.getElementById("progressPercent").textContent =
+        percentage + "%";
+
+      document.getElementById("progressFill").style.width =
+        percentage + "%";
+
+      document.getElementById("checklistMessage").textContent =
+        completed + " of " + total + " completed";
+    }
+
+    function getStatusClass(status) {
+      if (status === "Verified") return "status-verified";
+      if (status === "Rejected") return "status-rejected";
+      return "status-pending";
+    }
+
+    function renderDocuments() {
+      const query = searchInput.value.trim().toLowerCase();
+
+      const filtered = demoDocuments.filter(item =>
+        item.name.toLowerCase().includes(query) ||
+        item.category.toLowerCase().includes(query) ||
+        item.status.toLowerCase().includes(query)
+      );
+
+      document.getElementById("totalCount").textContent =
+        demoDocuments.length;
+
+      document.getElementById("verifiedCount").textContent =
+        demoDocuments.filter(item => item.status === "Verified").length;
+
+      documentList.replaceChildren();
+
+      if (filtered.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent = demoDocuments.length
+          ? "No matching documents found."
+          : "No demo documents added yet.";
+
+        documentList.appendChild(empty);
+        return;
+      }
+
+      filtered.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "document-row";
+
+        const details = document.createElement("div");
+
+        const title = document.createElement("div");
+        title.className = "document-title";
+        title.textContent = item.name;
+
+        const category = document.createElement("div");
+        category.className = "document-category";
+        category.textContent = "Category: " + item.category;
+
+        details.append(title, category);
+
+        const actions = document.createElement("div");
+        actions.className = "document-actions";
+
+        const badge = document.createElement("span");
+        badge.className = "status-badge " + getStatusClass(item.status);
+        badge.textContent = item.status;
+
+        const statusSelect = document.createElement("select");
+        statusSelect.className = "status-select";
+        statusSelect.setAttribute("aria-label", "Change status for " + item.name);
+
+        ["Pending", "Verified", "Rejected"].forEach(value => {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = value;
+          statusSelect.appendChild(option);
+        });
+
+        statusSelect.value = item.status;
+
+        statusSelect.addEventListener("change", () => {
+          item.status = statusSelect.value;
+          renderDocuments();
+        });
+
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.className = "delete-btn";
+        deleteButton.textContent = "Remove";
+        deleteButton.setAttribute("aria-label", "Remove " + item.name);
+
+        deleteButton.addEventListener("click", () => {
+          const index = demoDocuments.findIndex(
+            document => document.id === item.id
+          );
+
+          if (index !== -1) {
+            demoDocuments.splice(index, 1);
+            renderDocuments();
+          }
+        });
+
+        actions.append(badge, statusSelect, deleteButton);
+        row.append(details, actions);
+        documentList.appendChild(row);
+      });
+    }
+
+    document.querySelectorAll(".required-check").forEach(checkbox => {
+      checkbox.addEventListener("change", updateChecklist);
+    });
+form.addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const category = categoryInput.value;
+  const name = nameInput.value.trim();
+
+  if (!category || !name) {
+    alert("Please select a category and enter a demo document name.");
+    return;
+  }
+
+  const sensitivePattern =
+    /\b\d{12}\b|\b[A-Z]{5}\d{4}[A-Z]\b|\b\d{9,18}\b/i;
+
+  if (sensitivePattern.test(name)) {
+    alert("Please use a fictional sample name, not a personal ID number.");
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      "http://localhost:5000/api/wallet-documents",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ category, name })
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Document save failed");
+    }
+
+    const savedDocument = await response.json();
+    demoDocuments.unshift(savedDocument);
+
+    form.reset();
+    renderDocuments();
+  } catch (error) {
+    console.error("Document save error:", error);
+    alert("Document save aagala. Backend running-la irukka nu check pannunga.");
+  }
+});
+   
+      event.preventDefault();
+
+      const category = categoryInput.value;
+      const name = nameInput.value.trim();
+
+      if (!category || !name) {
+        alert("Please select a category and enter a demo document name.");
+        return;
+      }
+
+      // Reject common ID-number patterns; only use fictional demo names.
+      const sensitivePattern =
+        /\b\d{12}\b|\b[A-Z]{5}\d{4}[A-Z]\b|\b\d{9,18}\b/i;
+
+      if (sensitivePattern.test(name)) {
+        alert("Please use a fictional sample name, not a personal ID number.");
+        return;
+      }
+
+      demoDocuments.push({
+        id: nextDocumentId++,
+        category: category,
+        name: name,
+        status: "Pending"
+      });
+
+      form.reset();
+      renderDocuments();
+    ;
+
+    searchInput.addEventListener("input", renderDocuments);
+
+    updateChecklist();
+   loadDocuments();
+
+  </script>
+</body>
+</html>

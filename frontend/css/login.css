@@ -1,0 +1,474 @@
+/* ===== MahaConnect Premium Login Background ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+    overflow-x: hidden;
+    background:
+        radial-gradient(ellipse at 10% 15%, rgba(59, 130, 246, 0.10), transparent 40%),
+        radial-gradient(ellipse at 90% 85%, rgba(20, 184, 166, 0.09), transparent 38%),
+        linear-gradient(135deg, #f8fbff 0%, #edf5ff 50%, #f8fbff 100%);
+}
+
+/* Soft government-inspired watermark */
+body::before {
+    content: "MAHACONNECT";
+    position: fixed;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-12deg);
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(3rem, 9vw, 8rem);
+    font-weight: 800;
+    letter-spacing: 12px;
+    color: rgba(24, 65, 125, 0.035);
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Keep login content above background watermark */
+.login-header,
+.login-page,
+footer {
+    position: relative;
+    z-index: 1;
+}
+
+/* Premium brand typography */
+.logo strong {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    color: #123777;
+}
+
+.logo small {
+    font-family: 'DM Sans', sans-serif;
+    color: #647da4;
+    letter-spacing: 1.2px;
+}
+
+/* Center login box */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 20px 55px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 510px;
+    margin: 0 auto;
+    padding: 38px;
+    border: 1px solid rgba(147, 197, 253, 0.65);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow:
+        0 24px 70px rgba(30, 64, 125, 0.10),
+        0 4px 15px rgba(37, 99, 235, 0.05);
+    backdrop-filter: blur(12px);
+}
+
+/* Heading styles */
+.login-card h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -1.2px;
+    color: #123777;
+    text-align: center;
+}
+
+.login-card .section-label {
+    color: #1769d2;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+}
+
+.login-description {
+    color: #627695;
+    line-height: 1.8;
+    text-align: center;
+}
+
+/* Form fields */
+.login-card input:not([type="checkbox"]) {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d8e5f5;
+    border-radius: 12px;
+    padding: 14px 15px;
+    background: #fbfdff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-card input:not([type="checkbox"]):focus {
+    outline: none;
+    border-color: #3984ed;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.11);
+}
+
+.login-card label {
+    font-weight: 600;
+    color: #233d66;
+}
+
+.login-card .form-group small {
+    color: #788ba8;
+    line-height: 1.6;
+}
+
+/* Main action button */
+.login-submit {
+    width: 100%;
+    min-height: 52px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(110deg, #0878ed, #174ee5);
+    color: white;
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.20);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.login-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(37, 99, 235, 0.25);
+}
+
+.login-submit:disabled {
+    opacity: 0.65;
+    cursor: wait;
+    transform: none;
+}
+
+/* Links */
+.login-header a,
+.form-options a {
+    color: #0969da;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-header a:hover,
+.form-options a:hover {
+    text-decoration: underline;
+}
+
+/* Security panel */
+.security-note {
+    padding: 15px;
+    border: 1px solid #d8f3e8;
+    border-radius: 14px;
+    background: linear-gradient(120deg, #f0fdf8, #f4fbff);
+}
+
+.security-note p {
+    color: #4f6c79;
+    line-height: 1.7;
+}
+
+/* Hide the unwanted right-side promotional content */
+.login-info {
+    display: none !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    .login-page {
+        padding: 20px 14px 35px;
+    }
+
+    .login-card {
+        padding: 25px 20px;
+        border-radius: 18px;
+    }
+
+    body::before {
+        letter-spacing: 5px;
+        font-size: 2.7rem;
+    }
+
+    .login-header {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+/* ===== MahaConnect Login Layout Fix ===== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "DM Sans", "Segoe UI", sans-serif;
+    color: #19365f;
+}
+
+/* Header alignment */
+.login-header {
+    width: 100%;
+    min-height: 82px;
+    padding: 18px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1746a2, #0878ed);
+    color: white;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.logo strong {
+    display: block;
+    font-size: 25px;
+    line-height: 1.3;
+    letter-spacing: -0.7px;
+}
+
+.logo small {
+    display: block;
+    margin-top: 3px;
+    font-size: 13px;
+}
+
+.login-header > a {
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+/* Center the login card */
+.login-page {
+    width: 100%;
+    min-height: calc(100vh - 145px);
+    padding: 25px 20px 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 510px;
+    margin: 0 auto;
+    padding: 38px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid #c8dcff;
+    box-shadow: 0 20px 60px rgba(30, 64, 125, 0.12);
+}
+
+/* Readable headings */
+.login-card h1 {
+    font-size: 34px;
+    line-height: 1.25;
+    text-align: center;
+    margin: 18px 0;
+    color: #153a7b;
+}
+
+.login-card .section-label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.login-description {
+    font-size: 15px;
+    line-height: 1.8;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Form spacing and readable fields */
+.login-card .form-group {
+    margin-bottom: 17px;
+}
+
+.login-card .form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.login-card input:not([type="checkbox"]) {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    font-size: 15px;
+    border: 1px solid #d2e0f5;
+    border-radius: 10px;
+}
+
+.login-card .form-group small {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.form-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 18px 0;
+    font-size: 14px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.form-options a {
+    white-space: nowrap;
+}
+
+/* Main button */
+.login-submit {
+    width: 100%;
+    min-height: 52px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 11px;
+    margin-top: 5px;
+}
+
+/* Security and accessibility */
+.login-divider {
+    margin: 24px 0 15px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.sign-language-help button,
+#changeDetails,
+#togglePassword {
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.sign-language-help button {
+    padding: 12px 15px;
+    border: none;
+    border-radius: 10px;
+    background: #edf5ff;
+    color: #145bc2;
+}
+
+.security-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 12px;
+}
+
+.security-note p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* Hide the unwanted right-side panel */
+.login-info {
+    display: none !important;
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #6b7f9e;
+}
+
+/* Mobile screens */
+@media (max-width: 600px) {
+    .login-header {
+        padding: 14px 18px;
+        min-height: 70px;
+    }
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .logo strong {
+        font-size: 19px;
+    }
+
+    .logo small {
+        font-size: 11px;
+    }
+
+    .login-header > a {
+        font-size: 12px;
+    }
+
+    .login-page {
+        min-height: auto;
+        padding: 20px 14px 30px;
+    }
+
+    .login-card {
+        padding: 25px 20px;
+        border-radius: 17px;
+    }
+
+    .login-card h1 {
+        font-size: 28px;
+    }
+
+    .form-options {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MahaConnect | Government Service Assistant</title>
+<meta name="description" content="Explore the MahaConnect virtual assistant prototype for information about government services, schemes, and application guidance.">
+    <link rel="stylesheet" href="css/chatbot.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="chat-header">
+
+        <div class="logo">
+
+            <span class="logo-icon">MC</span>
+
+            <div>
+                <strong>MahaConnect</strong>
+                <small>Digital Services</small>
+            </div>
+
+        </div>
+
+        <a href="dashboard.html">
+            ← Dashboard
+        </a>
+
+    </header>
+
+
+    <!-- CHATBOT -->
+
+    <main class="chat-page">
+
+        <div class="chat-card">
+
+            <!-- CHAT HEADER -->
+
+            <div class="bot-header">
+
+                <div class="bot-avatar">
+                    🤖
+                </div>
+
+                <div>
+                    <h2>Government Service Assistant</h2>
+                    <span class="online">
+                        ● Online
+                    </span>
+                </div>
+
+            </div>
+
+
+            <!-- CHAT AREA -->
+
+            <div
+                class="chat-messages"
+                id="chatMessages"
+            >
+
+                <div class="message bot-message">
+
+                    <div class="avatar">
+                        🤖
+                    </div>
+
+                    <div class="message-content">
+
+                        <p>
+                            Hello! 👋 I'm the MahaConnect
+                            Government Service Assistant.
+                        </p>
+
+                        <p>
+                            I can help you apply for government
+                            services and understand the required
+                            documents.
+                        </p>
+
+                        <p>
+                            What service do you need?
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SERVICE BUTTONS -->
+
+                <div
+                    class="quick-options"
+                    id="serviceOptions"
+                >
+
+                    <button onclick="selectService('Income Certificate')">
+                        💰 Income Certificate
+                    </button>
+
+                    <button onclick="selectService('Community Certificate')">
+                        📄 Community Certificate
+                    </button>
+
+                    <button onclick="selectService('Scholarship')">
+                        🎓 Scholarship
+                    </button>
+
+                    <button onclick="selectService('Employment Service')">
+                        💼 Employment Service
+                    </button>
+
+                    <button onclick="selectService('Pension')">
+                        👴 Pension
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- INPUT AREA -->
+
+            <div class="chat-input-area">
+
+    <button
+        type="button"
+        id="voiceButton"
+        class="voice-button"
+        onclick="startVoiceInput()"
+    >
+        🎙️
+    </button>
+
+    <input
+        type="text"
+        id="userInput"
+        placeholder="Type or speak your message..."
+        autocomplete="off"
+    >
+
+    <button
+        type="button"
+        onclick="sendMessage()"
+        class="send-button"
+    >
+        ➤
+    </button>
+
+</div>
+
+
+            <!-- FOOTER -->
+
+            <div class="chat-footer">
+
+                <span>
+                    🔒 Your information is handled securely.
+                </span>
+
+                <button onclick="restartChat()">
+                    ↻ Restart
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script src="js/chatbot.js"></script>
+
+    <script src="language.js"></script>
+</body>
+
+</html>

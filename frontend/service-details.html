@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="MahaConnect service information, eligibility, documents and application guidance.">
+<title>Service Details | MahaConnect</title>
+
+<style>
+*{box-sizing:border-box}
+:root{
+  --navy:#12366b;
+  --blue:#2164c5;
+  --light:#edf4ff;
+  --text:#203653;
+  --muted:#63738a;
+  --border:#dce5f1;
+  --green:#18794e;
+}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:#f3f6fb;
+  line-height:1.65;
+}
+a{text-decoration:none}
+header{
+  background:#fff;
+  padding:17px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  border-bottom:1px solid var(--border);
+}
+.brand{font-size:23px;font-weight:800;color:var(--blue)}
+.back{font-weight:700;color:var(--blue)}
+.hero{
+  background:linear-gradient(120deg,#102b59,#2164c5);
+  color:#fff;
+  padding:45px 7%;
+}
+.hero-inner,main{max-width:1100px;margin:auto}
+.label{
+  display:inline-block;
+  border:1px solid #ffffff80;
+  border-radius:30px;
+  padding:5px 13px;
+  font-size:12px;
+  letter-spacing:.5px;
+}
+h1{font-size:clamp(29px,5vw,43px);line-height:1.2;margin:15px 0 10px}
+.hero p{color:#e1ebff;max-width:750px}
+main{padding:30px 20px 45px}
+.intro,.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:24px;
+  box-shadow:0 5px 18px #17305208;
+}
+.intro{margin-bottom:20px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+h2{font-size:21px;margin:0 0 13px;color:var(--navy)}
+h3{font-size:16px;margin-bottom:6px}
+ul,ol{padding-left:23px}
+li{margin:9px 0}
+.btn{
+  display:inline-block;
+  border:0;
+  border-radius:8px;
+  padding:11px 16px;
+  background:var(--blue);
+  color:white;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+}
+.secondary{background:var(--light);color:var(--blue)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:17px}
+.notice{
+  margin-top:20px;
+  padding:16px;
+  border:1px solid #f1d99a;
+  border-radius:10px;
+  background:#fff7df;
+  color:#6d5010;
+  font-size:13px;
+}
+.faq-item{padding:13px 0;border-bottom:1px solid #e6ebf3}
+.faq-item:last-child{border-bottom:0}
+.faq-item strong{display:block;color:var(--navy);margin-bottom:4px}
+.assistant{margin-top:20px}
+.assistant form{display:flex;gap:10px;flex-wrap:wrap}
+input{
+  flex:1;
+  min-width:180px;
+  padding:12px;
+  border:1px solid #cbd7e7;
+  border-radius:8px;
+  font:inherit;
+}
+#chatAnswer{
+  margin-top:15px;
+  padding:15px;
+  background:#edf4ff;
+  border-radius:10px;
+  white-space:pre-wrap;
+}
+.small{font-size:13px;color:var(--muted)}
+footer{
+  background:#10264a;
+  color:#e4edff;
+  text-align:center;
+  padding:23px;
+  font-size:13px;
+}
+@media(max-width:700px){
+  header{padding:15px 5%}
+  .brand{font-size:20px}
+  .hero{padding:35px 5%}
+  .grid{grid-template-columns:1fr}
+  main{padding:22px 14px 35px}
+  .intro,.card{padding:19px}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <a class="brand" href="index.html">MahaConnect</a>
+  <a class="back" href="services.html">← All Services</a>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="label" id="serviceCategory">SERVICE INFORMATION</span>
+    <h1 id="serviceTitle">Loading service...</h1>
+    <p id="serviceDescription">Service information and application guidance.</p>
+  </div>
+</section>
+
+<main>
+  <section class="intro">
+    <h2>About This Service</h2>
+    <p id="serviceAbout"></p>
+    <div class="actions">
+      <a class="btn" id="applicationLink" href="application.html">Continue to Application</a>
+      <a class="btn secondary" href="services.html">Explore Other Services</a>
+    </div>
+    <p class="small">MahaConnect provides guidance. It does not itself issue certificates or submit applications to government departments.</p>
+  </section>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Eligibility Guidance</h2>
+      <ul id="eligibilityList"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Required Documents</h2>
+      <ul id="documentsList"></ul>
+      <p class="small">Use the relevant authority's current checklist before applying.</p>
+    </section>
+
+    <section class="card">
+      <h2>Application Steps</h2>
+      <ol id="stepsList"></ol>
+    </section>
+
+    <section class="card">
+      <h2>Frequently Asked Questions</h2>
+      <div id="faqList"></div>
+    </section>
+  </div>
+
+  <section class="card assistant">
+    <h2>Service Help Assistant</h2>
+    <p>Ask about documents, eligibility, application steps, fees or status.</p>
+    <form id="helpForm">
+      <input id="question" type="text" required maxlength="300"
+        placeholder="Example: What documents do I need?">
+      <button class="btn" type="submit">Ask Question</button>
+    </form>
+    <div id="chatAnswer" role="status" aria-live="polite" hidden></div>
+    <p class="small">This is a local rule-based demo assistant, not a connected AI or official helpdesk.</p>
+  </section>
+
+  <div class="notice">
+    <strong>Important:</strong> MahaConnect is a service-discovery prototype.
+    It does not issue certificates, approve benefits or submit applications to
+    government systems. Document requirements, eligibility, fees and processing
+    times can vary by state, scheme and issuing authority. Verify the latest
+    information on the relevant official portal before applying.
+  </div>
+</main>
+
+<footer>
+  © <span id="year"></span> MahaConnect · Service Discovery Prototype
+</footer>
+
+<script>
+"use strict";
+
+const services = {
+  scholarship: {
+    title: "Student Scholarships",
+    category: "Education",
+    description: "Explore scholarship schemes and education financial assistance.",
+    about: "Scholarship schemes may help eligible students meet education-related expenses. Eligibility, amounts and application dates vary by scheme.",
+    eligibility: [
+      "Must satisfy the selected scholarship's eligibility rules.",
+      "Course, institution, academic marks or attendance conditions may apply.",
+      "Family income or community criteria may apply to some schemes.",
+      "Check the current application period and official notification."
+    ],
+    documents: [
+      "Aadhaar or another identity document accepted by the scheme.",
+      "Student ID card or bonafide certificate from the institution.",
+      "Previous examination marksheets and certificates.",
+      "Current admission or enrolment proof.",
+      "Income certificate, if required by the scheme.",
+      "Community certificate, if applicable.",
+      "Bank passbook or account details, if required.",
+      "Recent photograph and signature, if requested.",
+      "Disability certificate, hostel proof or other category-specific evidence, if applicable."
+    ],
+    steps: [
+      "Identify a scholarship that matches your course and circumstances.",
+      "Read the official eligibility rules, required documents and deadline.",
+      "Prepare clear copies of the documents requested by the scheme.",
+      "Complete the application on the authorised scholarship portal.",
+      "Review the details before submission and save the acknowledgement.",
+      "Track the application using the official portal, if available."
+    ],
+    faqs: [
+      ["Who can apply?", "Students who meet the particular scholarship's conditions may apply."],
+      ["Are applications always open?", "No. Each scheme has its own application period."],
+      ["Is a bank account always required?", "Some schemes require bank details for payment. Check the official instructions."]
+    ]
+  },
+
+  income: {
+    title: "Income Certificate",
+    category: "Certificates",
+    description: "Learn about income certificate requirements and application steps.",
+    about: "An income certificate records income information as determined by the authorised issuing authority. It may be needed for scholarships, concessions or welfare schemes.",
+    eligibility: [
+      "Follow the rules of the relevant state and issuing authority.",
+      "The applicant may need to provide household and income information.",
+      "The authority may verify the information before issuing a certificate."
+    ],
+    documents: [
+      "Aadhaar or another accepted identity proof.",
+      "Address proof or residence evidence accepted by the authority.",
+      "Ration card or family details, if required.",
+      "Salary slips, employer certificate or other income evidence, if applicable.",
+      "Self-declaration or income declaration form, if required.",
+      "Agricultural income or other income records, if applicable.",
+      "Passport-size photograph, if requested.",
+      "Application form and any additional evidence requested by the authority."
+    ],
+    steps: [
+      "Open the authorised state or local certificate service.",
+      "Check the current eligibility rules and document checklist.",
+      "Fill in the applicant and household income details accurately.",
+      "Upload or provide the requested supporting documents.",
+      "Pay an official fee only if the portal specifies one.",
+      "Save the acknowledgement and track verification or collection instructions."
+    ],
+    faqs: [
+      ["Is an income certificate required for every scheme?", "No. The requirement depends on the scheme or institution."],
+      ["How long does it take?", "Processing time varies by authority and verification requirements."],
+      ["Can I use any income proof?", "Only evidence accepted by the relevant authority should be submitted."]
+    ]
+  },
+
+  community: {
+    title: "Community Certificate",
+    category: "Certificates",
+    description: "Find community certificate eligibility and document guidance.",
+    about: "A community certificate may be used where an authorised institution or government scheme requires proof of community status.",
+    eligibility: [
+      "Follow the applicable state rules and issuing-authority process.",
+      "The authority may check family records and supporting evidence.",
+      "The certificate category and applicant details must match the applicable rules."
+    ],
+    documents: [
+      "Aadhaar or another accepted identity document.",
+      "Residence proof accepted by the authority.",
+      "Birth certificate or school records, if required.",
+      "Parent or family community certificate, if applicable and requested.",
+      "Family register or other relationship evidence, if required.",
+      "Applicant's school or transfer certificate, if requested.",
+      "Application form and photograph, if required.",
+      "Additional records requested during official verification."
+    ],
+    steps: [
+      "Check the authorised state certificate portal for the correct service.",
+      "Read the official instructions and document checklist.",
+      "Prepare identity, residence and relevant family records.",
+      "Submit the application through the authorised channel.",
+      "Respond to any verification request from the authority.",
+      "Save the acknowledgement and follow the official status instructions."
+    ],
+    faqs: [
+      ["Are requirements the same in every state?", "No. Procedures and accepted evidence can differ."],
+      ["Can a family document be requested?", "It may be requested depending on the case and state rules."],
+      ["Does MahaConnect issue this certificate?", "No. Issuance is handled by the authorised government authority."]
+    ]
+  },
+
+  employment: {
+    title: "Employment & Skills",
+    category: "Employment",
+    description: "Explore employment registration, job opportunities and skill training.",
+    about: "Employment services may include job-seeker registration, recruitment information, career guidance and skills programmes.",
+    eligibility: [
+      "Requirements depend on the particular job or training programme.",
+      "Age, education, experience or location criteria may apply.",
+      "Some opportunities require specific skills or qualifications."
+    ],
+    documents: [
+      "Aadhaar or another accepted identity proof.",
+      "Updated resume or CV.",
+      "Education certificates and marksheets.",
+      "Recent photograph, if requested.",
+      "Skills, training or professional certificates, if available.",
+      "Experience or internship certificates, if applicable.",
+      "Employment registration details, if already registered.",
+      "Portfolio or project links, if requested by an employer.",
+      "Additional documents specified in the official vacancy or programme notice."
+    ],
+    steps: [
+      "Choose the relevant job, employment service or skills programme.",
+      "Check qualifications, age limits, location and application deadline.",
+      "Prepare an accurate resume and supporting documents.",
+      "Apply using the official employer or programme website.",
+      "Save the application confirmation and follow interview instructions.",
+      "Never pay an unverified recruiter to obtain a job."
+    ],
+    faqs: [
+      ["Does registration guarantee a job?", "No. Selection depends on the employer or programme."],
+      ["Are all training programmes free?", "No. Check the fee and funding details of each programme."],
+      ["Should I pay a recruiter for a job offer?", "Verify the employer independently and be cautious of requests for upfront payment."]
+    ]
+  },
+
+  welfare: {
+    title: "Family & Welfare Schemes",
+    category: "Welfare",
+    description: "Explore family, women, children and household welfare programmes.",
+    about: "Welfare programmes may provide eligible people or households with financial assistance, services or other support under specific rules.",
+    eligibility: [
+      "Eligibility depends on the exact scheme.",
+      "Income, age, residence or household conditions may apply.",
+      "Some schemes are intended for specific groups or circumstances.",
+      "Check whether the scheme is currently accepting applications."
+    ],
+    documents: [
+      "Aadhaar or another accepted identity document.",
+      "Ration card or family details, if required.",
+      "Residence proof, if required.",
+      "Income certificate or income evidence, if applicable.",
+      "Bank passbook or account details, if required for benefits.",
+      "Age or date-of-birth proof, where relevant.",
+      "Community, disability, widowhood or other supporting certificate, if applicable.",
+      "Photograph and scheme application form, if requested.",
+      "Any additional evidence specified in the scheme notification."
+    ],
+    steps: [
+      "Identify the exact welfare scheme relevant to the applicant.",
+      "Check eligibility, application dates and the official document list.",
+      "Prepare the required identity, household and supporting records.",
+      "Apply through the authorised department or portal.",
+      "Keep the acknowledgement and respond to verification requests.",
+      "Use the official status-checking method, if available."
+    ],
+    faqs: [
+      ["Are all welfare benefits automatic?", "No. Some schemes require applications and eligibility verification."],
+      ["Can every household apply?", "Only households meeting the relevant scheme's rules may qualify."],
+      ["Does this page approve benefits?", "No. Decisions are made by the authorised scheme department."]
+    ]
+  },
+
+  education: {
+    title: "Education Services",
+    category: "Education",
+    description: "Explore academic records, student services and education support.",
+    about: "Education services may include student records, admission-related services, academic certificates and other support provided by authorised institutions.",
+    eligibility: [
+      "Requirements depend on the institution and service requested.",
+      "Student status, course, examination or admission conditions may apply.",
+      "Some services are available only to current or former students of an institution."
+    ],
+    documents: [
+      "Student ID card or institutional registration number.",
+      "Aadhaar or another identity document, if required.",
+      "Bonafide certificate, if required.",
+      "Relevant marksheets or examination records.",
+      "Admission letter or enrolment proof, where applicable.",
+      "Transfer certificate or migration certificate, if relevant.",
+      "Fee receipt or payment evidence, if requested.",
+      "Photograph or application form, if required.",
+      "Additional records specified by the institution or examination authority."
+    ],
+    steps: [
+      "Identify the institution or authority responsible for the service.",
+      "Read its official instructions and document checklist.",
+      "Collect the relevant student and academic records.",
+      "Submit the request through the authorised institutional channel.",
+      "Save the receipt or application reference.",
+      "Follow the institution's instructions for verification or collection."
+    ],
+    faqs: [
+      ["Are requirements identical across colleges?", "No. Each institution or examination authority may set its own process."],
+      ["Can MahaConnect issue marksheets?", "No. Academic records are issued by the responsible institution or authority."],
+      ["Can I use my student ID for every request?", "Not necessarily. Additional documents may be required."]
+    ]
+  },
+
+  documents: {
+    title: "Citizen Document Services",
+    category: "Documents",
+    description: "Find guidance for common certificates and citizen documents.",
+    about: "Different documents establish different facts and may be issued by different government authorities. The correct service depends on the document you need.",
+    eligibility: [
+      "Identify the exact document or certificate required.",
+      "Eligibility and evidence depend on the issuing authority.",
+      "The authority may require verification of the applicant's information."
+    ],
+    documents: [
+      "Aadhaar or another identity document accepted for the requested service.",
+      "Address or residence proof, if applicable.",
+      "Birth certificate or other date-of-birth evidence, if required.",
+      "Existing certificate or document, if applying for correction or renewal.",
+      "Relevant family or supporting records, if requested.",
+      "Photograph and signed application form, if required.",
+      "Application reference or acknowledgement, for follow-up requests.",
+      "Any additional evidence listed by the issuing authority."
+    ],
+    steps: [
+      "Confirm the exact document name and purpose.",
+      "Find the authorised government department or service portal.",
+      "Read the current eligibility and document requirements.",
+      "Complete the correct form and provide supporting evidence.",
+      "Save the acknowledgement or reference number.",
+      "Track the request and follow the official collection instructions."
+    ],
+    faqs: [
+      ["Can one certificate be used for every purpose?", "No. Acceptance depends on the organisation and purpose."],
+      ["Are all document services online?", "No. Some services may require in-person verification."],
+      ["Can MahaConnect issue official documents?", "No. Documents are issued by the authorised authority."]
+    ]
+  },
+
+  pension: {
+    title: "Pension Services",
+    category: "Welfare",
+    description: "Explore pension and eligible senior citizen support information.",
+    about: "Pension schemes may support eligible applicants under conditions relating to age, residence, income, employment history or other circumstances.",
+    eligibility: [
+      "Check the exact pension scheme's eligibility conditions.",
+      "Age, income, residence or other qualifying criteria may apply.",
+      "Some pension types have specific contribution or employment requirements.",
+      "The issuing authority may verify the information provided."
+    ],
+    documents: [
+      "Aadhaar or another accepted identity proof.",
+      "Age or date-of-birth proof, if required.",
+      "Residence proof, if required.",
+      "Bank passbook or account details, if required.",
+      "Income certificate or household income evidence, if applicable.",
+      "Ration card or family information, if requested.",
+      "Disability, widowhood or other relevant certificate, if applicable.",
+      "Employment, service or pension records, for schemes that require them.",
+      "Photograph, application form and any scheme-specific evidence."
+    ],
+    steps: [
+      "Identify the correct pension scheme and responsible authority.",
+      "Check age, income and other eligibility requirements.",
+      "Prepare the documents listed by the official scheme.",
+      "Apply through the authorised channel.",
+      "Save the acknowledgement and complete any required verification.",
+      "Check the official portal or office for application status."
+    ],
+    faqs: [
+      ["Can everyone receive a pension?", "No. Each scheme has its own eligibility conditions."],
+      ["Are all pension schemes the same?", "No. Benefits and requirements differ by scheme."],
+      ["How can I check status?", "Use the official tracking service or contact the responsible authority."]
+    ]
+  },
+
+  residence: {
+    title: "Residence Certificate",
+    category: "Certificates",
+    description: "Learn about residence certificate requirements and application guidance.",
+    about: "Residence-related certificates may be required for certain education, employment or government services. The exact document and eligibility rules depend on the authority.",
+    eligibility: [
+      "Follow the rules of the relevant state or issuing authority.",
+      "Residence duration or local residence conditions may apply.",
+      "The authority may verify the applicant's address and supporting records."
+    ],
+    documents: [
+      "Aadhaar or another accepted identity proof.",
+      "Address proof accepted by the issuing authority.",
+      "Ration card, if accepted and relevant.",
+      "Electricity, water or other utility bill, if accepted.",
+      "Rental agreement or other residence evidence, if accepted.",
+      "School, college or employer residence record, if relevant and accepted.",
+      "Parent or family residence records, if applicable.",
+      "Application form, photograph or declaration, if required.",
+      "Any additional evidence requested by the authority."
+    ],
+    steps: [
+      "Find the authorised state or local certificate service.",
+      "Check the official residence rules and accepted proof list.",
+      "Prepare the requested identity and residence documents.",
+      "Submit the application through the authorised channel.",
+      "Complete any verification requested by the authority.",
+      "Save the acknowledgement and follow official status instructions."
+    ],
+    faqs: [
+      ["Is any address proof accepted?", "No. Use only proof accepted by the relevant authority."],
+      ["Can a utility bill be enough?", "It depends on the official checklist and the applicant's circumstances."],
+      ["Does this website issue the certificate?", "No. The authorised government authority handles issuance."]
+    ]
+  },
+
+  agriculture: {
+    title: "Agriculture & Farmer Schemes",
+    category: "Agriculture",
+    description: "Explore farmer welfare, agricultural support and scheme guidance.",
+    about: "Agricultural programmes may provide eligible farmers with financial support, insurance, training or other assistance under scheme-specific rules.",
+    eligibility: [
+      "Eligibility depends on the individual agricultural scheme.",
+      "Landholding, cultivation activity or farmer registration may be relevant.",
+      "Some schemes have crop, location or seasonal conditions.",
+      "Check the official notification for current eligibility."
+    ],
+    documents: [
+      "Aadhaar or another accepted identity proof.",
+      "Bank passbook or account details, if required.",
+      "Land ownership or land record documents, if applicable.",
+      "Cultivation, tenancy or farmer registration evidence, if accepted and required.",
+      "Ration card or residence details, if requested.",
+      "Crop details or crop insurance information, if relevant.",
+      "Photograph and application form, if required.",
+      "Previous scheme registration or reference number, if applicable.",
+      "Other records specified by the agricultural department."
+    ],
+    steps: [
+      "Identify the agricultural scheme relevant to the applicant.",
+      "Check the official scheme conditions and application dates.",
+      "Prepare the identity, bank and agricultural records requested.",
+      "Apply through the authorised department or portal.",
+      "Complete any land, identity or eligibility verification.",
+      "Save the acknowledgement and track the request through official channels."
+    ],
+    faqs: [
+      ["Can every farmer apply for every scheme?", "No. Scheme eligibility conditions differ."],
+      ["Are land records always required?", "Only where required by the relevant scheme."],
+      ["Where can I verify scheme details?", "Check the official agriculture department or scheme portal."]
+    ]
+  },
+
+  health: {
+    title: "Health & Insurance Schemes",
+    category: "Health",
+    description: "Discover health coverage, insurance and medical assistance guidance.",
+    about: "Health programmes may provide eligible people with healthcare coverage or other assistance. Covered services and eligibility depend on the particular scheme.",
+    eligibility: [
+      "Eligibility depends on the selected health programme.",
+      "Household, income, residence or enrolment conditions may apply.",
+      "Some programmes require registration or verification before benefits are available.",
+      "Check the current coverage and exclusions with the authorised provider."
+    ],
+    documents: [
+      "Aadhaar or another accepted identity document.",
+      "Health scheme card or insurance policy details, if available.",
+      "Ration card or household details, if required.",
+      "Residence proof, if required by the programme.",
+      "Income certificate, if applicable.",
+      "Medical records or referral documents, when specifically requested.",
+      "Bank details, if the scheme requires them for eligible reimbursements.",
+      "Photograph and application form, if required.",
+      "Other documents listed by the official scheme or authorised hospital."
+    ],
+    steps: [
+      "Identify the relevant health scheme or insurance programme.",
+      "Check eligibility, covered services and exclusions.",
+      "Prepare the documents required for registration or verification.",
+      "Contact the authorised provider or use the official portal.",
+      "Confirm coverage and any approval requirements before relying on benefits.",
+      "Keep the scheme reference and relevant official records."
+    ],
+    faqs: [
+      ["Does MahaConnect provide insurance?", "No. It only provides general service guidance."],
+      ["Are all hospitals covered?", "No. Coverage depends on the scheme and its authorised provider network."],
+      ["Does every medical expense qualify?", "No. Covered treatments and expenses depend on the programme's terms."]
+    ]
+  }
+};
+
+const params = new URLSearchParams(window.location.search);
+const key = (params.get("service") || "scholarship").toLowerCase();
+const service = services[key];
+
+function fillList(id, items) {
+  const list = document.getElementById(id);
+  list.replaceChildren();
+
+  items.forEach(text => {
+    const li = document.createElement("li");
+    li.textContent = text;
+    list.appendChild(li);
+  });
+}
+
+function showServiceNotFound() {
+  document.title = "Service Not Found | MahaConnect";
+  document.getElementById("serviceTitle").textContent = "Service Not Found";
+  document.getElementById("serviceCategory").textContent = "NOT FOUND";
+  document.getElementById("serviceDescription").textContent =
+    "This service link is not available in the current 11-service directory.";
+  document.getElementById("serviceAbout").textContent =
+    "Return to the service directory and select one of the available services.";
+
+  fillList("eligibilityList", ["Select a valid service from the directory."]);
+  fillList("documentsList", ["Document requirements are unavailable for this link."]);
+  fillList("stepsList", ["Return to the service directory and choose a listed service."]);
+
+  document.getElementById("faqList").textContent =
+    "Please select a valid service to view its FAQs.";
+
+  document.getElementById("applicationLink").hidden = true;
+  document.getElementById("helpForm").hidden = true;
+}
+
+if (service) {
+  document.title = service.title + " | MahaConnect";
+
+  document.getElementById("serviceTitle").textContent = service.title;
+  document.getElementById("serviceCategory").textContent = service.category;
+  document.getElementById("serviceDescription").textContent = service.description;
+  document.getElementById("serviceAbout").textContent = service.about;
+
+  fillList("eligibilityList", service.eligibility);
+  fillList("documentsList", service.documents);
+  fillList("stepsList", service.steps);
+
+  const faqList = document.getElementById("faqList");
+  faqList.replaceChildren();
+
+  service.faqs.forEach(([question, answer]) => {
+    const item = document.createElement("div");
+    item.className = "faq-item";
+
+    const title = document.createElement("strong");
+    title.textContent = question;
+
+    const text = document.createElement("span");
+    text.textContent = answer;
+
+    item.append(title, text);
+    faqList.appendChild(item);
+  });
+
+  document.getElementById("applicationLink").href =
+    "application.html?service=" + encodeURIComponent(key);
+} else {
+  showServiceNotFound();
+}
+
+document.getElementById("helpForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  if (!service) return;
+
+  const question = document.getElementById("question").value.trim().toLowerCase();
+  const output = document.getElementById("chatAnswer");
+
+  if (!question) return;
+
+  let answer;
+
+  if (
+    question.includes("document") ||
+    question.includes("proof") ||
+    question.includes("certificate needed")
+  ) {
+    answer = "DOCUMENTS TO PREPARE\n\n• " + service.documents.join("\n• ");
+  } else if (
+    question.includes("eligib") ||
+    question.includes("qualify") ||
+    question.includes("who can")
+  ) {
+    answer = "ELIGIBILITY GUIDANCE\n\n• " + service.eligibility.join("\n• ");
+  } else if (
+    question.includes("step") ||
+    question.includes("how to apply") ||
+    question.includes("application process") ||
+    question.includes("apply")
+  ) {
+    answer = "APPLICATION STEPS\n\n1. " + service.steps.join("\n2. ");
+  } else if (
+    question.includes("fee") ||
+    question.includes("cost") ||
+    question.includes("price")
+  ) {
+    answer = "Fees depend on the selected service and issuing authority. Check the current official portal for applicable charges. Do not pay unofficial agents.";
+  } else if (
+    question.includes("time") ||
+    question.includes("days") ||
+    question.includes("status") ||
+    question.includes("track")
+  ) {
+    answer = "Processing times and status tracking depend on the responsible department. Use your official acknowledgement or reference number, if available.";
+  } else {
+    answer = "I can provide basic guidance for " + service.title +
+      ". Try asking about documents, eligibility, application steps, fees or status.\n\nThis is a local rule-based demo assistant, not an official helpdesk.";
+  }
+
+  output.textContent = answer;
+  output.hidden = false;
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+<script src="language.js"></script>
+</body>
+</html>

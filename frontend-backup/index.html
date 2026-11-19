@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MahaConnect | Connected Government Services</title>
+<meta name="description" content="Explore government service information, discover schemes, and learn how to track applications through the MahaConnect digital services prototype.">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+    .language-switcher {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        margin: 12px;
+        width: fit-content;
+        background: #ffffff;
+
+        border: 1px solid #dbe3ef;
+        border-radius: 10px;
+        font-family: Arial, sans-serif;
+    }
+
+    .language-switcher label {
+        color: #243247;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .language-switcher select {
+        padding: 8px 12px;
+        border: 1px solid #b8c6d9;
+        border-radius: 7px;
+        background: #f8fafc;
+        color: #12345a;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .language-switcher select:focus {
+        outline: 2px solid #2563eb;
+        outline-offset: 2px;
+    }
+</style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="brand">
+
+                <div class="brand-icon">
+                    MC
+                </div>
+
+                <div class="brand-text">
+                    <strong>MahaConnect</strong>
+                    <span>Digital Services</span>
+                </div>
+
+            </a>
+
+
+            <nav class="desktop-nav">
+
+               <a href="#home" class="active" data-i18n="home">
+    Home
+</a>
+<a href="#services" data-i18n="services">
+    Services
+</a>
+
+              <a href="#how-it-works" data-i18n="howItWorks">
+    How It Works
+</a>
+<a href="#about" data-i18n="about">
+    About
+</a>
+            </nav>
+
+
+          <a href="login.html" class="nav-login" data-i18n="login">
+    Citizen Login
+</a>
+<a href="settings.html" class="settings-mini" title="Settings">⚙️</a>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                ☰
+            </button>
+
+        </div>
+
+
+        <!-- MOBILE MENU -->
+
+        <div class="mobile-menu" id="mobileMenu">
+
+            <a href="#home">Home</a>
+
+            <a href="#services">Services</a>
+
+            <a href="#how-it-works">How It Works</a>
+
+            <a href="#about">About</a>
+
+            <a href="login.html">
+                Citizen Login
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main>
+
+
+        <!-- ================= HERO ================= -->
+
+        <section class="hero" id="home">
+
+            <div class="hero-container">
+
+
+                <!-- LEFT CONTENT -->
+
+                <div class="hero-content">
+
+                    <div class="hero-badge">
+
+                        <span class="badge-dot"></span>
+
+                        Connected Digital Services
+
+                    </div>
+
+
+                    <h1>
+
+                        Government services,
+                        <span>connected for you.</span>
+
+                    </h1>
+
+
+                    <p class="hero-description">
+
+                        Discover government services, submit applications,
+                        manage required information and track your service
+                        requests from one connected digital platform.
+
+                    </p>
+
+
+                    <div class="hero-actions">
+
+                        <a href="login.html" class="primary-btn">
+                            Get Started
+                            <span>→</span>
+                        </a>
+
+
+                        <a href="#services" class="secondary-btn">
+                            Explore Services
+                        </a>
+
+                    </div>
+
+
+                    <div class="hero-trust">
+
+                        <div>
+                            <span class="trust-icon">✓</span>
+                            Secure Access
+                        </div>
+
+                        <div>
+                            <span class="trust-icon">✓</span>
+                            Unified Services
+                        </div>
+
+                        <div>
+                            <span class="trust-icon">✓</span>
+                            Application Tracking
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- RIGHT DASHBOARD PREVIEW -->
+
+                <div class="hero-preview">
+
+                    <div class="preview-window">
+
+
+                        <div class="preview-top">
+
+                            <div class="preview-brand">
+
+                                <div class="mini-logo">
+                                    MC
+                                </div>
+
+                                <span>
+                                    Citizen Dashboard
+                                </span>
+
+                            </div>
+
+                            <div class="preview-status">
+                                ● Connected
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="preview-content">
+
+                            <p class="preview-small">
+                                WELCOME BACK
+                            </p>
+
+                            <h3>
+                                Your services at a glance
+                            </h3>
+
+
+                            <!-- STATS -->
+
+                            <div class="preview-stats">
+
+                                <div class="preview-stat">
+
+                                    <span>
+                                        Applications
+                                    </span>
+
+                                    <strong>
+                                        03
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="preview-stat">
+
+                                    <span>
+                                        In Progress
+                                    </span>
+
+                                    <strong>
+                                        02
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="preview-stat">
+
+                                    <span>
+                                        Completed
+                                    </span>
+
+                                    <strong>
+                                        01
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- APPLICATION -->
+
+                            <div class="preview-application">
+
+                                <div class="application-icon">
+                                    🎓
+                                </div>
+
+
+                                <div class="application-info">
+
+                                    <strong>
+                                        Student Scholarship
+                                    </strong>
+
+                                    <span>
+                                        MC2026001
+                                    </span>
+
+                                </div>
+
+
+                                <span class="status completed">
+                                    Completed
+                                </span>
+
+                            </div>
+
+
+
+                            <div class="preview-application">
+
+                                <div class="application-icon">
+                                    📄
+                                </div>
+
+
+                                <div class="application-info">
+
+                                    <strong>
+                                        Income Certificate
+                                    </strong>
+
+                                    <span>
+                                        MC2026002
+                                    </span>
+
+                                </div>
+
+
+                                <span class="status progress">
+                                    In Progress
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-card floating-one">
+
+                        <span class="floating-icon">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Application Updated
+                            </strong>
+
+                            <small>
+                                Just now
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-card floating-two">
+
+                        <span class="floating-icon blue">
+                            🔔
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                New Update
+                            </strong>
+
+                            <small>
+                                View your application
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= QUICK ACCESS ================= -->
+
+        <section class="quick-section">
+
+            <div class="quick-container">
+<a href="schemes.html" class="quick-item"></a>  
+
+                    <div class="quick-icon">
+                        🔐
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Secure Access
+                        </strong>
+
+                        <span>
+                            Manage your services securely
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="quick-item">
+
+                    <div class="quick-icon">
+                        🔗
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Connected Services
+                        </strong>
+
+                        <span>
+                            Access multiple services
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="quick-item">
+
+                    <div class="quick-icon">
+                        📊
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Track Applications
+                        </strong>
+
+                        <span>
+                            Follow your application status
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="quick-item">
+
+                    <div class="quick-icon">
+                        🤖
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Smart Recommendations
+                        </strong>
+
+                        <span>
+                            Discover relevant schemes
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= SERVICES ================= -->
+
+        <section class="services-section" id="services">
+
+            <div class="section-container">
+
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        GOVERNMENT SERVICES
+                    </div>
+
+                    <h2>
+                        Services made simpler
+                    </h2>
+
+                    <p>
+                        Find commonly used government services and
+                        manage your applications from one place.
+                    </p>
+
+                </div>
+
+
+
+                <div class="service-grid">
+
+<!-- SCHOLARSHIP -->
+<a href="application.html?service=scholarship" class="service-card">
+    <div class="service-card-top">
+        <img src="images/services/scholarship.jpg"
+             alt="Student Scholarship" class="service-image">
+        <span class="arrow">↗</span>
+    </div>
+    <h3>Student Scholarship</h3>
+    <p>Explore student scholarship and education support services.</p>
+    <span class="service-link">View service →</span>
+</a>
+
+<!-- INCOME CERTIFICATE -->
+<a href="application.html?service=income" class="service-card">
+    <div class="service-card-top">
+        <img src="images/services/income.jpg"
+             alt="Income Certificate" class="service-image">
+        <span class="arrow">↗</span>
+    </div>
+    <h3>Income Certificate</h3>
+    <p>Apply for income-related certificate services through one platform.</p>
+    <span class="service-link">View service →</span>
+</a>
+
+<!-- COMMUNITY CERTIFICATE -->
+<a href="application.html?service=community" class="service-card">
+    <div class="service-card-top">
+        <img src="images/services/community.jpg"
+             alt="Community Certificate" class="service-image">
+        <span class="arrow">↗</span>
+    </div>
+    <h3>Community Certificate</h3>
+    <p>Access community certificate services and track your application.</p>
+    <span class="service-link">View service →</span>
+</a>
+
+<!-- EMPLOYMENT SERVICES -->
+<a href="application.html?service=employment" class="service-card">
+    <div class="service-card-top">
+        <img src="images/services/employment.jpg"
+             alt="Employment Services" class="service-image">
+        <span class="arrow">↗</span>
+    </div>
+    <h3>Employment Services</h3>
+    <p>Discover employment and career-related government services.</p>
+    <span class="service-link">View service →</span>
+</a>
+
+
+
+
+                </div>
+
+
+
+                <div class="services-footer">
+
+                    <a href="services.html">
+                        View all services →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= HOW IT WORKS ================= -->
+
+        <section class="journey-section" id="how-it-works">
+
+            <div class="section-container">
+
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        HOW IT WORKS
+                    </div>
+
+                    <h2>
+                        One simple service journey
+                    </h2>
+
+                    <p>
+                        From discovering a service to tracking
+                        your application, everything stays connected.
+                    </p>
+
+                </div>
+
+
+
+                <div class="journey-grid">
+
+    <!-- SIGN IN -->
+    <div class="journey-card"
+         onclick="window.location.href='login.html'">
+
+        <div class="journey-number">
+            01
+        </div>
+
+        <div class="journey-icon">
+            👤
+        </div>
+
+        <h3>
+            Sign In
+        </h3>
+
+        <p>
+            Access your citizen account and
+            manage your services.
+        </p>
+
+    </div>
+
+
+    <div class="journey-line"></div>
+
+
+    <!-- DISCOVER -->
+    <div class="journey-card"
+         onclick="window.location.href='services.html'">
+
+        <div class="journey-number">
+            02
+        </div>
+
+        <div class="journey-icon">
+            🔎
+        </div>
+
+        <h3>
+            Discover
+        </h3>
+
+        <p>
+            Find the service that matches
+            your requirement.
+        </p>
+
+    </div>
+
+
+    <div class="journey-line"></div>
+
+
+    <!-- APPLY -->
+    <div class="journey-card"
+         onclick="window.location.href='application.html'">
+
+        <div class="journey-number">
+            03
+        </div>
+
+        <div class="journey-icon">
+            📝
+        </div>
+
+        <h3>
+            Apply
+        </h3>
+
+        <p>
+            Provide the required details and
+            supporting documents.
+        </p>
+
+    </div>
+
+
+    <div class="journey-line"></div>
+
+
+    <!-- TRACK -->
+    <div class="journey-card"
+         onclick="window.location.href='tracking.html'">
+
+        <div class="journey-number">
+            04
+        </div>
+
+        <div class="journey-icon">
+            📍
+        </div>
+
+        <h3>
+            Track
+        </h3>
+
+        <p>
+            Follow your application progress
+            from your dashboard.
+        </p>
+
+    </div>
+
+</div>
+
+        </section>
+
+
+
+        <!-- ================= TRACKING ================= -->
+
+        <section class="tracking-section">
+
+            <div class="section-container">
+
+                <div class="tracking-box">
+
+
+                    <div class="tracking-content">
+
+                        <div class="section-label">
+                            APPLICATION TRACKING
+                        </div>
+
+                        <h2>
+                            Know where your application stands.
+                        </h2>
+
+                        <p>
+                            Track submitted applications and view
+                            their latest status from one place.
+                        </p>
+
+
+                        <a href="tracking.html"
+                           class="primary-btn">
+                            Track Application
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+
+
+                    <div class="tracking-demo">
+
+
+                        <div class="tracking-header">
+
+                            <span>
+                                Application Status
+                            </span>
+
+                            <span class="tracking-live">
+                                ● Live Status
+                            </span>
+
+                        </div>
+
+
+                        <div class="tracking-id">
+                            MC2026002
+                        </div>
+
+
+                        <div class="tracking-service">
+                            Income Certificate
+                        </div>
+
+
+                        <div class="progress-track">
+
+                            <div class="progress-fill"></div>
+
+                        </div>
+
+
+                        <div class="tracking-steps">
+
+                            <div class="track-step active">
+
+                                <span></span>
+
+                                <small>
+                                    Submitted
+                                </small>
+
+                            </div>
+
+
+                            <div class="track-step active">
+
+                                <span></span>
+
+                                <small>
+                                    Verification
+                                </small>
+
+                            </div>
+
+
+                            <div class="track-step">
+
+                                <span></span>
+
+                                <small>
+                                    Completed
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= ABOUT ================= -->
+
+        <section class="about-section" id="about">
+
+            <div class="section-container">
+
+
+                <div class="about-grid">
+
+
+                    <div class="about-content">
+
+                        <div class="section-label">
+                            ABOUT MAHACONNECT
+                        </div>
+
+                        <h2>
+                            A connected approach to
+                            digital public services.
+                        </h2>
+
+                        <p>
+                            MahaConnect brings service discovery,
+                            application management, information
+                            sharing and tracking into a unified
+                            citizen experience.
+                        </p>
+
+                        <p>
+                            The platform is designed around
+                            connected service interactions so that
+                            citizens can access participating
+                            government services more conveniently.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="about-cards">
+
+
+                        <div class="about-card">
+
+                            <span>
+                                01
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Unified Experience
+                                </strong>
+
+                                <p>
+                                    Access connected service
+                                    interactions from one place.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="about-card">
+
+                            <span>
+                                02
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Secure Information Sharing
+                                </strong>
+
+                                <p>
+                                    Share required information
+                                    with appropriate consent.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="about-card">
+
+                            <span>
+                                03
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Transparent Tracking
+                                </strong>
+
+                                <p>
+                                    Follow application progress
+                                    through clear status updates.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= FINAL CTA ================= -->
+
+        <section class="final-section">
+
+            <div class="final-box">
+
+                <div>
+
+                    <span class="section-label">
+                        GET STARTED
+                    </span>
+
+                    <h2>
+                        Your services.
+                        One connected experience.
+                    </h2>
+
+                    <p>
+                        Sign in to explore services and manage
+                        your applications.
+                    </p>
+
+                </div>
+
+
+                <a href="login.html"
+                   class="white-btn">
+
+                    Citizen Login
+                    <span>→</span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+
+            <div class="footer-brand">
+
+                <a href="index.html" class="brand">
+
+                    <div class="brand-icon">
+                        MC
+                    </div>
+
+                    <div class="brand-text">
+
+                        <strong>
+                            MahaConnect
+                        </strong>
+
+                        <span>
+                            Digital Services
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <p>
+                    One platform for connected digital
+                    government service interactions.
+                </p>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <strong>
+                    Platform
+                </strong>
+
+                <a href="#services">
+                    Services
+                </a>
+
+                <a href="#how-it-works">
+                    How It Works
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <strong>
+                    Services
+                </strong>
+
+                <a href="services.html">
+                    All Services
+                </a>
+
+                <a href="tracking.html">
+                    Track Application
+                </a>
+
+                <a href="login.html">
+                    Citizen Login
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <strong>
+                    Security
+                </strong>
+
+                <span>
+                    Secure Access
+                </span>
+
+                <span>
+                    Consent Management
+                </span>
+
+                <span>
+                    Data Protection
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 MahaConnect
+            </span>
+
+            <span>
+                Connected Digital Services
+            </span>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        const mobileMenuBtn =
+            document.getElementById("mobileMenuBtn");
+
+        const mobileMenu =
+            document.getElementById("mobileMenu");
+
+
+        mobileMenuBtn.addEventListener("click", function () {
+
+            mobileMenu.classList.toggle("show");
+
+        });
+
+
+        document.querySelectorAll(".mobile-menu a")
+            .forEach(function (link) {
+
+                link.addEventListener("click", function () {
+
+                    mobileMenu.classList.remove("show");
+
+                });
+
+            });
+
+    </script>
+<div class="language-switcher">
+    <label for="languageSelect" data-i18n="selectLanguage">
+        Choose your language
+    </label>
+
+    <select
+        id="languageSelect"
+        data-language-selector
+        onchange="MahaLanguage.setLanguage(this.value)"
+    >
+        <option value="en">English</option>
+        <option value="ta">தமிழ்</option>
+    </select>
+</div>
+
+<script src="language.js"></script>
+</body>
+
+</html>

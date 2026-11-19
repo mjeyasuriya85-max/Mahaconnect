@@ -1,0 +1,458 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #145c43;
+    --primary-dark: #0b4030;
+    --accent: #d9a441;
+    --bg: #f3f6f4;
+    --card: #ffffff;
+    --text: #20332b;
+    --muted: #68776f;
+    --border: #e1e8e3;
+    --soft: #eaf4ee;
+    --danger: #dc3545;
+    --shadow: 0 8px 25px rgba(20, 60, 43, 0.07);
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #eef6ff 0%, #f8fbff 50%, #eef4ff 100%);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.5;
+    transition: background 0.25s, color 0.25s;
+}
+
+/* Dark mode */
+body.dark {
+    --bg: #111c18;
+    --card: #1b2a23;
+    --text: #edf5ef;
+    --muted: #b2c1b7;
+    --border: #34463b;
+    --soft: #263d30;
+    --shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* Main layout */
+.settings-container {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+/* Header */
+.settings-header {
+    position: relative;
+    padding: 28px;
+    margin-bottom: 28px;
+    border-radius: 18px;
+    color: white;
+    background: linear-gradient(120deg, #104d38, #21815a);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.settings-header::after {
+    content: "⚙";
+    position: absolute;
+    right: 25px;
+    top: 0;
+    font-size: 90px;
+    opacity: 0.13;
+}
+
+.settings-header h1 {
+    position: relative;
+    z-index: 1;
+    color: white;
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.settings-header p {
+    position: relative;
+    z-index: 1;
+    color: #e0eee5;
+    font-size: 15px;
+    max-width: 650px;
+}
+
+/* Cards */
+.settings-card {
+    background: var(--card);
+    color: var(--text);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 18px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.settings-card:hover {
+    box-shadow: 0 10px 28px rgba(20, 60, 43, 0.10);
+}
+
+.settings-card h2 {
+    color: var(--text);
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.settings-card p {
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* Individual setting rows */
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 10px;
+    margin-top: 5px;
+    border-top: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 8px;
+    min-height: 52px;
+    transition: background 0.2s;
+}
+
+.setting-row span {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.setting-row strong {
+    color: var(--text);
+    font-size: 15px;
+}
+
+.setting-row a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Hover for clickable settings */
+a.setting-row:hover,
+button.setting-row:hover {
+    background: var(--soft);
+}
+
+a.setting-row:focus-visible,
+button.setting-row:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Form controls */
+.setting-row input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
+    accent-color: var(--primary);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.setting-row select {
+    max-width: 150px;
+    padding: 9px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--text);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Switch style for checkbox inputs with class switch */
+.setting-row input.switch {
+    appearance: none;
+    position: relative;
+    width: 42px;
+    min-width: 42px;
+    height: 24px;
+    border: none;
+    border-radius: 20px;
+    background: #aab6ae;
+    transition: background 0.2s;
+}
+
+.setting-row input.switch::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 3px;
+    left: 3px;
+    border-radius: 50%;
+    background: #ffffff;
+    transition: transform 0.2s;
+}
+
+.setting-row input.switch:checked {
+    background: #24835a;
+}
+
+.setting-row input.switch:checked::before {
+    transform: translateX(18px);
+}
+
+/* Profile summary */
+.profile-summary {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px;
+    margin: 12px 0;
+    border-radius: 12px;
+    background: var(--soft);
+}
+
+.avatar {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.profile-summary strong {
+    display: block;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+.profile-summary small {
+    display: block;
+    color: var(--muted);
+    overflow-wrap: anywhere;
+}
+
+/* Notice messages */
+.notice {
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    background: var(--soft);
+    border: 1px solid var(--border);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* Privacy note */
+.privacy-note {
+    padding: 16px;
+    margin-top: 22px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card);
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.privacy-note strong {
+    color: var(--text);
+}
+
+/* Buttons */
+.logout-btn {
+    background: var(--danger);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.logout-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.button {
+    display: inline-block;
+    border: none;
+    border-radius: 9px;
+    padding: 12px 18px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.button-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.button-secondary {
+    background: var(--soft);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.button-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.bottom-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* Navigation */
+.topbar {
+    background: var(--primary-dark);
+    color: white;
+    padding: 16px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.brand span {
+    color: #f2cb75;
+}
+
+.top-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.top-actions a {
+    color: white;
+    text-decoration: none;
+    padding: 9px 13px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.top-actions a:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    padding: 24px 12px;
+}
+
+/* Accessibility */
+button,
+input,
+select,
+a {
+    font-family: inherit;
+}
+
+button.setting-row {
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    cursor: pointer;
+    background: transparent;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+
+/* Responsive design */
+@media (max-width: 720px) {
+    .settings-container {
+        width: 92%;
+        margin: 22px auto;
+    }
+
+    .settings-header {
+        padding: 23px;
+    }
+
+    .settings-header h1 {
+        font-size: 26px;
+    }
+
+    .settings-header p {
+        font-size: 14px;
+        max-width: 85%;
+    }
+
+    .settings-header::after {
+        right: 10px;
+        font-size: 70px;
+    }
+
+    .settings-card {
+        padding: 18px;
+    }
+
+    .setting-row {
+        gap: 10px;
+        padding: 13px 5px;
+    }
+
+    .setting-row span {
+        font-size: 14px;
+    }
+
+    .topbar {
+        padding: 14px 4%;
+    }
+
+    .bottom-actions {
+        align-items: stretch;
+    }
+
+    .bottom-actions .button,
+    .bottom-actions .logout-btn {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}

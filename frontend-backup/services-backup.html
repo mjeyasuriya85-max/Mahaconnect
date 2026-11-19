@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MahaConnect | Government Services</title>
+
+<style>
+    
+:root {
+    --blue: #1264e8;
+    --dark: #142b4b;
+    --muted: #657792;
+    --line: #e2eaf5;
+    --bg: #f5f8ff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+}
+
+a { text-decoration: none; }
+
+/* NAVBAR */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,.96);
+    border-bottom: 1px solid var(--line);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.brand-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg,#3285ff,#064bc4);
+    color: white;
+    font-weight: 900;
+    box-shadow: 0 6px 18px #1264e833;
+}
+
+.brand-name {
+    font-size: 21px;
+    font-weight: 850;
+    color: var(--blue);
+}
+
+.brand-tag {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: #405570;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: var(--blue); }
+
+.login-btn {
+    padding: 11px 17px;
+    border-radius: 10px;
+    background: var(--blue);
+    color: white !important;
+}
+
+/* HERO */
+.hero {
+    background:
+        radial-gradient(circle at 85% 25%,#c8e3ff 0,transparent 30%),
+        linear-gradient(120deg,#e8f2ff,#fff 58%,#eef6ff);
+    border-bottom: 1px solid #dce9fa;
+}
+
+.hero-container {
+    max-width: 1200px;
+    min-height: 350px;
+    margin: auto;
+    padding: 55px 24px;
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    align-items: center;
+    gap: 35px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 8px 13px;
+    border-radius: 30px;
+    background: #d9eaff;
+    color: #0755c8;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .6px;
+}
+
+.hero h1 {
+    max-width: 650px;
+    margin: 18px 0;
+    font-size: clamp(36px,4vw,54px);
+    line-height: 1.12;
+    letter-spacing: -1.5px;
+}
+
+.hero h1 span { color: var(--blue); }
+
+.hero p {
+    max-width: 590px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.search-box {
+    display: flex;
+    gap: 9px;
+    max-width: 600px;
+    margin-top: 25px;
+    padding: 7px;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: white;
+    box-shadow: 0 12px 30px #174d8510;
+}
+
+.search-box input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+    border: 0;
+    outline: 0;
+    font-size: 13px;
+}
+
+.primary-btn {
+    border: 0;
+    border-radius: 9px;
+    padding: 12px 19px;
+    background: linear-gradient(135deg,#2780ff,#0752cc);
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.hero-art {
+    min-height: 250px;
+    display: grid;
+    place-items: center;
+}
+
+.art-card {
+    position: relative;
+    width: 300px;
+    height: 240px;
+    display: grid;
+    place-items: center;
+    border-radius: 35px;
+    background: linear-gradient(145deg,#d9eaff,#f8fbff);
+    border: 1px solid #d3e5ff;
+}
+
+.gov-building {
+    width: 155px;
+    height: 125px;
+    position: relative;
+    margin-top: 25px;
+    background: white;
+    border: 2px solid #b7d5fb;
+    border-radius: 9px 9px 0 0;
+    box-shadow: 0 14px 28px #1264e81c;
+}
+
+.gov-building:before {
+    content: "";
+    position: absolute;
+    left: -12px;
+    top: -30px;
+    width: 175px;
+    height: 30px;
+    background: #9fc7fa;
+    clip-path: polygon(50% 0,100% 100%,0 100%);
+}
+
+.gov-building:after {
+    content: "🏛️";
+    position: absolute;
+    inset: 12px 0 0;
+    text-align: center;
+    font-size: 60px;
+}
+
+.float-icon {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    display: grid;
+    place-items: center;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    font-size: 25px;
+    box-shadow: 0 10px 25px #174d8516;
+}
+
+.float-one { left: 10px; top: 25px; }
+.float-two { right: 12px; top: 35px; }
+.float-three { left: 28px; bottom: 18px; }
+.float-four { right: 23px; bottom: 15px; }
+
+/* MAIN */
+.main-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 45px 24px 55px;
+}
+
+.section-label {
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 1.3px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.section-heading h2 {
+    margin-top: 6px;
+    font-size: 29px;
+    letter-spacing: -.5px;
+}
+
+.section-heading p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.count {
+    padding: 9px 13px;
+    background: #e5efff;
+    border-radius: 30px;
+    color: #1559bd;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 22px 0 25px;
+}
+
+.filter-btn {
+    border: 1px solid var(--line);
+    border-radius: 30px;
+    padding: 10px 14px;
+    background: white;
+    color: #526681;
+    font-size: 12px;
+    font-weight: 750;
+    cursor: pointer;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--blue);
+    color: white;
+    border-color: var(--blue);
+}
+
+/* SERVICE CARDS */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 18px;
+}
+
+.service-card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    box-shadow: 0 5px 18px #174d8508;
+    transition: .25s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    border-color: #b7d4ff;
+    box-shadow: 0 16px 35px #174d8517;
+}
+
+.service-image {
+    height: 145px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg,#dcecff,#f4f8ff);
+}
+
+.service-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .3s;
+}
+
+.service-card:hover .service-image img {
+    transform: scale(1.05);
+}
+
+.service-fallback {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 48px;
+    background: linear-gradient(135deg,#e0edff,#f7faff);
+}
+
+.service-icon {
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+    z-index: 2;
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: white;
+    border: 1px solid #e1eaf6;
+    font-size: 21px;
+    box-shadow: 0 5px 12px #163b6715;
+}
+
+.service-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 15px 16px 17px;
+}
+
+.service-content h3 {
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.service-content p {
+    flex: 1;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.service-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 17px;
+}
+
+.category {
+    padding: 5px 8px;
+    border-radius: 6px;
+    background: #eff5ff;
+    color: #607895;
+    font-size: 10px;
+}
+
+.service-link {
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 850;
+    white-space: nowrap;
+}
+
+.no-results {
+    display: none;
+    grid-column: 1/-1;
+    padding: 35px;
+    text-align: center;
+    background: white;
+    border: 1px dashed #c5d7ef;
+    border-radius: 15px;
+    color: var(--muted);
+}
+
+/* CONNECTED PLATFORM */
+.connected-panel {
+    margin-top: 35px;
+    padding: 25px;
+    border-radius: 17px;
+    background: linear-gradient(110deg,#e4f0ff,#f8fbff);
+    border: 1px solid #d1e3ff;
+}
+
+.connected-panel h3 { font-size: 18px; }
+
+.connected-panel p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+    margin-top: 7px;
+}
+
+.connected-points {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.connected-point {
+    padding: 16px;
+    border: 1px solid #d8e7fb;
+    background: white;
+    border-radius: 12px;
+}
+
+.connected-point strong {
+    display: block;
+    font-size: 13px;
+}
+
+.connected-point span {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* DISCLAIMER */
+.notice {
+    margin-top: 20px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: start;
+    border: 1px solid #cde3ff;
+    border-radius: 12px;
+    background: white;
+}
+
+.notice-icon { font-size: 23px; }
+
+.notice strong {
+    font-size: 13px;
+}
+
+.notice p {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* FOOTER */
+.footer {
+    padding: 28px 24px;
+    background: #10264a;
+    color: white;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-title { font-weight: 850; font-size: 18px; }
+
+.footer p {
+    color: #b9c9df;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: #dbe8f8;
+    font-size: 12px;
+}
+
+@media(max-width:1000px) {
+    .services-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+    .hero-container { grid-template-columns: 1fr .7fr; }
+    .art-card { transform: scale(.9); }
+}
+
+@media(max-width:760px) {
+    .nav-container { padding: 13px 16px; }
+    .nav-links { gap: 13px; }
+    .nav-links a:not(.login-btn) { display: none; }
+    .hero-container { grid-template-columns: 1fr; padding: 40px 20px; }
+    .hero-art { display: none; }
+    .hero h1 { font-size: 37px; }
+    .main-container { padding: 32px 16px; }
+    .section-heading { align-items: start; flex-direction: column; }
+    .services-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .connected-points { grid-template-columns: 1fr; }
+}
+
+@media(max-width:480px) {
+    .brand-name { font-size: 18px; }
+    .brand-tag { font-size: 9px; }
+    .hero h1 { font-size: 32px; }
+    .hero p { font-size: 13px; }
+    .search-box input { padding: 9px 5px; font-size: 11px; }
+    .primary-btn { padding: 10px; font-size: 12px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-image { height: 175px; }
+    .section-heading h2 { font-size: 25px; }
+    .connected-panel { padding: 18px; }
+}
+</style>
+
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="brand">
+            <span class="brand-icon">MC</span>
+            <span>
+                <span class="brand-name">MahaConnect</span>
+                <span class="brand-tag">One Platform. Connected Government Services.</span>
+            </span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html" class="active">Services</a>
+            <a href="integration.html">Integration</a>
+            <a href="tracking.html">Track Application</a>
+            <a href="login.html" class="login-btn">Citizen Login →</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-container">
+        <div>
+            <span class="badge">✦ ONE CONNECTED CITIZEN PLATFORM</span>
+
+            <h1>All your government services.<br>
+                <span>One connected platform.</span>
+            </h1>
+
+            <p>
+                Discover citizen certificates, education assistance, welfare
+                schemes, employment support and essential public services.
+                MahaConnect brings service information together in one
+                simple, connected experience.
+            </p>
+
+            <form class="search-box" id="searchForm">
+                <input id="serviceSearch" type="search"
+                    placeholder="Search services, schemes or certificates..."
+                    aria-label="Search services">
+                <button class="primary-btn" type="submit">Search →</button>
+            </form>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+            <div class="art-card">
+                <div class="gov-building"></div>
+                <span class="float-icon float-one">🎓</span>
+                <span class="float-icon float-two">📄</span>
+                <span class="float-icon float-three">🛡️</span>
+                <span class="float-icon float-four">👨‍👩‍👧</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<main class="main-container">
+    <section id="services">
+        <div class="section-heading">
+            <div>
+                <div class="section-label">MAHACONNECT SERVICE DIRECTORY</div>
+                <h2>Services for every citizen</h2>
+                <p>Different service categories, organized in one place.</p>
+            </div>
+            <span class="count" id="serviceCount">15 services</span>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All Services</button>
+            <button class="filter-btn" data-filter="documents">Documents</button>
+            <button class="filter-btn" data-filter="education">Education</button>
+            <button class="filter-btn" data-filter="welfare">Welfare</button>
+            <button class="filter-btn" data-filter="employment">Employment</button>
+            <button class="filter-btn" data-filter="health">Health</button>
+            <button class="filter-btn" data-filter="agriculture">Agriculture</button>
+            <button class="filter-btn" data-filter="transport">Transport</button>
+            <button class="filter-btn" data-filter="housing">Housing</button>
+            <button class="filter-btn" data-filter="utilities">Utilities</button>
+        </div>
+
+        <div class="services-grid" id="servicesGrid">
+
+            <!-- EDUCATION -->
+            <article class="service-card" data-category="education"
+                data-search="scholarship student college school education financial assistance">
+                <div class="service-image">
+                    <img src="images/services/scholarship.jpg"
+                        alt="Student scholarship services"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">🎓</span>
+                    <span class="service-icon">🎓</span>
+                </div>
+                <div class="service-content">
+                    <h3>Student Scholarships</h3>
+                    <p>Explore student scholarships, education assistance and financial support information.</p>
+                    <div class="service-bottom">
+                        <span class="category">Education</span>
+                        <a class="service-link" href="application.html?service=scholarship">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- INCOME CERTIFICATE -->
+            <article class="service-card" data-category="documents"
+                data-search="income certificate income proof revenue certificate">
+                <div class="service-image">
+                    <img src="images/services/income.jpg"
+                        alt="Income certificate information"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">📄</span>
+                    <span class="service-icon">📄</span>
+                </div>
+                <div class="service-content">
+                    <h3>Income Certificate</h3>
+                    <p>Find income certificate guidance and information about application requirements.</p>
+                    <div class="service-bottom">
+                        <span class="category">Documents</span>
+                        <a class="service-link" href="application.html?service=income">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- COMMUNITY -->
+            <article class="service-card" data-category="documents"
+                data-search="community caste certificate identity">
+                <div class="service-image">
+                    <img src="images/services/community.jpg"
+                        alt="Community certificate information"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">🪪</span>
+                    <span class="service-icon">🪪</span>
+                </div>
+                <div class="service-content">
+                    <h3>Community Certificate</h3>
+                    <p>Learn about community certificate services and application steps.</p>
+                    <div class="service-bottom">
+                        <span class="category">Documents</span>
+                        <a class="service-link" href="application.html?service=community">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EMPLOYMENT -->
+            <article class="service-card" data-category="employment"
+                data-search="employment job career skill development work">
+                <div class="service-image">
+                    <img src="images/services/employment.jpg"
+                        alt="Employment and career services"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">💼</span>
+                    <span class="service-icon">💼</span>
+                </div>
+                <div class="service-content">
+                    <h3>Employment & Skills</h3>
+                    <p>Explore employment resources, career information and skill development support.</p>
+                    <div class="service-bottom">
+                        <span class="category">Employment</span>
+                        <a class="service-link" href="application.html?service=employment">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PENSION -->
+            <article class="service-card" data-category="welfare"
+                data-search="pension senior citizen elderly social security">
+                <div class="service-image">
+                    <img src="images/services/pension.jpg"
+                        alt="Pension and senior citizen services"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">👵</span>
+                    <span class="service-icon">👵</span>
+                </div>
+                <div class="service-content">
+                    <h3>Pension & Senior Citizens</h3>
+                    <p>Find pension-related information and senior citizen support resources.</p>
+                    <div class="service-bottom">
+                        <span class="category">Welfare</span>
+                        <a class="service-link" href="application.html?service=pension">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- HEALTH -->
+            <article class="service-card" data-category="health"
+                data-search="health insurance medical hospital health support">
+                <div class="service-image">
+                    <img src="images/services/health.jpg"
+                        alt="Health and insurance services"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">🏥</span>
+                    <span class="service-icon">🏥</span>
+                </div>
+                <div class="service-content">
+                    <h3>Health & Insurance</h3>
+                    <p>Discover health coverage information and medical assistance resources.</p>
+                    <div class="service-bottom">
+                        <span class="category">Health</span>
+                        <a class="service-link" href="application.html?service=health">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- AGRICULTURE -->
+            <article class="service-card" data-category="agriculture"
+                data-search="agriculture farmer crop subsidy farming rural">
+                <div class="service-image">
+                    <img src="images/services/agriculture.jpg"
+                        alt="Agriculture and farmer services"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">🌾</span>
+                    <span class="service-icon">🌾</span>
+                </div>
+                <div class="service-content">
+                    <h3>Agriculture & Farmers</h3>
+                    <p>Explore farmer schemes, crop support and agricultural resources.</p>
+                    <div class="service-bottom">
+                        <span class="category">Agriculture</span>
+                        <a class="service-link" href="application.html?service=agriculture">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- TRANSPORT -->
+            <article class="service-card" data-category="transport"
+                data-search="transport driving licence vehicle registration road">
+                <div class="service-image">
+                    <img src="images/services/transport.jpg"
+                        alt="Transport and driving licence services"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">🚘</span>
+                    <span class="service-icon">🚘</span>
+                </div>
+                <div class="service-content">
+                    <h3>Transport Services</h3>
+                    <p>Find transport, driving licence and vehicle-service information.</p>
+                    <div class="service-bottom">
+                        <span class="category">Transport</span>
+                        <a class="service-link" href="application.html?service=transport">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- DISABILITY -->
+            <article class="service-card" data-category="welfare"
+                data-search="disability disabled accessibility assistance welfare">
+                <div class="service-image">
+                    <img src="images/services/disability.jpg"
+                        alt="Disability support services"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">♿</span>
+                    <span class="service-icon">♿</span>
+                </div>
+                <div class="service-content">
+                    <h3>Disability Support</h3>
+                    <p>Explore disability-related certificate information and welfare resources.</p>
+                    <div class="service-bottom">
+                        <span class="category">Welfare</span>
+                        <a class="service-link" href="application.html?service=disability">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- HOUSING -->
+            <article class="service-card" data-category="housing"
+                data-search="housing home house construction scheme">
+                <div class="service-image">
+                    <img src="images/services/housing.jpg"
+                        alt="Housing services"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">🏠</span>
+                    <span class="service-icon">🏠</span>
+                </div>
+                <div class="service-content">
+                    <h3>Housing Services</h3>
+                    <p>Find housing scheme information and home-assistance resources.</p>
+                    <div class="service-bottom">
+                        <span class="category">Housing</span>
+                        <a class="service-link" href="application.html?service=housing">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- OTHER CERTIFICATES -->
+            <article class="service-card" data-category="documents"
+                data-search="birth death nativity residence certificate documents">
+                <div class="service-image">
+                    <img src="images/services/certificates.jpg"
+                        alt="Citizen certificate services"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">📑</span>
+                    <span class="service-icon">📑</span>
+                </div>
+                <div class="service-content">
+                    <h3>Citizen Certificates</h3>
+                    <p>Browse information about birth, death, residence and related certificates.</p>
+                    <div class="service-bottom">
+                        <span class="category">Documents</span>
+                        <a class="service-link" href="application.html?service=documents">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- FAMILY WELFARE -->
+            <article class="service-card" data-category="welfare"
+                data-search="family women child welfare ration card benefits">
+                <div class="service-image">
+                    <img src="images/services/welfare.jpg"
+                        alt="Family and welfare support"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">👨‍👩‍👧</span>
+                    <span class="service-icon">👨‍👩‍👧</span>
+                </div>
+                <div class="service-content">
+                    <h3>Family & Welfare Benefits</h3>
+                    <p>Find family welfare, women and child support scheme information.</p>
+                    <div class="service-bottom">
+                        <span class="category">Welfare</span>
+                        <a class="service-link" href="application.html?service=welfare">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- UTILITIES -->
+            <article class="service-card" data-category="utilities"
+                data-search="electricity water utility public service">
+                <div class="service-image">
+                    <img src="images/services/utilities.jpg"
+                        alt="Utilities and public services"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">⚡</span>
+                    <span class="service-icon">⚡</span>
+                </div>
+                <div class="service-content">
+                    <h3>Utilities & Public Services</h3>
+                    <p>Find electricity, water and other public utility service information.</p>
+                    <div class="service-bottom">
+                        <span class="category">Utilities</span>
+                        <a class="service-link" href="application.html?service=utilities">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- VOTER -->
+            <article class="service-card" data-category="welfare"
+                data-search="voter election voter id civic citizen">
+                <div class="service-image">
+                    <img src="images/services/voter.jpg"
+                        alt="Voter and civic services"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">🗳️</span>
+                    <span class="service-icon">🗳️</span>
+                </div>
+                <div class="service-content">
+                    <h3>Voter & Civic Services</h3>
+                    <p>Access voter-service information and civic participation resources.</p>
+                    <div class="service-bottom">
+                        <span class="category">Citizen Services</span>
+                        <a class="service-link" href="application.html?service=voter">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- GRIEVANCE -->
+            <article class="service-card" data-category="welfare"
+                data-search="grievance complaint public feedback citizen help">
+                <div class="service-image">
+                    <img src="images/services/grievance.jpg"
+                        alt="Citizen grievance and help services"
+                        onerror="this.style.display='none'">
+                    <span class="service-fallback">💬</span>
+                    <span class="service-icon">💬</span>
+                </div>
+                <div class="service-content">
+                    <h3>Grievance & Citizen Help</h3>
+                    <p>Learn where to raise public-service concerns and find help resources.</p>
+                    <div class="service-bottom">
+                        <span class="category">Citizen Services</span>
+                        <a class="service-link" href="application.html?service=grievance">Explore →</a>
+                    </div>
+                </div>
+            </article>
+
+            <div class="no-results" id="noResults">
+                No matching services found. Try another keyword or select All Services.
+            </div>
+        </div>
+    </section>
+
+    <section class="connected-panel">
+        <div class="section-label">THE MAHACONNECT DIFFERENCE</div>
+        <h3>One platform. Multiple connected services.</h3>
+        <p>
+            Instead of searching across many separate service pages, citizens
+            can discover service information and manage prototype applications
+            through one organized experience.
+        </p>
+
+        <div class="connected-points">
+            <div class="connected-point">
+                <strong>👤 One Citizen Experience</strong>
+                <span>A unified place to discover different government service categories.</span>
+            </div>
+            <div class="connected-point">
+                <strong>🔗 Connected Departments</strong>
+                <span>A proposed integration layer to connect authorized department services.</span>
+            </div>
+            <div class="connected-point">
+                <strong>📋 Unified Tracking</strong>
+                <span>View prototype application records and statuses from a single dashboard.</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="notice">
+        <div class="notice-icon">🛡️</div>
+        <div>
+            <strong>Privacy, security and official service notice</strong>
+            <p>
+                MahaConnect is a prototype concept, not an official government
+                portal. The listed categories provide service information.
+                Real certificate issuance, official submissions and government
+                database integrations require authorization from the relevant
+                departments. Never enter sensitive personal details unless
+                using a verified official service.
+            </p>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div>
+            <div class="footer-title">MahaConnect</div>
+            <p>One Platform. Connected Government Services.</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="integration.html">Integration</a>
+            <a href="tracking.html">Track Application</a>
+            <a href="login.html">Citizen Login</a>
+        </div>
+
+        <p>© 2026 MahaConnect · Prototype</p>
+    </div>
+</footer>
+
+<script>
+const searchInput = document.getElementById("serviceSearch");
+const cards = [...document.querySelectorAll(".service-card")];
+const filterButtons = [...document.querySelectorAll(".filter-btn")];
+const countLabel = document.getElementById("serviceCount");
+const noResults = document.getElementById("noResults");
+
+let activeFilter = "all";
+
+function updateServices() {
+    const query = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+        const text = (
+            card.dataset.search + " " + card.innerText
+        ).toLowerCase();
+
+        const matchesSearch = text.includes(query);
+        const matchesCategory =
+            activeFilter === "all" ||
+            card.dataset.category === activeFilter;
+
+        const show = matchesSearch && matchesCategory;
+        card.style.display = show ? "flex" : "none";
+
+        if (show) visibleCount++;
+    });
+
+    countLabel.textContent =
+        visibleCount + " service" + (visibleCount === 1 ? "" : "s");
+
+    noResults.style.display = visibleCount ? "none" : "block";
+}
+
+searchInput.addEventListener("input", updateServices);
+
+document.getElementById("searchForm").addEventListener("submit", event => {
+    event.preventDefault();
+    updateServices();
+    document.getElementById("services").scrollIntoView({
+        behavior: "smooth"
+    });
+});
+
+filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        filterButtons.forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        activeFilter = button.dataset.filter;
+        updateServices();
+    });
+});
+
+/* Show a fallback icon when a local image is missing */
+document.querySelectorAll(".service-image img").forEach(img => {
+    const fallback = img.parentElement.querySelector(".service-fallback");
+
+    function showFallback() {
+        img.style.display = "none";
+        fallback.style.display = "grid";
+    }
+
+    function showImage() {
+        img.style.display = "block";
+        fallback.style.display = "none";
+    }
+
+    img.addEventListener("error", showFallback);
+    img.addEventListener("load", showImage);
+
+    if (img.complete && img.naturalWidth === 0) {
+        showFallback();
+    } else if (img.complete && img.naturalWidth > 0) {
+        showImage();
+    }
+});
+
+updateServices();
+</script>
+
+</body>
+</html>
